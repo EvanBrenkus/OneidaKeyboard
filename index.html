@@ -168,6 +168,10 @@
                     <td>-</td>
                     <td>⋅</td>
                 </tr>
+    			<tr>
+                    <td>( )</td>
+                    <td>__</td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -198,26 +202,30 @@
             'z': '',
         };
 
-        function convertToIPA(text) {
-            let ipaText = '';
-            for (let char of text) {
-                if (ipaMapping.hasOwnProperty(char)) {
-                    ipaText += ipaMapping[char];
-                } else {
-                    ipaText += char;
-                }
-            }
-            return ipaText;
-        }
+	function convertToIPA(text) {
+		let convertedText = '';
+		for (let char of text) {
+			if (ipaMapping.hasOwnProperty(char)) {
+				convertedText += ipaMapping[char];
+			} else {
+				convertedText += char;
+			}
+		}
 
-        function updateIPAOutput() {
-            const textInput = document.getElementById('textInput').value;
-            const ipaOutput = document.getElementById('ipaOutput');
-            ipaOutput.textContent = convertToIPA(textInput);
-        }
+		convertedText = convertedText.replace(/\(([^)]+)\)/g, function(match, p1) {
+        return `<span style="text-decoration: underline;">${p1}</span>`;
+		});
 
-        document.getElementById('textInput').addEventListener('input', updateIPAOutput);
+		return convertedText;
+	}
 
+	function updateIPAOutput() {
+		const textInput = document.getElementById('textInput').value;
+		const ipaOutput = document.getElementById('ipaOutput');
+		ipaOutput.innerHTML = convertToIPA(textInput); 
+	}
+
+	document.getElementById('textInput').addEventListener('input', updateIPAOutput);
         function copyToClipboard(text) {
             const textarea = document.createElement('textarea');
             textarea.value = text;
