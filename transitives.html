@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oneida Language Transitives</title>
+  <style>
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+table {
+    border-collapse: collapse;
+    width: auto;
+	margin: 0;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+	width: auto;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+th, .left-column {
+	background-color: #f2f2f2;
+}
+
+.highlighted-header {
+	background-color: lightgray;
+}
+		
+.highlighted-left-column {
+	background-color: lightgray;
+}
+
+.highlighted-cell {
+    background-color: lightgray !important;
+}
+
+.highlighted-row {
+    background-color: #f2f2f2;
+}
+
+.highlighted-column {
+    background-color: #f2f2f2;
+}
+
+.table-container {
+    display: flex;
+    justify-content: center;
+}
+.table-container table {
+	border-collapse: collapse;
+	width: auto;
+	table-layout: fixed;
+	margin-bottom: 20px;
+}
+.table-container th, .table-container td {
+	border: 1px solid #ccc;
+	width: 120px;
+	height: 40px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	text-align: center;
+	vertical-align: middle;
+}
+
+caption {
+	font-weight: bold;
+	font-size: 1.2em;
+	margin-bottom: 10px;
+	margin-top: 20px;
+}
+table.large-caption caption {
+	font-size: 1.8em;
+}
+.navbar {
+	overflow: hidden;
+	background-color: #5D3F6A;
+	display: flex;
+	justify-content: left;
+}
+
+.navbar a {
+	float: left;
+	font-size: 20px;
+	color: white;
+	text-align: center;
+	padding: 20px;
+	text-decoration: none;
+	transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+	background-color: #ddd;
+    color: black;
+}
+
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+.dropdown .dropbtn {
+    font-size: 20px;  
+    border: none;
+    outline: none;
+    color: white;
+    padding: 20px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+	transition: background-color 0.3s, color 0.3s;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+	transition: background-color 0.3s;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+  </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="keyboard.html">Keyboard</a>
+        <div class="dropdown">
+            <button class="dropbtn">Charts</button>
+            <div class="dropdown-content">
+                <a href="pronouns.html">Pronouns</a>
+                <a href="transitives.html">Transitives</a>
+            </div>
+        </div>
+     </div>
+    <div class="table-container">
+        <table id="table1" class="interactive-table large-caption">
+		<caption>c-stem Transitive</caption>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Me</th>
+                    <th>Us Two</th>
+                    <th>Us All</th>
+                    <th>You</th>
+                    <th>You Two</th>
+                    <th>You All</th>
+                    <th>It</th>
+                    <th>Elder Her</th>
+                    <th>Him</th>
+                    <th>Her</th>
+                    <th>Female Them</th>
+                    <th>All Them</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="left-column"><b>I</b></td><td></td><td></td><td></td><td>ku</td><td>ky</td><td>kwa</td><td>k</td><td>k</td><td>hi</td><td>khe</td><td>khe</td><td>khe</td></tr>
+                <tr><td class="left-column"><b>Us Two - You</b></td><td></td><td></td><td></td><td>ky</td><td>ky</td><td>kwa</td><td>yaky</td><td>yaky</td><td>shakni</td><td>yakhi</td><td>yakhi</td><td>yakhi</td></tr>
+                <tr><td class="left-column"><b>All of Us - You</b></td><td></td><td></td><td></td><td>kwa</td><td>kwa</td><td>kwa</td><td>yakwa</td><td>yakwa</td><td>shakwa</td><td>yakhi</td><td>yakhi</td><td>yakhi</td></tr>
+                <tr><td class="left-column"><b>You and I</b></td><td></td><td></td><td></td><td></td><td></td><td></td><td>ty</td><td>ty</td><td>hethni</td><td>yethi</td><td>yethi</td><td>yethi</td></tr>
+                <tr><td class="left-column"><b>All of Us + You</b></td><td></td><td></td><td></td><td></td><td></td><td></td><td>twa</td><td>twa</td><td>hethwa</td><td>yethi</td><td>yethi</td><td>yethi</td></tr>
+                <tr><td class="left-column"><b>You</b></td><td>sk</td><td>skni</td><td>skwa</td><td></td><td></td><td></td><td>hs</td><td>hs</td><td>hets</td><td>she</td><td>she</td><td>she</td></tr>
+                <tr><td class="left-column"><b>You Two</b></td><td>skni</td><td>skni</td><td>skwa</td><td></td><td></td><td></td><td>sni</td><td>sni</td><td>hetsni</td><td>yetshi</td><td>yetshi</td><td>yetshi</td></tr>
+                <tr><td class="left-column"><b>You All</b></td><td>skwa</td><td>skwa</td><td>skwa</td><td></td><td></td><td></td><td>swa</td><td>swa</td><td>hetswa</td><td>yetshi</td><td>yetshi</td><td>yetshi</td></tr>
+                <tr><td class="left-column"><b>It / Elder She</b></td><td>wak</td><td>yukni</td><td>yukwa</td><td>sa</td><td>sni</td><td>swa</td><td>ka</td><td>yo</td><td>lo</td><td>yako</td><td>yoti</td><td>loti</td></tr>
+                <tr><td class="left-column"><b>He</b></td><td>lak</td><td>shukni</td><td>shukwa</td><td>hya</td><td>hetsni</td><td>hetswa</td><td>la</td><td>la</td><td>lo</td><td>shako</td><td>shako</td><td>shako</td></tr>
+                <tr><td class="left-column"><b>She</b></td><td>yuk</td><td>yukhi</td><td>yukhi</td><td>yesa</td><td>yetshi</td><td>yetshi</td><td>ye</td><td>kuwa</td><td>luwa</td><td>yutat</td><td>kuwati</td><td>luwati</td></tr>
+                <tr><td class="left-column"><b>Two Females</b></td><td>yuk</td><td>yukhi</td><td>yukhi</td><td>yesa</td><td>yetshi</td><td>yetshi</td><td>kni</td><td>?</td><td>?</td><td>yakoti</td><td>?</td><td>?</td></tr>
+                <tr><td class="left-column"><b>All Females</b></td><td>yuk</td><td>yukhi</td><td>yukhi</td><td>yesa</td><td>yetshi</td><td>yetshi</td><td>kuti</td><td>?</td><td>?</td><td>yakoti</td><td>?</td><td>?</td></tr>
+                <tr><td class="left-column"><b>Two of Them</b></td><td>yuk</td><td>yukhi</td><td>yukhi</td><td>yesa</td><td>yetshi</td><td>yetshi</td><td>hni</td><td>?</td><td>?</td><td>shakoti</td><td>?</td><td>?</td></tr>
+                <tr><td class="left-column"><b>All of Them</b></td><td>yuk</td><td>yukhi</td><td>yukhi</td><td>yesa</td><td>yetshi</td><td>yetshi</td><td>lati</td><td>?</td><td>?</td><td>shakoti</td><td>?</td><td>?</td></tr>
+            </tbody>
+        </table>
+    </div>
+	
+	<div class="table-container">
+        <table id="table2" class="interactive-table large-caption">
+		<caption>a-stem Transitive</caption>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Me</th>
+                    <th>Us Two</th>
+                    <th>Us All</th>
+                    <th>You</th>
+                    <th>You Two</th>
+                    <th>You All</th>
+                    <th>It</th>
+                    <th>Elder Her</th>
+                    <th>Him</th>
+                    <th>Her</th>
+                    <th>Female Them</th>
+                    <th>All Them</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="left-column"><b>I</b></td><td></td><td></td><td></td><td>kuy</td><td>ky</td><td>kwa</td><td>k</td><td>k</td><td>hiy</td><td>khey</td><td>khey</td><td>khey</td></tr>
+                <tr><td class="left-column"><b>Us Two - You</b></td><td></td><td></td><td></td><td>ky</td><td>ky</td><td>kwa</td><td>yaky</td><td>yaky</td><td>shaky</td><td>yakhiy</td><td>yakhiy</td><td>yakhiy</td></tr>
+                <tr><td class="left-column"><b>All of Us - You</b></td><td></td><td></td><td></td><td>kwa</td><td>kwa</td><td>kwa</td><td>yakwa</td><td>yakwa</td><td>shakwa</td><td>yakhiy</td><td>yakhiy</td><td>yakhiy</td></tr>
+                <tr><td class="left-column"><b>You and I</b></td><td></td><td></td><td></td><td></td><td></td><td></td><td>ty</td><td>ty</td><td>hethy</td><td>yethiy</td><td>yethiy</td><td>yethiy</td></tr>
+                <tr><td class="left-column"><b>All of Us + You</b></td><td></td><td></td><td></td><td></td><td></td><td></td><td>twa</td><td>twa</td><td>hethwa</td><td>yethiy</td><td>yethiy</td><td>yethiy</td></tr>
+                <tr><td class="left-column"><b>You</b></td><td>skw</td><td>sky</td><td>skwa</td><td></td><td></td><td></td><td>hs</td><td>hs</td><td>hets</td><td>shey</td><td>shey</td><td>shey</td></tr>
+                <tr><td class="left-column"><b>You Two</b></td><td>sky</td><td>sky</td><td>skwa</td><td></td><td></td><td></td><td>tsy</td><td>tsy</td><td>hetsy</td><td>yetshiy</td><td>yetshiy</td><td>yetshiy</td></tr>
+                <tr><td class="left-column"><b>You All</b></td><td>skwa</td><td>skwa</td><td>skwa</td><td></td><td></td><td></td><td>swa</td><td>swa</td><td>hetswa</td><td>yetshiy</td><td>yetshiy</td><td>yetshiy</td></tr>
+                <tr><td class="left-column"><b>It / Elder She</b></td><td>wak</td><td>yuky</td><td>yukwa</td><td>sa</td><td>tsy</td><td>swa</td><td>w</td><td>yo</td><td>lo</td><td>yako</td><td>yon</td><td>lon</td></tr>
+                <tr><td class="left-column"><b>He</b></td><td>lakw</td><td>shuky</td><td>shukwa</td><td>hya</td><td>hetsy</td><td>hetswa</td><td>la</td><td>la</td><td>lo</td><td>shako</td><td>shako</td><td>shako</td></tr>
+                <tr><td class="left-column"><b>She</b></td><td>yukw</td><td>yukhiy</td><td>yukhiy</td><td>yesa</td><td>yetshiy</td><td>yetshiy</td><td>yu</td><td>kuwa</td><td>luwa</td><td>yutat</td><td>kuwʌn</td><td>luwʌn</td></tr>
+                <tr><td class="left-column"><b>Two Females</b></td><td>yukw</td><td>yukhiy</td><td>yukhiy</td><td>yesa</td><td>yetshiy</td><td>yetshiy</td><td>ky</td><td>?</td><td>?</td><td>yakon</td><td>?</td><td>?</td></tr>
+                <tr><td class="left-column"><b>All Females</b></td><td>yukw</td><td>yukhiy</td><td>yukhiy</td><td>yesa</td><td>yetshiy</td><td>yetshiy</td><td>ku</td><td>?</td><td>?</td><td>yakon</td><td>?</td><td>?</td></tr>
+                <tr><td class="left-column"><b>Two of Them</b></td><td>yukw</td><td>yukhiy</td><td>yukhiy</td><td>yesa</td><td>yetshiy</td><td>yetshiy</td><td>hy</td><td>?</td><td>?</td><td>shakon</td><td>?</td><td>?</td></tr>
+                <tr><td class="left-column"><b>All of Them</b></td><td>yukw</td><td>yukhiy</td><td>yukhiy</td><td>yesa</td><td>yetshiy</td><td>yetshiy</td><td>lu</td><td>?</td><td>?</td><td>shakon</td><td>?</td><td>?</td></tr>
+            </tbody>
+        </table>
+    </div>
+	
+	<div class="table-container">
+        <table id="table3" class="interactive-table large-caption">
+		<caption>e-stem Transitive</caption>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Me</th>
+                    <th>Us Two</th>
+                    <th>Us All</th>
+                    <th>You</th>
+                    <th>You Two</th>
+                    <th>You All</th>
+                    <th>It</th>
+                    <th>Elder Her</th>
+                    <th>Him</th>
+                    <th>Her</th>
+                    <th>Female Them</th>
+                    <th>All Them</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="left-column"><b>I</b></td><td></td><td></td><td></td><td>kuy</td><td>kn</td><td>kw</td><td>k</td><td>k</td><td>hiy</td><td>khey</td><td>khey</td><td>khey</td></tr>
+                <tr><td class="left-column"><b>Us Two - You</b></td><td></td><td></td><td></td><td>kn</td><td>kn</td><td>kw</td><td>yakn</td><td>yakn</td><td>shakn</td><td>yakhiy</td><td>yakhiy</td><td>yakhiy</td></tr>
+                <tr><td class="left-column"><b>All of Us - You</b></td><td></td><td></td><td></td><td>kw</td><td>kw</td><td>kw</td><td>yakwa</td><td>yakwa</td><td>shakw</td><td>yakhiy</td><td>yakhiy</td><td>yakhiy</td></tr>
+                <tr><td class="left-column"><b>You and I</b></td><td></td><td></td><td></td><td></td><td></td><td></td><td>tn</td><td>tn</td><td>hethn</td><td>yethiy</td><td>yethiy</td><td>yethiy</td></tr>
+                <tr><td class="left-column"><b>All of Us + You</b></td><td></td><td></td><td></td><td></td><td></td><td></td><td>tw</td><td>tw</td><td>hethw</td><td>yethiy</td><td>yethiy</td><td>yethiy</td></tr>
+                <tr><td class="left-column"><b>You</b></td><td>skw</td><td>skn</td><td>skw</td><td></td><td></td><td></td><td>hs</td><td>hs</td><td>hets</td><td>shey</td><td>shey</td><td>shey</td></tr>
+                <tr><td class="left-column"><b>You Two</b></td><td>skn</td><td>skn</td><td>skw</td><td></td><td></td><td></td><td>sn</td><td>sn</td><td>hetsni</td><td>yetshiy</td><td>yetshiy</td><td>yetshiy</td></tr>
+                <tr><td class="left-column"><b>You All</b></td><td>skw</td><td>skw</td><td>skw</td><td></td><td></td><td></td><td>sw</td><td>sw</td><td>hetsw</td><td>yetshiy</td><td>yetshiy</td><td>yetshiy</td></tr>
+                <tr><td class="left-column"><b>It / Elder She</b></td><td>wak</td><td>yukn</td><td>yukw</td><td>sa</td><td>sn</td><td>sw</td><td>w</td><td>yaw</td><td>law</td><td>yakaw</td><td>yon</td><td>lon</td></tr>
+                <tr><td class="left-column"><b>He</b></td><td>lakw</td><td>shukn</td><td>shukw</td><td>hyay</td><td>hetsn</td><td>hetsw</td><td>le</td><td>le</td><td>law</td><td>shako</td><td>shako</td><td>shako</td></tr>
+                <tr><td class="left-column"><b>She</b></td><td>yukw</td><td>yukhiy</td><td>yukhiy</td><td>yesa</td><td>yetshiy</td><td>yetshiy</td><td>yak</td><td>kuw</td><td>luw</td><td>yutat</td><td>kuwʌn</td><td>luwʌn</td></tr>
+                <tr><td class="left-column"><b>Two Females</b></td><td>yukw</td><td>yukhiy</td><td>yukhiy</td><td>yesa</td><td>yetshiy</td><td>yetshiy</td><td>kn</td><td>?</td><td>?</td><td>yakon</td><td>?</td><td>?</td></tr>
+                <tr><td class="left-column"><b>All Females</b></td><td>yukw</td><td>yukhiy</td><td>yukhiy</td><td>yesa</td><td>yetshiy</td><td>yetshiy</td><td>kun</td><td>?</td><td>?</td><td>yakon</td><td>?</td><td>?</td></tr>
+                <tr><td class="left-column"><b>Two of Them</b></td><td>yukw</td><td>yukhiy</td><td>yukhiy</td><td>yesa</td><td>yetshiy</td><td>yetshiy</td><td>hn</td><td>?</td><td>?</td><td>shakon</td><td>?</td><td>?</td></tr>
+                <tr><td class="left-column"><b>All of Them</b></td><td>yukw</td><td>yukhiy</td><td>yukhiy</td><td>yesa</td><td>yetshiy</td><td>yetshiy</td><td>lʌn</td><td>?</td><td>?</td><td>shakon</td><td>?</td><td>?</td></tr>
+            </tbody>
+        </table>
+    </div>
+	
+	<div class="table-container">
+        <table id="table4" class="interactive-table large-caption">
+		<caption>i-stem Transitive</caption>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Me</th>
+                    <th>Us Two</th>
+                    <th>Us All</th>
+                    <th>You</th>
+                    <th>You Two</th>
+                    <th>You All</th>
+                    <th>It</th>
+                    <th>Elder Her</th>
+                    <th>Him</th>
+                    <th>Her</th>
+                    <th>Female Them</th>
+                    <th>All Them</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="left-column"><b>I</b></td><td></td><td></td><td></td><td>ku</td><td>kn</td><td>yakwʌ</td><td>k</td><td>k</td><td>hi</td><td>khe</td><td>khe</td><td>khe</td></tr>
+                <tr><td class="left-column"><b>Us Two - You</b></td><td></td><td></td><td></td><td>kn</td><td>kn</td><td>yakwʌ</td><td>yakn</td><td>yakn</td><td>shakn</td><td>yakhi</td><td>yakhi</td><td>yakhi</td></tr>
+                <tr><td class="left-column"><b>All of Us - You</b></td><td></td><td></td><td></td><td>yakwʌ</td><td>yakwʌ</td><td>yakwʌ</td><td>yakwʌ</td><td>yakwʌ</td><td>shakwʌ</td><td>yakhi</td><td>yakhi</td><td>yakhi</td></tr>
+                <tr><td class="left-column"><b>You and I</b></td><td></td><td></td><td></td><td></td><td></td><td></td><td>tn</td><td>tn</td><td>hethn</td><td>yethi</td><td>yethi</td><td>yethi</td></tr>
+                <tr><td class="left-column"><b>All of Us + You</b></td><td></td><td></td><td></td><td></td><td></td><td></td><td>twʌ</td><td>twʌ</td><td>hethwʌ</td><td>yethi</td><td>yethi</td><td>yethi</td></tr>
+                <tr><td class="left-column"><b>You</b></td><td>sk</td><td>skn</td><td>skwʌ</td><td></td><td></td><td></td><td>hs</td><td>hs</td><td>hets</td><td>she</td><td>she</td><td>she</td></tr>
+                <tr><td class="left-column"><b>You Two</b></td><td>skn</td><td>skn</td><td>skwʌ</td><td></td><td></td><td></td><td>sn</td><td>sn</td><td>hetsn</td><td>yetshi</td><td>yetshi</td><td>yetshi</td></tr>
+                <tr><td class="left-column"><b>You All</b></td><td>skwʌ</td><td>skwʌ</td><td>skwʌ</td><td></td><td></td><td></td><td>swʌ</td><td>swʌ</td><td>hetswʌ</td><td>yetshi</td><td>yetshi</td><td>yetshi</td></tr>
+                <tr><td class="left-column"><b>It / Elder She</b></td><td>wak</td><td>yukn</td><td>yukwʌ</td><td>sʌ</td><td>sn</td><td>swʌ</td><td>kʌ</td><td>yo</td><td>lo</td><td>yako</td><td>yon</td><td>lon</td></tr>
+                <tr><td class="left-column"><b>He</b></td><td>lak</td><td>shukn</td><td>shukwʌ</td><td>hyʌ</td><td>hetsn</td><td>hetswʌ</td><td>lʌ</td><td>lʌ</td><td>lo</td><td>shako</td><td>shako</td><td>shako</td></tr>
+                <tr><td class="left-column"><b>She</b></td><td>yuk</td><td>yukhi</td><td>yukhi</td><td>yesʌ</td><td>yetshi</td><td>yetshi</td><td>ye</td><td>kuwʌ</td><td>luwʌ</td><td>yutat</td><td>kuwʌn / kuwati</td><td>luwʌn / luwati</td></tr>
+                <tr><td class="left-column"><b>Two Females</b></td><td>yuk</td><td>yukhi</td><td>yukhi</td><td>yesʌ</td><td>yetshi</td><td>yetshi</td><td>kn</td><td>?</td><td>?</td><td>yakon / yakoti</td><td>?</td><td>?</td></tr>
+                <tr><td class="left-column"><b>All Females</b></td><td>yuk</td><td>yukhi</td><td>yukhi</td><td>yesʌ</td><td>yetshi</td><td>yetshi</td><td>kun / kuti</td><td>?</td><td>?</td><td>yakon / yakoti</td><td>?</td><td>?</td></tr>
+                <tr><td class="left-column"><b>Two of Them</b></td><td>yuk</td><td>yukhi</td><td>yukhi</td><td>yesʌ</td><td>yetshi</td><td>yetshi</td><td>hn</td><td>?</td><td>?</td><td>shakon / shakoti</td><td>?</td><td>?</td></tr>
+                <tr><td class="left-column"><b>All of Them</b></td><td>yuk</td><td>yukhi</td><td>yukhi</td><td>yesʌ</td><td>yetshi</td><td>yetshi</td><td>lʌn / lati</td><td>?</td><td>?</td><td>shakon / shakoti</td><td>?</td><td>?</td></tr>
+            </tbody>
+        </table>
+    </div>
+	
+	<div class="table-container">
+        <table id="table5" class="interactive-table large-caption">
+		<caption>o-stem Transitive</caption>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Me</th>
+                    <th>Us Two</th>
+                    <th>Us All</th>
+                    <th>You</th>
+                    <th>You Two</th>
+                    <th>You All</th>
+                    <th>It</th>
+                    <th>Elder Her</th>
+                    <th>Him</th>
+                    <th>Her</th>
+                    <th>Female Them</th>
+                    <th>All Them</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="left-column"><b>I</b></td><td></td><td></td><td></td><td>kuy</td><td>kn</td><td>ky</td><td>k</td><td>k</td><td>hiy</td><td>khey</td><td>khey</td><td>khey</td></tr>
+                <tr><td class="left-column"><b>Us Two - You</b></td><td></td><td></td><td></td><td>kn</td><td>kn</td><td>ky</td><td>yakn</td><td>yakn</td><td>shakn</td><td>yakhiy</td><td>yakhiy</td><td>yakhiy</td></tr>
+                <tr><td class="left-column"><b>All of Us - You</b></td><td></td><td></td><td></td><td>ky</td><td>ky</td><td>ky</td><td>yaky</td><td>yaky</td><td>shaky</td><td>yakhiy</td><td>yakhiy</td><td>yakhiy</td></tr>
+                <tr><td class="left-column"><b>You and I</b></td><td></td><td></td><td></td><td></td><td></td><td></td><td>tn</td><td>tn</td><td>hethn</td><td>yethiy</td><td>yethiy</td><td>yethiy</td></tr>
+                <tr><td class="left-column"><b>All of Us + You</b></td><td></td><td></td><td></td><td></td><td></td><td></td><td>ty</td><td>ty</td><td>hethy</td><td>yethiy</td><td>yethiy</td><td>yethiy</td></tr>
+                <tr><td class="left-column"><b>You</b></td><td>sk</td><td>skn</td><td>sky</td><td></td><td></td><td></td><td>hs</td><td>hs</td><td>hets</td><td>shey</td><td>shey</td><td>shey</td></tr>
+                <tr><td class="left-column"><b>You Two</b></td><td>skn</td><td>skn</td><td>sky</td><td></td><td></td><td></td><td>esn</td><td>esn</td><td>hetsn</td><td>yetshiy</td><td>yetshiy</td><td>yetshiy</td></tr>
+                <tr><td class="left-column"><b>You All</b></td><td>sky</td><td>sky</td><td>sky</td><td></td><td></td><td></td><td>etsy</td><td>etsy</td><td>hetsy</td><td>yetshiy</td><td>yetshiy</td><td>yetshiy</td></tr>
+                <tr><td class="left-column"><b>It / Elder She</b></td><td>wak</td><td>yukn</td><td>yuky</td><td>s</td><td>sn</td><td>tsy</td><td>y</td><td>yao</td><td>lao</td><td>yakao</td><td>yon</td><td>lon</td></tr>
+                <tr><td class="left-column"><b>He</b></td><td>lak</td><td>shukn</td><td>shuky</td><td>hyay</td><td>hetsn</td><td>hetsy</td><td>hl</td><td>hl</td><td>lao</td><td>shakao</td><td>shakao</td><td>shakao</td></tr>
+                <tr><td class="left-column"><b>She</b></td><td>yuk</td><td>yukhiy</td><td>yukhiy</td><td>yesay</td><td>yetshiy</td><td>yetshiy</td><td>yak</td><td>kuway</td><td>luway</td><td>yutat</td><td>kuwʌn</td><td>luwʌn</td></tr>
+                <tr><td class="left-column"><b>Two Females</b></td><td>yuk</td><td>yukhiy</td><td>yukhiy</td><td>yesay</td><td>yetshiy</td><td>yetshiy</td><td>kn</td><td>?</td><td>?</td><td>yakon</td><td>?</td><td>?</td></tr>
+                <tr><td class="left-column"><b>All Females</b></td><td>yuk</td><td>yukhiy</td><td>yukhiy</td><td>yesay</td><td>yetshiy</td><td>yetshiy</td><td>kun</td><td>?</td><td>?</td><td>yakon</td><td>?</td><td>?</td></tr>
+                <tr><td class="left-column"><b>Two of Them</b></td><td>yuk</td><td>yukhiy</td><td>yukhiy</td><td>yesay</td><td>yetshiy</td><td>yetshiy</td><td>hn</td><td>?</td><td>?</td><td>shakon</td><td>?</td><td>?</td></tr>
+                <tr><td class="left-column"><b>All of Them</b></td><td>yuk</td><td>yukhiy</td><td>yukhiy</td><td>yesay</td><td>yetshiy</td><td>yetshiy</td><td>lʌn</td><td>?</td><td>?</td><td>shakon</td><td>?</td><td>?</td></tr>
+            </tbody>
+        </table>
+    </div>
+	
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const tables = document.querySelectorAll('.interactive-table');
+
+    tables.forEach(table => {
+        const cells = table.getElementsByTagName('td');
+
+        function clearHighlights() {
+            const highlightedCells = table.querySelectorAll('.highlighted-cell, .highlighted-row, .highlighted-column, .highlighted-header, .highlighted-left-column');
+            highlightedCells.forEach(cell => {
+                cell.classList.remove('highlighted-cell', 'highlighted-row', 'highlighted-column', 'highlighted-header', 'highlighted-left-column');
+            });
+        }
+
+        function highlightCell(cell) {
+            const row = cell.parentElement;
+            const cellIndex = Array.prototype.indexOf.call(row.children, cell);
+
+            for (let i = 1; i <= cellIndex; i++) {
+                row.children[i].classList.add('highlighted-row');
+            }
+
+            const headerRow = table.querySelector('thead').children[0];
+            const rows = table.querySelectorAll('tbody tr');
+            for (let i = 0; i < rows.length; i++) {
+                const currentRow = rows[i];
+                const currentCell = currentRow.children[cellIndex];
+                if (currentRow.rowIndex <= row.rowIndex) {
+                    currentCell.classList.add('highlighted-column');
+                }
+            }
+
+            cell.classList.add('highlighted-cell');
+            headerRow.children[cellIndex].classList.add('highlighted-header');
+
+            const leftColumnCell = row.querySelector('.left-column');
+            if (leftColumnCell) {
+                leftColumnCell.classList.add('highlighted-left-column');
+            }
+        }
+
+        for (let cell of cells) {
+            cell.addEventListener('mouseover', function() {
+                clearHighlights();
+                highlightCell(this);
+            });
+        }
+
+        table.addEventListener('mouseout', clearHighlights);
+    });
+});
+</script>
+</body>
+</html>
