@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oneida Language Pronouns</title>
+    <style>
+          html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Roboto", sans-serif;
+            font-weight: 400;
+        }
+
+              table {
+            border-collapse: collapse;
+            width: auto;
+            margin: 0;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+            width: auto;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        th, .left-column {
+            background-color: #f2f2f2;
+        }
+
+        .table-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .tables-container {
+           display: flex;
+          justify-content: center;
+          gap: 30px;
+        }
+      
+        .table-container table {
+            border-collapse: collapse;
+            width: auto;
+            table-layout: fixed;
+        }
+
+        .table-container th, .table-container td {
+            border: 1px solid #ccc;
+            width: 120px;
+            height: 40px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        caption {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            margin-top: 20px;
+        }
+        .navbar {
+          	overflow: hidden;
+          	background-color: #5D3F6A;
+          	display: flex;
+          	justify-content: left;
+        }
+
+        .navbar a {
+          	float: left;
+        	  font-size: 20px;
+        	  color: white;
+        	  text-align: center;
+        	  padding: 20px;
+          	text-decoration: none;
+        	  transition: background-color 0.3s, color 0.3s;
+        }
+
+        .navbar a:hover, .dropdown:hover .dropbtn {
+        	  background-color: #ddd;
+            color: black;
+        }
+
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+  
+        .dropdown .dropbtn {
+            font-size: 20px;  
+            border: none;
+            outline: none;
+            color: white;
+            padding: 20px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+      	    transition: background-color 0.3s, color 0.3s;
+        }
+  
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+	          transition: background-color 0.3s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+  	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="keyboard.html">Keyboard</a>
+        <div class="dropdown">
+            <button class="dropbtn">Charts</button>
+            <div class="dropdown-content">
+                <a href="pronouns.html">Pronouns</a>
+                <a href="transitives.html">Transitives</a>
+            </div>
+        </div>
+    </div>
+<div class="table-container">
+	<table>
+		<caption>Meaning Chart</caption>
+        <tr>
+            <th>Single (1)</th>
+            <th>Dual (2)</th>
+            <th>Plural (3+)</th>
+        </tr>
+        <tr>
+            <td>Me</td>
+            <td>Me and you</td>
+            <td>All of us</td>
+        </tr>
+        <tr>
+            <td>You</td>
+            <td>You two</td>
+            <td>All of you</td>
+        </tr>
+        <tr>
+            <td>Him</td>
+            <td>Two Males or Mixed</td>
+            <td>Three+ Males or Mixed</td>
+        </tr>
+        <tr>
+            <td>Her</td>
+            <td>Two Females</td>
+            <td>Three+ Females</td>
+        </tr>
+        <tr>
+            <td>Older Female / It</td>
+            <td>Us two, but not you</td>
+            <td>All of us, but not you</td>
+        </tr>
+    </table>
+</div>
+
+<div class="tables-container">
+	<table>
+		<caption>c-stem Subjective</caption>
+        <tr>
+            <th>Single (1)</th>
+            <th>Dual (2)</th>
+            <th>Plural (3+)</th>
+        </tr>
+        <tr>
+            <td>k</td>
+            <td>tni</td>
+            <td>twa</td>
+        </tr>
+        <tr>
+            <td>s</td>
+            <td>sni</td>
+            <td>swa</td>
+        </tr>
+        <tr>
+            <td>la</td>
+            <td>ni</td>
+            <td>lati</td>
+        </tr>
+        <tr>
+            <td>ye</td>
+            <td>kni</td>
+            <td>kuti</td>
+        </tr>
+        <tr>
+            <td>ka</td>
+            <td>yakni</td>
+            <td>yakwa</td>
+        </tr>
+    </table>
+	
+	<table>
+		<caption>c-stem Objective</caption>
+        <tr>
+            <th>Single (1)</th>
+            <th>Dual (2)</th>
+            <th>Plural (3+)</th>
+        </tr>
+        <tr>
+            <td>wak</td>
+            <td>yukni</td>
+            <td>yukwa</td>
+        </tr>
+        <tr>
+            <td>sa</td>
+            <td>sni</td>
+            <td>swa</td>
+        </tr>
+        <tr>
+            <td>lo</td>
+            <td>loti</td>
+            <td>loti</td>
+        </tr>
+        <tr>
+            <td>yako</td>
+            <td>yoti</td>
+            <td>yoti</td>
+        </tr>
+        <tr>
+            <td>yo / ka</td>
+            <td>yukni</td>
+            <td>yakwa</td>
+        </tr>
+    </table>
+</div>
+
+<div class="tables-container">
+	<table>
+		<caption>a-stem Subjective</caption>
+        <tr>
+            <th>Single (1)</th>
+            <th>Dual (2)</th>
+            <th>Plural (3+)</th>
+        </tr>
+        <tr>
+            <td>ka</td>
+            <td>tya</td>
+            <td>twa</td>
+        </tr>
+        <tr>
+            <td>sa</td>
+            <td>tsya</td>
+            <td>swa</td>
+        </tr>
+        <tr>
+            <td>la</td>
+            <td>ya</td>
+            <td>lu</td>
+        </tr>
+        <tr>
+            <td>yu</td>
+            <td>kya</td>
+            <td>ku</td>
+        </tr>
+        <tr>
+            <td>wa</td>
+            <td>yakya</td>
+            <td>yakwa</td>
+        </tr>
+    </table>
+
+	<table>
+		<caption>a-stem Objective</caption>
+        <tr>
+            <th>Single (1)</th>
+            <th>Dual (2)</th>
+            <th>Plural (3+)</th>
+        </tr>
+        <tr>
+            <td>waka</td>
+            <td>yukya</td>
+            <td>yukwa</td>
+        </tr>
+        <tr>
+            <td>sa</td>
+            <td>tsya</td>
+            <td>swa</td>
+        </tr>
+        <tr>
+            <td>lo</td>
+            <td>lona</td>
+            <td>lona</td>
+        </tr>
+        <tr>
+            <td>yako</td>
+            <td>yona</td>
+            <td>yona</td>
+        </tr>
+        <tr>
+            <td>yo / wa</td>
+            <td>yukya</td>
+            <td>yukwa</td>
+        </tr>
+    </table>
+</div>
+
+<div class="tables-container">
+	<table>
+		<caption>e-stem Subjective</caption>
+        <tr>
+            <th>Single (1)</th>
+            <th>Dual (2)</th>
+            <th>Plural (3+)</th>
+        </tr>
+        <tr>
+            <td>ke</td>
+            <td>tne</td>
+            <td>twe</td>
+        </tr>
+        <tr>
+            <td>se</td>
+            <td>sne</td>
+            <td>swe</td>
+        </tr>
+        <tr>
+            <td>le</td>
+            <td>ne</td>
+            <td>lʌne</td>
+        </tr>
+        <tr>
+            <td>yake</td>
+            <td>kne</td>
+            <td>kune</td>
+        </tr>
+        <tr>
+            <td>we</td>
+            <td>yakne</td>
+            <td>yakwe</td>
+        </tr>
+    </table>
+
+	<table>
+		<caption>e-stem Objective</caption>
+        <tr>
+            <th>Single (1)</th>
+            <th>Dual (2)</th>
+            <th>Plural (3+)</th>
+        </tr>
+        <tr>
+            <td>wake</td>
+            <td>yukne</td>
+            <td>yukwe</td>
+        </tr>
+        <tr>
+            <td>se</td>
+            <td>sne</td>
+            <td>swe</td>
+        </tr>
+        <tr>
+            <td>lawe</td>
+            <td>lone</td>
+            <td>lone</td>
+        </tr>
+        <tr>
+            <td>yakawe</td>
+            <td>yone</td>
+            <td>yone</td>
+        </tr>
+        <tr>
+            <td>yawe</td>
+            <td>yukne</td>
+            <td>yukwe</td>
+        </tr>
+    </table>
+</div>
+
+<div class="tables-container">
+	<table>
+		<caption>i-stem Subjective</caption>
+        <tr>
+            <th>Single (1)</th>
+            <th>Dual (2)</th>
+            <th>Plural (3+)</th>
+        </tr>
+        <tr>
+            <td>ki</td>
+            <td>tni</td>
+            <td>twʌ</td>
+        </tr>
+        <tr>
+            <td>si</td>
+            <td>sni</td>
+            <td>swʌ</td>
+        </tr>
+        <tr>
+            <td>lʌ</td>
+            <td>ni</td>
+            <td>lati</td>
+        </tr>
+        <tr>
+            <td>ye</td>
+            <td>kni</td>
+            <td>kuti</td>
+        </tr>
+        <tr>
+            <td>kʌ</td>
+            <td>yakni</td>
+            <td>yakwʌ</td>
+        </tr>
+    </table>
+
+	<table>
+		<caption>i-stem Objective</caption>
+        <tr>
+            <th>Single (1)</th>
+            <th>Dual (2)</th>
+            <th>Plural (3+)</th>
+        </tr>
+        <tr>
+            <td>waki</td>
+            <td>yukni</td>
+            <td>yukwa</td>
+        </tr>
+        <tr>
+            <td>sa</td>
+            <td>sni</td>
+            <td>swa</td>
+        </tr>
+        <tr>
+            <td>lo</td>
+            <td>loti</td>
+            <td>loti</td>
+        </tr>
+        <tr>
+            <td>yako</td>
+            <td>yoti</td>
+            <td>yoti</td>
+        </tr>
+        <tr>
+            <td>yo</td>
+            <td>yukni</td>
+            <td>yukwʌ</td>
+        </tr>
+    </table>
+</div>
+
+<div class="tables-container">
+	<table>
+		<caption>o-stem Subjective</caption>
+        <tr>
+            <th>Single (1)</th>
+            <th>Dual (2)</th>
+            <th>Plural (3+)</th>
+        </tr>
+        <tr>
+            <td>ko</td>
+            <td>tno</td>
+            <td>tyo</td>
+        </tr>
+        <tr>
+            <td>so</td>
+            <td>sno</td>
+            <td>tsyo</td>
+        </tr>
+        <tr>
+            <td>lo</td>
+            <td>no</td>
+            <td>lʌno</td>
+        </tr>
+        <tr>
+            <td>yako</td>
+            <td>kno</td>
+            <td>kuno</td>
+        </tr>
+        <tr>
+            <td>yo</td>
+            <td>yakno</td>
+            <td>yakyo</td>
+        </tr>
+    </table>
+
+	<table>
+		<caption>o-stem Objective</caption>
+        <tr>
+            <th>Single (1)</th>
+            <th>Dual (2)</th>
+            <th>Plural (3+)</th>
+        </tr>
+        <tr>
+            <td>wako</td>
+            <td>yukno</td>
+            <td>yukyo</td>
+        </tr>
+        <tr>
+            <td>so</td>
+            <td>sno</td>
+            <td>tsyo</td>
+        </tr>
+        <tr>
+            <td>lao</td>
+            <td>lono</td>
+            <td>lono</td>
+        </tr>
+        <tr>
+            <td>yakao</td>
+            <td>yono</td>
+            <td>yono</td>
+        </tr>
+        <tr>
+            <td>yao</td>
+            <td>yukno</td>
+            <td>yukyo</td>
+        </tr>
+    </table>
+</div>
+
+<div class="tables-container">
+	<table>
+		<caption>u-stem Subjective</caption>
+        <tr>
+            <th>Single (1)</th>
+            <th>Dual (2)</th>
+            <th>Plural (3+)</th>
+        </tr>
+        <tr>
+            <td>ku</td>
+            <td>tnu</td>
+            <td>tyu</td>
+        </tr>
+        <tr>
+            <td>su</td>
+            <td>snu</td>
+            <td>tsyu</td>
+        </tr>
+        <tr>
+            <td>lu</td>
+            <td>nu</td>
+            <td>lʌnu</td>
+        </tr>
+        <tr>
+            <td>yaku</td>
+            <td>knu</td>
+            <td>kunu</td>
+        </tr>
+        <tr>
+            <td>yu</td>
+            <td>yaknu</td>
+            <td>yakyu</td>
+        </tr>
+    </table>
+
+	<table>
+		<caption>u-stem Objective</caption>
+        <tr>
+            <th>Single (1)</th>
+            <th>Dual (2)</th>
+            <th>Plural (3+)</th>
+        </tr>
+        <tr>
+            <td>waku</td>
+            <td>yuknu</td>
+            <td>yukyu</td>
+        </tr>
+        <tr>
+            <td>su</td>
+            <td>snu</td>
+            <td>tsyu</td>
+        </tr>
+        <tr>
+            <td>lau</td>
+            <td>lonu</td>
+            <td>lonu</td>
+        </tr>
+        <tr>
+            <td>yakau</td>
+            <td>yonu</td>
+            <td>yonu</td>
+        </tr>
+        <tr>
+            <td>yau</td>
+            <td>yuknu</td>
+            <td>yukyu</td>
+        </tr>
+    </table>
+</div>
+
+<div class="tables-container">
+	<table>
+		<caption>ʌ-stem Subjective</caption>
+        <tr>
+            <th>Single (1)</th>
+            <th>Dual (2)</th>
+            <th>Plural (3+)</th>
+        </tr>
+        <tr>
+            <td>kʌ</td>
+            <td>tnʌ</td>
+            <td>twʌ</td>
+        </tr>
+        <tr>
+            <td>sʌ</td>
+            <td>snʌ</td>
+            <td>swʌ</td>
+        </tr>
+        <tr>
+            <td>lʌ</td>
+            <td>nʌ</td>
+            <td>lʌnʌ</td>
+        </tr>
+        <tr>
+            <td>yakʌ</td>
+            <td>knʌ</td>
+            <td>kunʌ</td>
+        </tr>
+        <tr>
+            <td>wʌ</td>
+            <td>yaknʌ</td>
+            <td>yakwʌ</td>
+        </tr>
+    </table>
+
+	<table>
+		<caption>ʌ-stem Objective</caption>
+        <tr>
+            <th>Single (1)</th>
+            <th>Dual (2)</th>
+            <th>Plural (3+)</th>
+        </tr>
+        <tr>
+            <td>wakʌ</td>
+            <td>yuknʌ</td>
+            <td>yukwʌ</td>
+        </tr>
+        <tr>
+            <td>sʌ</td>
+            <td>snʌ</td>
+            <td>swʌ</td>
+        </tr>
+        <tr>
+            <td>lawʌ</td>
+            <td>lonʌ</td>
+            <td>lonʌ</td>
+        </tr>
+        <tr>
+            <td>yakawʌ</td>
+            <td>yonʌ</td>
+            <td>yonʌ</td>
+        </tr>
+        <tr>
+            <td>yawʌ</td>
+            <td>yuknʌ</td>
+            <td>yukwʌ</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
