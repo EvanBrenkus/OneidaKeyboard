@@ -291,10 +291,10 @@ function convertToIPA(text) {
         }
     }
 
+    convertedText = convertedText.normalize('NFC');
+
     convertedText = convertedText.replace(/\(([^)]+)\)/g, function(match, p1) {
-        return p1.split('').map(char => {
-            return char + '\u0332';
-        }).join('');
+        return p1.split('').map(char => char + '\u0332').join('');
     });
 
     return convertedText;
@@ -307,6 +307,7 @@ function updateIPAOutput() {
 }
 
 document.getElementById('textInput').addEventListener('input', updateIPAOutput);
+
 
 
         function copyToClipboard(text) {
