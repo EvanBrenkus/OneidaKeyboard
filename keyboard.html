@@ -292,7 +292,7 @@
 		}
 
 		convertedText = convertedText.replace(/\(([^)]+)\)/g, function(match, p1) {
-        return `<span style="text-decoration: underline;">${p1}</span>`;
+       			return p1.split('').map(char => char + '\u0332').join('');
 		});
 
 		return convertedText;
@@ -301,7 +301,7 @@
 	function updateIPAOutput() {
 		const textInput = document.getElementById('textInput').value;
 		const ipaOutput = document.getElementById('ipaOutput');
-		ipaOutput.innerHTML = convertToIPA(textInput); 
+		ipaOutput.textContent = convertToIPA(textInput); 
 	}
 
 	document.getElementById('textInput').addEventListener('input', updateIPAOutput);
