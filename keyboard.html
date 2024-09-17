@@ -281,32 +281,34 @@
             'z': '',
         };
 
-	function convertToIPA(text) {
-		let convertedText = '';
-		for (let char of text) {
-			if (ipaMapping.hasOwnProperty(char)) {
-				convertedText += ipaMapping[char];
-			} else {
-				convertedText += char;
-			}
-		}
+function convertToIPA(text) {
+    let convertedText = '';
+    for (let char of text) {
+        if (ipaMapping.hasOwnProperty(char)) {
+            convertedText += ipaMapping[char];
+        } else {
+            convertedText += char;
+        }
+    }
 
-		convertedText = convertedText.replace(/\(([^)]+)\)/g, function(match, p1) {
-       			return p1.split('').map(char => {
-				return char + '\u0332';
-			}).join('');
-		});
+    convertedText = convertedText.replace(/\(([^)]+)\)/g, function(match, p1) {
+        return p1.split('').map(char => {
+            return char + '\u0332';
+        }).join('');
+    });
 
-		return convertedText;
-	}
+    return convertedText;
+}
 
-	function updateIPAOutput() {
-		const textInput = document.getElementById('textInput').value;
-		const ipaOutput = document.getElementById('ipaOutput');
-		ipaOutput.textContent = convertToIPA(textInput); 
-	}
+function updateIPAOutput() {
+    const textInput = document.getElementById('textInput').value;
+    const ipaOutput = document.getElementById('ipaOutput');
+    ipaOutput.textContent = convertToIPA(textInput);
+}
 
-	document.getElementById('textInput').addEventListener('input', updateIPAOutput);
+document.getElementById('textInput').addEventListener('input', updateIPAOutput);
+
+
         function copyToClipboard(text) {
             const textarea = document.createElement('textarea');
             textarea.value = text;
