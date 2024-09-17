@@ -291,15 +291,8 @@ function convertToIPA(text) {
         }
     }
 
-    convertedText = convertedText.normalize('NFC');
-
     convertedText = convertedText.replace(/\(([^)]+)\)/g, function(match, p1) {
-        return p1.split('').map(char => {
-            if (char === 'ʌ́') {
-                return char + '\u0332';
-            }
-            return char + '\u0332';
-        }).join('');
+        return `<span style="text-decoration: underline;">${p1}</span>`;
     });
 
     return convertedText;
@@ -308,7 +301,7 @@ function convertToIPA(text) {
 function updateIPAOutput() {
     const textInput = document.getElementById('textInput').value;
     const ipaOutput = document.getElementById('ipaOutput');
-    ipaOutput.textContent = convertToIPA(textInput);
+    ipaOutput.innerHTML = convertToIPA(textInput);
 }
 
 document.getElementById('textInput').addEventListener('input', updateIPAOutput);
