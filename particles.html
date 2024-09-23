@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oneida Language Nouns</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: "Roboto", sans-serif;
+        }
+        body {
+            font-weight: 400;
+        }
+        table {
+            border-collapse: collapse;
+            width: auto;
+            margin: 0;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #5D3F6A;
+            display: flex;
+            justify-content: left;
+        }
+        .navbar a {
+            float: left;
+            font-size: 20px;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .navbar a:hover, .dropdown:hover .dropbtn {
+            background-color: #ddd;
+            color: black;
+        }
+        .dropdown {
+            float: left;
+            background-color: #5D3F6A;
+            overflow: hidden;
+        }
+        .dropdown .dropbtn {
+            font-size: 20px;  
+            border: none;
+            outline: none;
+            color: white;
+            padding: 20px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+            transition: background-color 0.3s, color 0.3s;
+			pointer-events: none;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            transition: background-color 0.3s;
+        }
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dictionary-container {
+            width: 100%;
+            max-width: 1600px;
+            margin: 20px auto;
+            padding: 10px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #searchInput {
+            width: 500px;
+            padding: 10px;
+            margin-top: 20px;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .filters {
+            display: flex;
+            margin-top: 20px;
+            justify-content: center;
+            background-color: #5D3F6A;
+        }
+        .filter-btn {
+            padding: 15px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #5D3F6A;
+            color: white;
+            border: none;
+            transition: background-color 0.3s;
+        }
+        .filter-btn:hover, .filter-btn.active, .filter-dropbtn:hover, .filter-dropbtn:active {
+            background-color: #ddd;
+            color: black;
+        }
+		.filter-dropbtn {
+            padding: 15px 20px;
+            font-size: 16px;
+            background-color: #5D3F6A;
+            color: white;
+            border: none;
+            transition: background-color 0.3s;
+			pointer-event: none;
+		}
+        .dropdown-table {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            color: black;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-table button {
+            display: block;
+            width: 150px;
+            padding: 15px 20px;
+            border: none;
+            background: none;
+            color: black;
+            text-align: left;
+            cursor: pointer;
+        }
+        .dropdown-table button:hover {
+            background-color: #ddd;
+        }
+        .filters .dropdown:hover .dropdown-table {
+            display: block;
+        }
+		.filter-dropbtn:hover, .dropdown:hover .filter-dropbtn {
+			background-color: #ddd;
+			color: black;
+		}
+        .particles-table {
+            width: auto;
+            border-collapse: collapse;
+        }
+        .particles-table th, .particles-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+			width: 300px;
+        }
+		.particles-table td {
+			text-align: left;
+		}
+        .hidden-column {
+            display: none;
+        }
+        .underline {
+            text-decoration: underline;
+        }
+        .no-results {
+            display: none;
+            color: black;
+            font-weight: bold;
+            font-size: 25px;
+            margin: 20px;
+			text-align: center;
+        }
+		.pagination {
+			margin: 10px 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.page-btn {
+			padding: 10px 20px;
+			font-size: 16px;
+			cursor: pointer;
+			background-color: #5D3F6A;
+			color: white;
+			border: none;
+			margin: 0 5px;
+			transition: background-color 0.3s;
+		}
+		.page-btn:hover, .page-btn:disabled {
+			background-color: #ddd;
+			color: black;
+		}
+		.page-btn:disabled {
+			cursor: not-allowed;
+		}
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="keyboard.html">Keyboard</a>
+        <div class="dropdown">
+            <button class="dropbtn">Charts</button>
+            <div class="dropdown-content">
+                <a href="pronouns.html">Pronouns</a>
+                <a href="transitives.html">Transitives</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Dictionaries</button>
+            <div class="dropdown-content">
+                <a href="particles.html">Particles</a>
+            </div>
+        </div>
+    </div>
+	
+    <div class="dictionary-container">
+        <input type="text" id="searchInput" placeholder="Search...">
+	  <div class="filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="question">Question</button>
+			<button class="filter-btn" data-filter="time">Time</button>
+			<button class="filter-btn" data-filter="place">Place</button>
+			<button class="filter-btn" data-filter="agreement">Agreement</button>
+			<button class="filter-btn" data-filter="extent">Extent</button>
+			<button class="filter-btn" data-filter="connective">Connective</button>
+			<button class="filter-btn" data-filter="relative">Relative</button>
+			<button class="filter-btn" data-filter="conversational">Conversational</button>
+    </div>
+	<div class="table-container">
+		<div class="pagination">
+			<button class="page-btn" id="prevBtn" onclick="changePage('prev')">Back</button>
+			<span id="pageInfo" style="margin: 0 15px;">Page 1 out of 1</span>
+            <button class="page-btn" id="nextBtn" onclick="changePage('next')">Next</button>
+		</div>
+        <table class="particles-table" id="particlesTable">
+            <thead id="tableHeader">
+                <tr>
+                    <th>Particle</th>
+                    <th>Meanings</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+        <div class="no-results">No results found.</div>
+    </div>
+	</div>
+<script>
+const rows = [
+  { particle: 'kʌ', meanings: 'yes? / no?', category: 'question' },
+	{ particle: 'náhteˀ', meanings: 'what?', category: 'question' },
+	{ particle: 'náhoht<span class="underline">e</span>', meanings: 'what?', category: 'question' },
+	{ particle: 'úhka náhteˀ', meanings: 'who?', category: 'question' },
+	{ particle: 'kánhke', meanings: 'when?', category: 'question' },
+	{ particle: 'to nikaha⋅wí⋅', meanings: 'when?', category: 'question' },
+	{ particle: 'kátsaˀ nu', meanings: 'where?', category: 'question' },
+	{ particle: 'kátsaˀ ka⋅yʌ́⋅', meanings: 'which one?', category: 'question' },
+	{ particle: 'náhteˀ aolí⋅waˀ', meanings: 'why? / what reason?', category: 'question' },
+	{ particle: 'oh ni⋅yót', meanings: 'how?', category: 'question' },
+	{ particle: 'to ni⋅kú', meanings: 'how much?', category: 'question' },
+	{ particle: 'to niha⋅tí', meanings: 'how many people?', category: 'question' },
+	{ particle: 'to niku⋅ti', meanings: 'how many females?', category: 'question' },
+	
+	{ particle: 'o⋅nʌ́', meanings: 'now / at that time', category: 'time' },
+	{ particle: 'nʌ', meanings: 'now / at that time', category: 'time' },
+	{ particle: 'úwa', meanings: 'now / today', category: 'time' },
+	{ particle: 'núwa', meanings: 'now / today', category: 'time' },
+	{ particle: 'nuˀú', meanings: 'now / today', category: 'time' },
+	{ particle: 'oksaˀ', meanings: 'soon / right away', category: 'time' },
+	{ particle: 'elhúwa', meanings: 'recently', category: 'time' },
+	{ particle: 'tyótkut', meanings: 'always', category: 'time' },
+	{ particle: 'yotká⋅te', meanings: 'always', category: 'time' },
+	{ particle: 'swatye⋅lʌ́', meanings: 'sometimes', category: 'time' },
+	{ particle: 'yah nuwʌ⋅tú', meanings: 'never', category: 'time' },
+	
+	{ particle: 'ákta', meanings: 'nearby', category: 'place' },
+	{ particle: 'ákte', meanings: 'somewhere else', category: 'place' },
+	{ particle: 'átste', meanings: 'outside', category: 'place' },
+	{ particle: 'é⋅nike', meanings: 'up / above', category: 'place' },
+	{ particle: 'ehtá⋅ke', meanings: 'down / below', category: 'place' },
+	{ particle: 'kʌ́⋅tho', meanings: 'here', category: 'place' },
+	{ particle: 'kʌh nu', meanings: 'here', category: 'place' },
+	{ particle: 'kʌh nukwá', meanings: 'this way', category: 'place' },
+	{ particle: 'ohná⋅kʌ', meanings: 'back / behind', category: 'place' },
+	{ particle: 'ohʌ⋅tú', meanings: 'ahead / in front', category: 'place' },
+	{ particle: 'ná⋅ku', meanings: 'underneath', category: 'place' },
+	{ particle: 'tho nukwá', meanings: 'there', category: 'place' },
+	{ particle: 'aˀe nukwá́', meanings: 'over there / away', category: 'place' },
+	{ particle: 'isi nukwá', meanings: 'over there / far away', category: 'place' },
+	
+	{ particle: 'ʌ́⋅ʌ', meanings: 'yes', category: 'agreement' },
+	{ particle: 'né⋅', meanings: 'yes / it is so', category: 'agreement' },
+	{ particle: 'né⋅ wah', meanings: 'yes / it is so', category: 'agreement' },
+	{ particle: 'né⋅ kiˀ wah', meanings: 'yes / indeed', category: 'agreement' },
+	{ particle: 'tho⋅kʌ́ske', meanings: 'for sure', category: 'agreement' },
+	{ particle: 'khele', meanings: 'I guess / it seems so', category: 'agreement' },
+	{ particle: 'khelé kiˀ wah', meanings: 'I guess so', category: 'agreement' },
+	{ particle: 'kwaˀnyó', meanings: 'it seems', category: 'agreement' },
+	{ particle: 'wé⋅ne kiˀ wah', meanings: 'it seems so', category: 'agreement' },
+	{ particle: 'úhteˀ wi', meanings: 'maybe so', category: 'agreement' },
+	{ particle: 'tá⋅t nuˀú', meanings: 'maybe so', category: 'agreement' },
+	{ particle: 'yáhtʌ', meanings: 'no', category: 'agreement' },
+	{ particle: 'táh', meanings: 'no', category: 'agreement' },
+	{ particle: 'to⋅káh', meanings: 'I do not know', category: 'agreement' },
+	{ particle: 'áhsu', meanings: 'not yet', category: 'agreement' },
+	
+	{ particle: 'ostúha', meanings: 'a little', category: 'extent' },
+	{ particle: 'e⋅só', meanings: 'much / a lot', category: 'extent' },
+	{ particle: 'kwah i⋅kʌ́ tsiˀ', meanings: 'very much', category: 'extent' },
+	{ particle: 'só⋅tsiˀ', meanings: 'very much / too much', category: 'extent' },
+	{ particle: 'akwe⋅kú', meanings: 'all', category: 'extent' },
+	{ particle: 'tsiléhkwah', meanings: 'almost', category: 'extent' },
+	
+	{ particle: 'okhaleˀ', meanings: 'and', category: 'connective' },
+	{ particle: 'ok', meanings: 'and / connecting #s', category: 'connective' },
+	{ particle: 'okhnaˀ', meanings: 'and then', category: 'connective' },
+	{ particle: 'táhnu', meanings: 'and then', category: 'connective' },
+	{ particle: 'tho neˀ onʌ́', meanings: 'and then', category: 'connective' },
+	{ particle: 'ok neˀn', meanings: 'or', category: 'connective' },
+	{ particle: 'nok tsiˀ', meanings: 'but', category: 'connective' },
+	{ particle: 'né⋅ tsiˀ', meanings: 'because', category: 'connective' },
+	
+	{ particle: 'tsiˀ ka⋅yʌ́⋅	', meanings: 'the one who', category: 'relative' },
+	{ particle: 'tsiˀ náhteˀ', meanings: 'whatever', category: 'relative' },
+	{ particle: 'kanyó', meanings: 'whenever / when', category: 'relative' },
+	{ particle: 'tho nu', meanings: 'then', category: 'relative' },
+	{ particle: 'kátsaˀ ok nu', meanings: '	somewhere', category: 'relative' },
+	{ particle: 'tsyok náhteˀ', meanings: 'something / somethings', category: 'relative' },
+	{ particle: 'úhka ok náhteˀ', meanings: 'someone', category: 'relative' },
+	
+	{ particle: 'she⋅kú', meanings: 'hello / still / again', category: 'conversational' },
+	{ particle: 'yawʌˀkó', meanings: 'thank you very much', category: 'conversational' },
+	{ particle: 'yo', meanings: "you're welcome", category: 'conversational' },
+	{ particle: 'hao', meanings: 'come on!', category: 'conversational' },
+	{ particle: 'ake⋅', meanings: 'ouch', category: 'conversational' },
+	{ particle: 'o⋅nʌ́ kiˀ wah', meanings: 'goodbye', category: 'conversational' },
+	{ particle: 'ni⋅yót', meanings: 'how it is / look at that!', category: 'conversational' },
+	{ particle: 'otsé', meanings: 'wow!', category: 'conversational' },
+	{ particle: 'tho ni⋅k<span class="underline">ú</span>', meanings: "that's enough", category: 'conversational' },
+];
+
+document.getElementById('searchInput').addEventListener('input', filterRows);
+document.querySelectorAll('.filter-btn').forEach(button => button.addEventListener('click', applyFilter));
+
+let filteredRows = [...rows];
+let currentPage = 1;
+const rowsPerPage = 10;
+const tableHeader = document.getElementById('tableHeader');
+
+function displayRows() {
+    const start = (currentPage - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+    const rowsToDisplay = filteredRows.slice(start, end);
+    const tableBody = document.querySelector('#particlesTable tbody');
+    tableBody.innerHTML = '';
+
+    if (rowsToDisplay.length === 0) {
+        document.querySelector('.no-results').style.display = 'block';
+        tableHeader.style.display = 'none';
+    } else {
+        document.querySelector('.no-results').style.display = 'none';
+        tableHeader.style.display = '';
+        rowsToDisplay.forEach(row => {
+            const tr = document.createElement('tr');
+            const { particle, meanings } = row;
+            const wordCell = document.createElement('td');
+            wordCell.innerHTML = particle;
+            const translationCell = document.createElement('td');
+            translationCell.textContent = meanings;
+
+            tr.appendChild(wordCell);
+            tr.appendChild(translationCell);
+            tableBody.appendChild(tr);
+        });
+    }
+
+    updatePagination();
+}
+
+function changePage(direction) {
+    if (direction === 'prev' && currentPage > 1) {
+        currentPage--;
+    } else if (direction === 'next' && currentPage * rowsPerPage < filteredRows.length) {
+        currentPage++;
+    }
+    displayRows();
+}
+
+function updatePagination() {
+    const totalPages = Math.ceil(filteredRows.length / rowsPerPage);
+    document.getElementById('prevBtn').disabled = currentPage === 1;
+    document.getElementById('nextBtn').disabled = currentPage === totalPages || totalPages === 0;
+
+    document.getElementById('pageInfo').textContent = `Page ${currentPage} out of ${totalPages}`;
+}
+
+function filterRows() {
+    const searchText = document.getElementById('searchInput').value.toLowerCase();
+    filteredRows = rows.filter(row => {
+        return Object.values(row).some(val => val.toLowerCase().includes(searchText));
+    });
+    currentPage = 1;
+    displayRows();
+}
+
+function applyFilter(event) {
+    const filter = event.target.dataset.filter;
+    if (filter === 'all') {
+        filteredRows = [...rows];
+    } else {
+        filteredRows = rows.filter(row => row.category === filter);
+    }
+    document.querySelectorAll('.filter-btn').forEach(button => button.classList.remove('active'));
+    event.target.classList.add('active');
+    currentPage = 1;
+    displayRows();
+}
+
+displayRows();
+</script>
+</body>
+</html>
