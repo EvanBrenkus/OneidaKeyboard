@@ -107,6 +107,7 @@
         }
         .filters {
             display: flex;
+	    width: 500px;
             margin-top: 20px;
             justify-content: center;
             background-color: #5D3F6A;
@@ -124,15 +125,15 @@
             background-color: #ddd;
             color: black;
         }
-		.filter-dropbtn {
+	.filter-dropbtn {
             padding: 15px 20px;
             font-size: 16px;
             background-color: #5D3F6A;
             color: white;
             border: none;
             transition: background-color 0.3s;
-			pointer-event: none;
-		}
+	    pointer-event: none;
+	}
         .dropdown-table {
             display: none;
             position: absolute;
@@ -234,17 +235,19 @@
 	
     <div class="dictionary-container">
         <input type="text" id="searchInput" placeholder="Search...">
-	  <div class="filters">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="question">Question</button>
-			<button class="filter-btn" data-filter="time">Time</button>
-			<button class="filter-btn" data-filter="place">Place</button>
-			<button class="filter-btn" data-filter="agreement">Agreement</button>
-			<button class="filter-btn" data-filter="extent">Extent</button>
-			<button class="filter-btn" data-filter="connective">Connective</button>
-			<button class="filter-btn" data-filter="relative">Relative</button>
-			<button class="filter-btn" data-filter="conversational">Conversational</button>
-    </div>
+	<div class="filters">
+      		<button class="filter-btn active" data-filter="all">All</button>
+    		<button class="filter-btn" data-filter="question">Question</button>
+		<button class="filter-btn" data-filter="time">Time</button>
+		<button class="filter-btn" data-filter="place">Place</button>
+		<button class="filter-btn" data-filter="agreement">Agreement</button>
+	</div>
+	<div class="filters">
+		<button class="filter-btn" data-filter="extent">Extent</button>
+		<button class="filter-btn" data-filter="connective">Connective</button>
+		<button class="filter-btn" data-filter="relative">Relative</button>
+		<button class="filter-btn" data-filter="conversational">Conversational</button>
+ 	</div>
 	<div class="table-container">
 		<div class="pagination">
 			<button class="page-btn" id="prevBtn" onclick="changePage('prev')">Back</button>
