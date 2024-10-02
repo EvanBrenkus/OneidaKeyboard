@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oneida Language Nouns</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: "Roboto", sans-serif;
+        }
+        body {
+            font-weight: 400;
+        }
+        table {
+            border-collapse: collapse;
+            width: auto;
+            margin: 0;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #5D3F6A;
+            display: flex;
+            justify-content: left;
+        }
+        .navbar a {
+            float: left;
+            font-size: 20px;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .navbar a:hover, .dropdown:hover .dropbtn {
+            background-color: #ddd;
+            color: black;
+        }
+        .dropdown {
+            float: left;
+            background-color: #5D3F6A;
+            overflow: hidden;
+        }
+        .dropdown .dropbtn {
+            font-size: 20px;  
+            border: none;
+            outline: none;
+            color: white;
+            padding: 20px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+            transition: background-color 0.3s, color 0.3s;
+			pointer-events: none;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            transition: background-color 0.3s;
+        }
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dictionary-container {
+            width: 100%;
+            max-width: 1600px;
+            margin: 20px auto;
+            padding: 10px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #searchInput {
+            width: 500px;
+            padding: 10px;
+            margin-top: 20px;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .filters {
+            display: flex;
+            margin-top: 20px;
+            justify-content: center;
+            background-color: #5D3F6A;
+        }
+        .filter-btn {
+            padding: 15px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #5D3F6A;
+            color: white;
+            border: none;
+            transition: background-color 0.3s;
+        }
+        .filter-btn:hover, .filter-btn.active, .filter-dropbtn:hover, .filter-dropbtn:active {
+            background-color: #ddd;
+            color: black;
+        }
+		.filter-dropbtn {
+            padding: 15px 20px;
+            font-size: 16px;
+            background-color: #5D3F6A;
+            color: white;
+            border: none;
+            transition: background-color 0.3s;
+			pinter-event: none;
+		}
+        .dropdown-table {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            color: black;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-table button {
+            display: block;
+            width: 150px;
+            padding: 15px 20px;
+            border: none;
+            background: none;
+            color: black;
+            text-align: left;
+            cursor: pointer;
+        }
+        .dropdown-table button:hover {
+            background-color: #ddd;
+        }
+        .filters .dropdown:hover .dropdown-table {
+            display: block;
+        }
+		.filter-dropbtn:hover, .dropdown:hover .filter-dropbtn {
+			background-color: #ddd;
+			color: black;
+		}
+        .nouns-table {
+            width: auto;
+            border-collapse: collapse;
+        }
+        .nouns-table th, .nouns-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+			width: 300px;
+        }
+		.nouns-table td {
+			text-align: left;
+		}
+        .hidden-column {
+            display: none;
+        }
+        .underline {
+            text-decoration: underline;
+        }
+        .no-results {
+            display: none;
+            color: black;
+            font-weight: bold;
+            font-size: 25px;
+            margin: 20px;
+			text-align: center;
+        }
+		.pagination {
+			margin: 10px 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.page-btn {
+			padding: 10px 20px;
+			font-size: 16px;
+			cursor: pointer;
+			background-color: #5D3F6A;
+			color: white;
+			border: none;
+			margin: 0 5px;
+			transition: background-color 0.3s;
+		}
+		.page-btn:hover, .page-btn:disabled {
+			background-color: #ddd;
+			color: black;
+		}
+		.page-btn:disabled {
+			cursor: not-allowed;
+		}
+		.table-caption {
+			font-size: 20px;
+			margin-bottom: 15px;
+			text-align: center;
+		}
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="Index.html">Home</a>
+        <a href="Keyboard.html">Keyboard</a>
+        <div class="dropdown">
+            <button class="dropbtn">Charts</button>
+            <div class="dropdown-content">
+                <a href="Pronouns.html">Pronouns</a>
+                <a href="Transitives.html">Transitives</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Dictionary</button>
+            <div class="dropdown-content">
+                <a href="Nouns.html">Nouns</a>
+                <a href="Particles.html">Particles</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="dictionary-container">
+        <input type="text" id="searchInput" placeholder="Search...">
+        
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <div class="dropdown">
+                <button class="filter-dropbtn">Nature</button>
+                <div class="dropdown-table">
+					<button class="filter-btn" data-filter="animals">Animals</button>
+					<button class="filter-btn" data-filter="birds">Birds</button>
+					<button class="filter-btn" data-filter="bugs">Bugs</button>
+					<button class="filter-btn" data-filter="animal-parts">Animal Parts</button>
+					<button class="filter-btn" data-filter="trees">Trees</button>
+					<button class="filter-btn" data-filter="plants">Plants</button>
+					<button class="filter-btn" data-filter="formations">Formations</button>
+					<button class="filter-btn" data-filter="weather">Weather</button>
+					<button class="filter-btn" data-filter="directions">Directions</button>
+					<button class="filter-btn" data-filter="times">Times</button>
+			  	</div>
+			</div>
+			<div class="dropdown">
+				<button class="filter-dropbtn">Concepts</button>
+				<div class="dropdown-table">
+					<button class="filter-btn" data-filter="numbers">Numbers</button>
+					<button class="filter-btn" data-filter="colors">Colors</button>
+					<button class="filter-btn" data-filter="shapes">Shapes</button>
+        </div>
+      </div>
+            <div class="dropdown">
+                <button class="filter-dropbtn">Household & Community</button>
+                <div class="dropdown-table">
+          <button class="filter-btn" data-filter="clothing">Clothing & Accessories</button>
+					<button class="filter-btn" data-filter="cooking">Cooking Utensils</button>
+					<button class="filter-btn" data-filter="foods">Foods</button>
+					<button class="filter-btn" data-filter="housing">Housing</button>
+					<button class="filter-btn" data-filter="tools">Tools</button>
+					<button class="filter-btn" data-filter="transportation">Transportation</button>
+					<button class="filter-btn" data-filter="structures">Structures</button>
+					<button class="filter-btn" data-filter="entertainment">Entertainment</button>
+					<button class="filter-btn" data-filter="money">Money</button>
+					<button class="filter-btn" data-filter="measures">Measures</button>
+                </div>
+            </div>
+        </div>
+	<div class="table-container">
+		<div class="pagination">
+			<button class="page-btn" id="prevBtn" onclick="changePage('prev')">Back</button>
+			<span id="pageInfo" style="margin: 0 15px;">Page 1 out of 1</span>
+            <button class="page-btn" id="nextBtn" onclick="changePage('next')">Next</button>
+		</div>
+		
+		<div class="table-caption" id="tableCaption"><strong>Showing:</strong> All Nouns</div>
+				
+        <table class="nouns-table" id="nounsTable">
+            <thead id="tableHeader">
+                <tr>
+                    <th>Nouns</th>
+                    <th>Meanings</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+        <div class="no-results">No results found.</div>
+    </div>
+	</div>
+<script>
+const rows = [
+	{ words: 'katshe⋅<span class="underline">nʌ́⋅</span>', meanings: 'animal / domestic animal / pet', category: 'animals'},
+	{ words: 'kutitshenʌˀshú<span class="underline">ha</span>', meanings: 'animals / pets / livestock', category: 'animals'},
+	{ words: 'kályoˀ', meanings: 'wild animal', category: 'animals'},
+	{ words: 'kutílyoˀ / kutilyoˀshú<span class="underline">ha</span>', meanings: 'wild animals', category: 'animals'},
+	{ words: 'onaˀkʌtkó⋅', meanings: 'badger', category: 'animals'},
+	{ words: 'tsiˀklaˀwístal', meanings: 'bat', category: 'animals'},
+	{ words: 'ohkwa⋅l<span class="underline">í</span>', meanings: 'bear', category: 'animals'},
+	{ words: 'tsyoní⋅<span class="underline">tuˀ</span>', meanings: 'beaver', category: 'animals'},
+	{ words: 'tsyotekliyá⋅ku', meanings: 'buffalo', category: 'animals'},
+	{ words: 'yoˀnowakwa⋅lú<span class="underline">teˀ</span>', meanings: 'camel', category: 'animals'},
+	{ words: 'takóhs', meanings: 'cat', category: 'animals'},
+	{ words: 'tsyolhyóh<span class="underline">kwaˀ</span>', meanings: 'chipmunk', category: 'animals'},
+	{ words: 'ata⋅kʌ́⋅', meanings: 'clam', category: 'animals'},
+	{ words: 'tyonhúskwalut', meanings: 'cow', category: 'animals'},
+	{ words: 'kanú⋅tat', meanings: 'cow / milk cow', category: 'animals'},
+	{ words: 'tsyeˀelo⋅l<span class="underline">ú</span>', meanings: 'crab / lobster / crayfish', category: 'animals'},
+	{ words: 'oskanu⋅<span class="underline">tú⋅</span> / oskʌnu⋅<span class="underline">tú⋅</span>', meanings: 'deer', category: 'animals'},
+	{ words: 'kayaˀkwáhe<span class="underline">leˀ</span>', meanings: 'dinosaur', category: 'animals'},
+	{ words: 'é⋅lhal', meanings: 'dog', category: 'animals'},
+	{ words: 'tewahúhtes', meanings: 'donkey', category: 'animals'},
+    { words: 'ohnaˀkwalohsaˀkó⋅ / ohnakwalohsaˀkó⋅', meanings: 'elephant', category: 'animals'},
+	{ words: 'kʌ́tsi<span class="underline">ˀ</span>', meanings: 'fish', category: 'animals'},
+	{ words: 'kʌtsyʌˀshú<span class="underline">ha</span>', meanings: 'fishes', category: 'animals'},
+	{ words: 'skʌhnák<span class="underline">sʌˀ</span>', meanings: 'fox', category: 'animals'},
+	{ words: 'wale⋅l<span class="underline">ʌ́</span> / wale⋅l<span class="underline">ú</span>', meanings: 'frog', category: 'animals'},
+	{ words: 'to⋅tís', meanings: 'frog / spring frog', category: 'animals'},
+	{ words: 'kayaˀ táklah<span class="underline">seˀ</span>', meanings: 'goat', category: 'animals'},
+	{ words: 'tsikawihsakihaˀkó⋅', meanings: 'gorilla', category: 'animals'},
+	{ words: 'oná⋅kʌt', meanings: 'groundhog', category: 'animals'},
+	{ words: 'kohsa⋅tʌ́s', meanings: 'horse', category: 'animals'},
+	{ words: 'yohnaˀtátsles', meanings: 'kangaroo', category: 'animals'},
+	{ words: 'kʌ́⋅leks', meanings: 'lion', category: 'animals'},
+	{ words: 'okalanʌ́⋅<span class="underline">taˀ</span>', meanings: 'lizard', category: 'animals'},
+	{ words: 'tsyotsya⋅ká<span class="underline">weˀ</span>', meanings: 'mink', category: 'animals'},
+	{ words: 'tsiˀnyu⋅ká<span class="underline">leˀ</span>', meanings: 'mole', category: 'animals'},
+	{ words: 'tsikawihsakí<span class="underline">haˀ</span>', meanings: 'monkey', category: 'animals'},
+	{ words: 'skaˀnyúh<span class="underline">saˀ</span>', meanings: 'moose', category: 'animals'},
+	{ words: 'otsiˀno⋅w<span class="underline">ʌ́</span>', meanings: 'mouse', category: 'animals'},
+	{ words: 'anó⋅ki<span class="underline">ˀ</span>', meanings: 'muskrat', category: 'animals'},
+	{ words: 'kóskos', meanings: 'pig', category: 'animals'},
+	{ words: 'onhéh<span class="underline">taˀ</span>', meanings: 'porcupine', category: 'animals'},
+	{ words: 'kwaˀyʌ́<span class="underline">ha</span>', meanings: 'rabbit', category: 'animals'},
+	{ words: 'tshuˀkalo⋅l<span class="underline">ʌ́</span>', meanings: 'rabbit / jackrabbit', category: 'animals'},
+	{ words: 'ʌti⋅l<span class="underline">ú</span>', meanings: 'raccoon', category: 'animals'},
+	{ words: 'otsiˀnowʌhkó⋅', meanings: 'rat', category: 'animals'},
+	{ words: 'síksik', meanings: 'sheep', category: 'animals'},
+	{ words: 'aní⋅tas', meanings: 'skunk', category: 'animals'},
+	{ words: 'tsyonisklo⋅l<span class="underline">ú</span>', meanings: 'snail', category: 'animals'},
+	{ words: 'ót<span class="underline">kuˀ</span>', meanings: 'snake', category: 'animals'},
+	{ words: 'tsikwilʌ́⋅<span class="underline">tuˀ</span> / tsyokwilʌ́⋅<span class="underline">tuˀ</span>', meanings: 'squirrel', category: 'animals'},
+	{ words: 'tekahwa⋅sú<span class="underline">teˀ</span>', meanings: 'squirrel / flying squirrel', category: 'animals'},
+	{ words: 'tsyohsoˀkwaka⋅y<span class="underline">ú</span>', meanings: 'squirrel / red squirrel', category: 'animals'},
+	{ words: 'tsiniskwalakwalu⋅<span class="underline">tú⋅</span>', meanings: 'taod', category: 'animals'},
+	{ words: 'kwa⋅lál', meanings: 'taod / tree toad', category: 'animals'},
+	{ words: 'aˀno⋅wál', meanings: 'turtle', category: 'animals'},
+	{ words: 'onu⋅kót', meanings: 'weasel', category: 'animals'},
+	{ words: 'thahyu⋅n<span class="underline">í</span> / othahyu⋅n<span class="underline">í</span>', meanings: 'wolf', category: 'animals'},
+	
+	{ words: 'otsiˀtʌ⋅<span class="underline">ha</span>', meanings: 'bird', category: 'birds'},
+	{ words: 'otsiˀtʌhaˀshú<span class="underline">ha</span>', meanings: 'birds', category: 'birds'},
+	{ words: 'klíkli', meanings: 'blue jay', category: 'birds'},
+	{ words: 'talulo⋅l<span class="underline">ú</span>', meanings: 'bluebird', category: 'birds'},
+	{ words: 'tsyó⋅kwalis', meanings: 'bobolink', category: 'birds'},
+	{ words: 'kohkwáe', meanings: 'bobwhite / quail', category: 'birds'},
+	{ words: 'onikwʌhtalá<span class="underline">⋅</span>', meanings: 'cardinal', category: 'birds'},
+	{ words: 'tsiktsile⋅<span class="underline">lé⋅</span>', meanings: 'chickadee', category: 'birds'},
+	{ words: 'kítkit', meanings: 'chicken', category: 'birds'},
+	{ words: 'kítkit teyakoyaˀtákh<span class="underline">waˀ</span> / kítkit yakoye⋅nás', meanings: 'chicken hawk', category: 'birds'},
+	{ words: 'tekahsineskó⋅', meanings: 'crane', category: 'birds'},
+	{ words: 'ká⋅ka<span class="underline">ˀ</span>', meanings: 'crow', category: 'birds'},
+	{ words: 'taluˀkó⋅', meanings: 'duck', category: 'birds'},
+	{ words: 'atú⋅nyo<span class="underline">teˀ</span>', meanings: 'eagle', category: 'birds'},
+	{ words: 'lalutastoˀokshá<span class="underline">⋅</span>', meanings: 'flicker / woodpecker', category: 'birds'},
+	{ words: 'otsiˀnkwalá<span class="underline">⋅</span>', meanings: 'goldfinch', category: 'birds'},
+	{ words: 'onahsakʌ⋅lá<span class="underline">teˀ</span> / nahsakʌ⋅lá<span class="underline">teˀ</span>', meanings: 'goose', category: 'birds'},
+	{ words: 'káhuk / onahsakʌlatkó⋅ / nahsakʌlatkó⋅', meanings: 'goose / wild goose', category: 'birds'},
+	{ words: 'ohkwe⋅<span class="underline">sʌ́⋅</span>', meanings: 'grouse / partridge', category: 'birds'},
+	{ words: 'yostyʌˀtóta<span class="underline">ˀ</span>', meanings: 'guinea hen', category: 'birds'},
+	{ words: 'kalhakú<span class="underline">ha</span>', meanings: 'hawk', category: 'birds'},
+	{ words: 'lauláu', meanings: 'hummingbird', category: 'birds'},
+	{ words: 'tawístawi<span class="underline">ˀ</span>', meanings: 'killdeer', category: 'birds'},
+	{ words: 'kwalo⋅l<span class="underline">ú</span>', meanings: 'owl', category: 'birds'},
+	{ words: 'waˀkohseskó⋅', meanings: 'peacock', category: 'birds'},
+	{ words: 'oli⋅<span class="underline">té⋅</span>', meanings: 'pigeon', category: 'birds'},
+	{ words: 'tsiskó⋅ko<span class="underline">ˀ</span>', meanings: 'robin', category: 'birds'},
+	{ words: 'kítkit la⋅tsín', meanings: 'rooster', category: 'birds'},
+	{ words: 'tsyohwʌ́⋅tstaka<span class="underline">weˀ</span>', meanings: 'seagull', category: 'birds'},
+	{ words: 'kanataˀkék<span class="underline">haˀ</span>', meanings: 'sparrow', category: 'birds'},
+	{ words: 'tekaluhyakahnéla<span class="underline">ˀ</span>', meanings: 'stork', category: 'birds'},
+	{ words: 'tekahnekakhwá<span class="underline">⋅</span>', meanings: 'swallow', category: 'birds'},
+	{ words: 'skawilo⋅wá<span class="underline">neˀ</span>', meanings: 'turkey', category: 'birds'},
+	
+	{ words: 'tsiˀnhutstókh<span class="underline">wiˀ</span> / tsiˀnhutstókh<span class="underline">waˀ</span>', meanings: 'ant', category: 'bugs'},
+	{ words: 'kasehtáklah<span class="underline">seˀ</span>', meanings: 'bedbug', category: 'bugs'},
+	{ words: 'tsinuhnéhklis / tsyonuhnéhklis', meanings: 'bee', category: 'bugs'},
+	{ words: 'tekayaˀtakwʌ́h<span class="underline">tʌˀ</span>', meanings: 'bloodsucker', category: 'bugs'},
+	{ words: 'otsiˀnu⋅<span class="underline">wá⋅</span>', meanings: 'bug / worm', category: 'bugs'},
+	{ words: 'otsiˀnuwaˀshú<span class="underline">ha</span>', meanings: 'bugs', category: 'bugs'},
+	{ words: 'kana⋅<span class="underline">wʌ́⋅</span>', meanings: 'butterfly', category: 'bugs'},
+	{ words: 'onhwalá⋅<span class="underline">neˀ</span>', meanings: 'caterpillar', category: 'bugs'},
+	{ words: 'tsikskó⋅', meanings: 'cicada', category: 'bugs'},
+	{ words: 'slíkslik', meanings: 'cricket', category: 'bugs'},
+	{ words: 'otsiˀnuwahé⋅<span class="underline">taˀ</span>', meanings: 'earthworm', category: 'bugs'},
+	{ words: 'tsistokaˀtá⋅<span class="underline">neˀ</span>', meanings: 'firefly / lightning bug', category: 'bugs'},
+	{ words: 'tawé⋅l', meanings: 'flea', category: 'bugs'},
+	{ words: 'latislanú⋅weh<span class="underline">seˀ</span>', meanings: 'gnats / picnic bugs', category: 'bugs'},
+	{ words: 'tsístalak', meanings: 'grasshopper', category: 'bugs'},
+	{ words: 'kohsa⋅tʌ́s tsí⋅ks', meanings: 'horsefly', category: 'bugs'},
+	{ words: 'tsí⋅ks', meanings: 'housefly', category: 'bugs'},
+	{ words: 'oˀnowaˀshú<span class="underline">ha</span>', meanings: 'ladybug', category: 'bugs'},
+	{ words: 'okalyahtá⋅<span class="underline">neˀ</span>', meanings: 'mosquito', category: 'bugs'},
+	{ words: 'otsiˀnéhta<span class="underline">laˀ</span>', meanings: 'nits / small beads', category: 'bugs'},
+	{ words: 'watlá⋅náyʌ<span class="underline">heˀ</span>', meanings: 'praying mantis', category: 'bugs'},
+	{ words: 'tsinaˀtsyakéh<span class="underline">tuˀ</span> / tsyonaˀtsyakéh<span class="underline">tuˀ</span>', meanings: 'spider', category: 'bugs'},
+	{ words: 'oséh<span class="underline">tuˀ</span>', meanings: 'tick', category: 'bugs'},
+	{ words: 'tehalutaweˀés<span class="underline">taˀ</span>', meanings: 'wasp', category: 'bugs'},
+	
+	{ words: 'laotsiyʌ⋅<span class="underline">tá⋅</span>', meanings: 'bird beak (male)', category: 'animal-parts'},
+	{ words: 'aotsiyʌ⋅<span class="underline">tá⋅</span>', meanings: 'bird beak (female / it)', category: 'animal-parts'},
+	{ words: 'okalyʌ́⋅<span class="underline">taˀ</span>', meanings: 'carcass', category: 'animal-parts'},
+	{ words: 'kítkit laohyakwilaˀshú<span class="underline">ha</span>', meanings: 'chicken feet', category: 'animal-parts'},
+	{ words: 'otsyeˀe⋅<span class="underline">lá⋅</span>', meanings: 'claw / fingernail', category: 'animal-parts'},
+	{ words: 'tsinaˀtsyakéhtuˀ teyotaˀa⋅lú<span class="underline">teˀ</span>', meanings: 'cobweb', category: 'animal-parts'},
+	{ words: 'onláh<span class="underline">saˀ</span>', meanings: 'comb of rooster', category: 'animal-parts'},
+	{ words: 'ostó⋅se<span class="underline">liˀ</span>', meanings: 'feather', category: 'animal-parts'},
+	{ words: 'okawé⋅<span class="underline">taˀ</span>', meanings: 'fin of fish / webbed feet', category: 'animal-parts'},
+	{ words: 'oˀnéhta<span class="underline">laˀ</span>', meanings: 'fish eggs / gravel', category: 'animal-parts'},
+	{ words: 'óts<span class="underline">taˀ</span>', meanings: 'fish scales', category: 'animal-parts'},
+	{ words: 'ónhwa<span class="underline">leˀ</span>', meanings: 'fur', category: 'animal-parts'},
+	{ words: 'onikwʌnó⋅<span class="underline">taˀ</span>', meanings: 'gizzard', category: 'animal-parts'},
+	{ words: 'okahlós<span class="underline">taˀ</span>', meanings: 'guts / intestines', category: 'animal-parts'},
+	{ words: 'ohnakʌ́h<span class="underline">saˀ</span>', meanings: 'hide / leather', category: 'animal-parts'},
+	{ words: 'oná⋅ka<span class="underline">laˀ</span>', meanings: 'horn', category: 'animal-parts'},
+	{ words: 'otstahlu⋅<span class="underline">wá⋅</span>', meanings: 'marrow', category: 'animal-parts'},
+	{ words: 'otsiˀnáh<span class="underline">kwaˀ</span>', meanings: 'nest', category: 'animal-parts'},
+	{ words: 'kané⋅<span class="underline">waˀ</span>', meanings: 'pelt', category: 'animal-parts'},
+	{ words: 'otsilanʌ́⋅<span class="underline">taˀ</span>', meanings: 'pig feet', category: 'animal-parts'},
+	{ words: 'onhéhtaˀ onúhkwis', meanings: 'porcupine quills', category: 'animal-parts'},
+	{ words: 'otáh<span class="underline">saˀ</span>', meanings: 'tail', category: 'animal-parts'},
+	{ words: 'oyahúts<span class="underline">haˀ</span> / owyahúts<span class="underline">haˀ</span>', meanings: 'wing', category: 'animal-parts'},
+	
+	{ words: 'kahuwe⋅<span class="underline">yá⋅</span>', meanings: 'ash / black ash / boat', category: 'trees'},
+	{ words: 'kánluˀ', meanings: 'ash / white ash', category: 'trees'},
+	{ words: 'oho⋅sé<span class="underline">laˀ</span>', meanings: 'basswood', category: 'trees'},
+	{ words: 'oˀne⋅yál', meanings: 'beech', category: 'trees'},
+	{ words: 'tekalaˀwistá⋅lu', meanings: 'birch', category: 'trees'},
+	{ words: 'yotnakalata⋅<span class="underline">sé</span>', meanings: 'birch / blue birch', category: 'trees'},
+	{ words: 'ohnakwʌ́h<span class="underline">saˀ</span>', meanings: 'birch / white birch', category: 'trees'},
+	{ words: 'tsyohsó⋅kwes', meanings: 'butternut', category: 'trees'},
+	{ words: 'tekanʌˀtakwʌ́h<span class="underline">tʌˀ</span>', meanings: 'cedar', category: 'trees'},
+	{ words: 'teyakonyaˀthalahtá⋅<span class="underline">neˀ</span>', meanings: 'chokecherry', category: 'trees'},
+	{ words: 'ohnéh<span class="underline">taˀ</span>', meanings: 'evergreen / pine', category: 'trees'},
+	{ words: 'kanʌˀtú⋅<span class="underline">saˀ</span>', meanings: 'hemlock / pine', category: 'trees'},
+	{ words: 'nékh / onu⋅ká<span class="underline">laˀ</span>', meanings: 'hickory', category: 'trees'},
+	{ words: 'tsiláhsal / tsiláhsa<span class="underline">luˀ</span>', meanings: 'ironwood', category: 'trees'},
+	{ words: 'wáh<span class="underline">taˀ</span>', meanings: 'maple / hard maple', category: 'trees'},
+	{ words: 'awʌhaníkwal', meanings: 'maple / soft maple', category: 'trees'},
+	{ words: 'wíhsuˀ', meanings: 'plum', category: 'trees'},
+	{ words: 'yonlahtu⋅tás', meanings: 'poplar', category: 'trees'},
+	{ words: 'yonahsaˀkʌ́sla<span class="underline">leˀ</span>', meanings: 'spruce', category: 'trees'},
+	
+	{ words: 'tewatnikwʌhtályaˀks', meanings: 'bloodroot', category: 'plants'},
+	{ words: 'olhohteˀkó⋅', meanings: 'burdock', category: 'plants'},
+	{ words: 'ólhoh<span class="underline">teˀ</span>', meanings: 'burr', category: 'plants'},
+	{ words: 'aˀnhuskwaˀlhaˀshú<span class="underline">ha</span>', meanings: 'dutchmans breeches', category: 'plants'},
+	{ words: 'yunheˀu⋅w<span class="underline">é</span>', meanings: 'everlasting', category: 'plants'},
+	{ words: 'óska<span class="underline">leˀ</span>', meanings: 'flax', category: 'plants'},
+	{ words: 'otsí⋅tsi<span class="underline">ˀ</span>', meanings: 'flower', category: 'plants'},
+	{ words: 'otsiˀtsyaˀshú<span class="underline">ha</span>', meanings: 'flowers', category: 'plants'},
+	{ words: 'tekalʌˀto⋅<span class="underline">kʌ́</span>', meanings: 'ginseng', category: 'plants'},
+	{ words: 'kutilu⋅tánun<span class="underline">heˀ</span>', meanings: 'hepatica', category: 'plants'},
+	{ words: 'onʌhóts<span class="underline">teˀ</span>', meanings: 'mandrake / may apple', category: 'plants'},
+	{ words: 'onitshehwʌ́⋅<span class="underline">taˀ</span>', meanings: 'milkweed', category: 'plants'},
+	{ words: 'oneklʌ́⋅<span class="underline">taˀ</span>', meanings: 'morel', category: 'plants'},
+	{ words: 'shahyeseˀkó⋅ / shaˀyeseˀkó⋅ / sha⋅yeseˀkó⋅', meanings: 'mulberry', category: 'plants'},
+	{ words: 'síksik aotínlah<span class="underline">teˀ</span> / síksik otáh<span class="underline">saˀ</span>', meanings: 'mullein', category: 'plants'},
+	{ words: 'yakohéhslalah<span class="underline">seˀ</span>', meanings: 'nettles', category: 'plants'},
+	{ words: 'yakohʌ⋅tálah<span class="underline">seˀ</span>', meanings: 'poison ivy', category: 'plants'},
+	{ words: 'teyothwalanekalákwʌ / yokwilahkali⋅y<span class="underline">ó</span>', meanings: 'pussy willow', category: 'plants'},
+	{ words: 'teyotskalaˀtkó⋅', meanings: 'smartweed', category: 'plants'},
+	{ words: 'okuhsaˀshú<span class="underline">ha</span> / okuhsyú⋅<span class="underline">taˀ</span>', meanings: 'sunflower', category: 'plants'},
+	{ words: 'onuno⋅<span class="underline">lí⋅</span>', meanings: 'sweet flag', category: 'plants'},
+	{ words: 'ohyu⋅kwá<span class="underline">laˀ</span>', meanings: 'thistle', category: 'plants'},
+	{ words: 'oyú⋅<span class="underline">kwaˀ</span>', meanings: 'tobacco', category: 'plants'},
+	{ words: 'oyuˀkwaˀu⋅w<span class="underline">é</span>', meanings: 'tobacco / Indian tobacco', category: 'plants'},
+	{ words: 'oˀnʌ́hal', meanings: 'vine', category: 'plants'},
+	{ words: 'tekutenyalotálhos', meanings: 'violet', category: 'plants'},
+	{ words: 'sekkó⋅', meanings: 'water lily', category: 'plants'},
+	
+	{ words: 'oˀwa⋅tsís<span class="underline">teˀ</span>', meanings: 'bark', category: 'formations'},
+	{ words: 'ó⋅nhah<span class="underline">teˀ</span>', meanings: 'branch', category: 'formations'},
+	{ words: 'kaska⋅wá<span class="underline">yʌˀ</span>', meanings: 'brush / bush / scrub', category: 'formations'},
+	{ words: 'otsiˀnéhkwa<span class="underline">laˀ</span>', meanings: 'buds', category: 'formations'},
+	{ words: 'kahu⋅tót<span class="underline">eˀ</span>', meanings: 'bush', category: 'formations'},
+	{ words: 'yauhwʌtsyaká⋅lu<span class="underline">teˀ</span>', meanings: 'cave / tunnel', category: 'formations'},
+	{ words: 'ó⋅<span class="underline">swʌˀ</span>', meanings: 'coal', category: 'formations'},
+	{ words: 'yohutsyaké⋅<span class="underline">luˀ</span>', meanings: 'continet', category: 'formations'},
+	{ words: 'yóklo<span class="underline">teˀ</span>', meanings: 'corn silk', category: 'formations'},
+	{ words: 'óhe<span class="underline">liˀ</span>', meanings: 'corn stalk', category: 'formations'},
+	{ words: 'ohláh<span class="underline">taˀ</span>', meanings: 'corncob', category: 'formations'},
+	{ words: 'ohwás<span class="underline">kʌˀ</span>', meanings: 'cornhusk', category: 'formations'},
+	{ words: 'teyoluhwʌ⋅<span class="underline">té⋅</span>', meanings: 'crevice / crack', category: 'formations'},
+	{ words: 'kahnekanho⋅<span class="underline">tú⋅</span>', meanings: 'dam', category: 'formations'},
+	{ words: 'oˀkʌ́⋅<span class="underline">laˀ</span>', meanings: 'dirt / dust / ashes / soil', category: 'formations'},
+	{ words: 'kaná⋅tshe<span class="underline">líˀ</span>', meanings: 'ditch', category: 'formations'},
+	{ words: 'kahʌ⋅tá<span class="underline">yʌˀ</span>', meanings: 'field / garden', category: 'formations'},
+	{ words: 'oˀtúh<span class="underline">kwaˀ</span>', meanings: 'flame', category: 'formations'},
+	{ words: 'ohwʌ́⋅<span class="underline">tstaˀ</span>', meanings: 'foam', category: 'formations'},
+	{ words: 'kélhi<span class="underline">teˀ</span>', meanings: 'forest', category: 'formations'},
+	{ words: 'yohne⋅kó<span class="underline">teˀ</span>', meanings: 'fountain', category: 'formations'},
+	{ words: 'onúskwa<span class="underline">liˀ</span>', meanings: 'fruit (unripe)', category: 'formations'},
+	{ words: 'onéke<span class="underline">liˀ</span>', meanings: 'grass / straw / hay / weeds', category: 'formations'},
+	{ words: 'ohlu⋅wá<span class="underline">ku</span>', meanings: 'gully / valley', category: 'formations'},
+	{ words: 'yonutáhe<span class="underline">leˀ</span>', meanings: 'hill', category: 'formations'},
+	{ words: 'yoshu⋅<span class="underline">wé⋅</span>', meanings: 'hole', category: 'formations'},
+	{ words: 'yohwé⋅no<span class="underline">teˀ</span>', meanings: 'island / peninsula', category: 'formations'},
+	{ words: 'katsíhko<span class="underline">teˀ</span>', meanings: 'knot (in a tree)', category: 'formations'},
+	{ words: 'kanya⋅tála<span class="underline">yʌˀ</span>', meanings: 'lake', category: 'formations'},
+	{ words: 'ohwʌ́tsi<span class="underline">ˀ</span> / ohútsi<span class="underline">ˀ</span>', meanings: 'land / ground / earth', category: 'formations'},
+	{ words: 'onuˀú⋅<span class="underline">laˀ</span>', meanings: 'lawn / sod / scalp', category: 'formations'},
+	{ words: 'ónlah<span class="underline">teˀ</span>', meanings: 'leaf', category: 'formations'},
+	{ words: 'onlahteˀshú<span class="underline">ha</span>', meanings: 'leaves', category: 'formations'},
+	{ words: 'ona⋅wá⋅<span class="underline">tsteˀ</span>', meanings: 'mud', category: 'formations'},
+	{ words: 'onawaˀtstáke<span class="underline">líˀ</span>', meanings: 'muddy water', category: 'formations'},
+	{ words: 'kanu⋅wá<span class="underline">ku</span>', meanings: 'murky water / murkiness', category: 'formations'},
+	{ words: 'wéhkwa<span class="underline">yʌˀ</span>', meanings: 'pond', category: 'formations'},
+	{ words: 'okʌnolehsláke<span class="underline">liˀ</span>', meanings: 'rainwater', category: 'formations'},
+	{ words: 'kawyhú<span class="underline">haˀ</span>', meanings: 'river', category: 'formations'},
+	{ words: 'ohá<span class="underline">haˀ</span>', meanings: 'road / path', category: 'formations'},
+	{ words: 'otstʌ́⋅<span class="underline">laˀ</span>', meanings: 'rock / mountain', category: 'formations'},
+	{ words: 'oˀnehsalúh<span class="underline">kwaˀ</span>', meanings: 'sand', category: 'formations'},
+	{ words: 'óshes', meanings: 'sap / syrup / gum / honey', category: 'formations'},
+	{ words: 'ka⋅nʌ́<span class="underline">heˀ</span>', meanings: 'seed / grain / oats / pits of fruit', category: 'formations'},
+	{ words: 'oyú⋅kwa<span class="underline">laˀ</span>', meanings: 'smoke', category: 'formations'},
+	{ words: 'yohnáwelo<span class="underline">teˀ</span>', meanings: 'spring', category: 'formations'},
+	{ words: 'oˀnís<span class="underline">taˀ</span>', meanings: 'stem', category: 'formations'},
+	{ words: 'kana⋅ká<span class="underline">leˀ</span> / atáhse<span class="underline">liˀ</span>', meanings: 'stick', category: 'formations'},
+	{ words: 'onʌ⋅<span class="underline">yá⋅</span>', meanings: 'stone', category: 'formations'},
+	{ words: 'yothnekahtʌ́ti', meanings: 'stream / creek', category: 'formations'},
+	{ words: 'kana⋅wá<span class="underline">yʌˀ</span>', meanings: 'swamp', category: 'formations'},
+	{ words: 'áslok', meanings: 'thorn', category: 'formations'},
+	{ words: 'ka⋅lú<span class="underline">teˀ</span>', meanings: 'tree log / cut-down tree', category: 'formations'},
+	{ words: 'otsinaˀá⋅<span class="underline">laˀ</span>', meanings: 'tree stump', category: 'formations'},
+	{ words: 'yohtehlaténi<span class="underline">ˀ</span>', meanings: 'tree root', category: 'formations'},
+	{ words: 'o⋅kwí<span class="underline">leˀ</span>', meanings: 'twig / whip', category: 'formations'},
+	{ words: 'tetwaˀsʌ́t<span class="underline">haˀ</span>', meanings: 'waterfall', category: 'formations'},
+	{ words: 'kahne⋅<span class="underline">kó⋅</span>', meanings: 'well', category: 'formations'},
+	{ words: 'yothnekata⋅<span class="underline">sé</span>', meanings: 'whirlpool', category: 'formations'},
+	{ words: 'o⋅yʌ́<span class="underline">teˀ</span>', meanings: 'wood', category: 'formations'},
+	{ words: 'ohéh<span class="underline">saˀ</span>', meanings: 'wood (rotting)', category: 'formations'},
+	{ words: 'ohka⋅<span class="underline">lá⋅</span>', meanings: 'wood chip', category: 'formations'},
+	{ words: 'ohutsyakwe⋅<span class="underline">kú</span>', meanings: 'wrold', category: 'formations'},
+	
+	{ words: 'yotewe⋅lá<span class="underline">leˀ</span>', meanings: 'breeze', category: 'weather'},
+	{ words: 'ohtsí⋅ke<span class="underline">laˀ</span>', meanings: 'cloud', category: 'weather'},
+	{ words: 'yotho⋅<span class="underline">lé⋅</span>', meanings: 'cold', category: 'weather'},
+	{ words: 'wʌhnisláksʌ', meanings: 'day (bad weather)', category: 'weather'},
+	{ words: 'wʌhnisli⋅y<span class="underline">ó</span>', meanings: 'day (good weather)', category: 'weather'},
+	{ words: 'yoˀáwi', meanings: 'dew', category: 'weather'},
+	{ words: 'yawʌhawi⋅n<span class="underline">ú</span>', meanings: 'drizzle / mist', category: 'weather'},
+	{ words: 'utʌhniˀtáhtu<span class="underline">ˀ</span>', meanings: 'eclipse', category: 'weather'},
+	{ words: 'yohno⋅<span class="underline">tú⋅</span>', meanings: 'flooded', category: 'weather'},
+	{ words: 'teyotsha⋅tá<span class="underline">yʌˀ</span>', meanings: 'foggy', category: 'weather'},
+	{ words: 'yowislátu<span class="underline">ˀ</span>', meanings: 'frozen', category: 'weather'},
+	{ words: 'yowisúti', meanings: 'freezing rain / hailing / ice storm', category: 'weather'},
+	{ words: 'yohsaˀkʌsla⋅<span class="underline">yʌ́⋅</span>', meanings: 'frost', category: 'weather'},
+	{ words: 'teyoyuˀkwala⋅<span class="underline">yʌ́⋅</span>', meanings: 'hazy', category: 'weather'},
+	{ words: 'yoˀtalí<span class="underline">hʌ</span>', meanings: 'hot', category: 'weather'},
+	{ words: 'o⋅wí<span class="underline">seˀ</span>', meanings: 'ice / glass / window', category: 'weather'},
+	{ words: 'yowíse<span class="underline">leˀ</span>', meanings: 'icey', category: 'weather'},
+	{ words: 'waˀtwanlé⋅kala<span class="underline">weˀ</span>', meanings: 'lightning (single)', category: 'weather'},
+	{ words: 'tewanleˀkalaˀwányu<span class="underline">heˀ</span>', meanings: 'lightning (many)', category: 'weather'},
+	{ words: 'wateˀslutyéhslu<span class="underline">heˀ</span>', meanings: 'lightning and thundering', category: 'weather'},
+	{ words: 'ohní⋅<span class="underline">taˀ</span>', meanings: 'moon / month', category: 'weather'},
+	{ words: 'wʌhní⋅ta<span class="underline">leˀ</span> / yohní⋅ta<span class="underline">leˀ</span>', meanings: 'moon (shining)', category: 'weather'},
+	{ words: 'tewatluhyayelúnyu<span class="underline">heˀ</span>', meanings: 'northern lights', category: 'weather'},
+	{ words: 'yokʌno⋅l<span class="underline">ú</span>', meanings: 'raining', category: 'weather'},
+	{ words: 'yó⋅nhya<span class="underline">leˀ</span>', meanings: 'rainbow', category: 'weather'},
+	{ words: 'yotahalá⋅<span class="underline">nu</span>', meanings: 'shady', category: 'weather'},
+	{ words: 'teyowískwaht', meanings: 'slippery', category: 'weather'},
+	{ words: 'ónyʌh<span class="underline">teˀ</span>', meanings: 'snow', category: 'weather'},
+	{ words: 'ó⋅klaˀ', meanings: 'snowflake', category: 'weather'},
+	{ words: 'yotaˀklókwʌ', meanings: 'snowing', category: 'weather'},
+	{ words: 'otsistóh<span class="underline">kwaˀ</span>', meanings: 'stars / dots / calico', category: 'weather'},
+	{ words: 'yotsistóhkwa<span class="underline">leˀ</span>', meanings: 'starry / stars are shining / spotted', category: 'weather'},
+	{ words: 'yotáhalo<span class="underline">teˀ</span>', meanings: 'sun (shining) / sunny', category: 'weather'},
+	{ words: 'takaké⋅<span class="underline">toˀ</span>', meanings: 'sun (rise)', category: 'weather'},
+	{ words: 'yaˀtwatshʌ́t<span class="underline">hoˀ</span>', meanings: 'sun (set)', category: 'weather'},
+	{ words: 'wahsakayu⋅té⋅<span class="underline">seˀ</span>', meanings: 'thundering', category: 'weather'},
+	{ words: 'tsiˀ niwʌhnisló⋅tʌh<span class="underline">seˀ</span>', meanings: 'weather', category: 'weather'},
+	{ words: 'ówe<span class="underline">laˀ</span>', meanings: 'wind / air', category: 'weather'},
+	{ words: 'yowelu⋅<span class="underline">tú</span>', meanings: 'windy', category: 'weather'},
+	
+	{ words: 'tsiˀ tkaké⋅toh<span class="underline">seˀ</span>', meanings: 'east', category: 'directions'},
+	{ words: 'otholé⋅<span class="underline">ke</span>', meanings: 'north', category: 'directions'},
+	{ words: 'ʌ́ti nukwá<span class="underline">⋅</span>', meanings: 'south', category: 'directions'},
+	{ words: 'tsiˀ tetwatshʌ́thos', meanings: 'west', category: 'directions'},
+	
+	{ words: 'yoˀkalá⋅u', meanings: 'dark / evening / night', category: 'times'},
+	{ words: 'nityoˀkalá⋅u', meanings: 'late at night', category: 'times'},
+	{ words: 'oyá⋅ tshityó⋅kalas', meanings: 'the other night', category: 'times'},
+	{ words: 'teyowʌtá⋅lu', meanings: 'dawn', category: 'times'},
+	{ words: 'awʌhnís<span class="underline">laˀ</span>', meanings: 'day', category: 'times'},
+	{ words: 'swʌhníslat', meanings: 'day (one)', category: 'times'},
+	{ words: 'tewʌhnisla⋅<span class="underline">ké</span>', meanings: 'day (two)', category: 'times'},
+	{ words: 'tóhkaˀ niwʌhnisla⋅<span class="underline">ké</span>', meanings: 'day (several)', category: 'times'},
+	{ words: 'kwaˀʌté⋅<span class="underline">ke</span>', meanings: 'daytime', category: 'times'},
+	{ words: 'wʌ⋅té⋅', meanings: 'daylight / light out', category: 'times'},
+	{ words: 'yoˀkaláshu', meanings: 'evening', category: 'times'},
+	{ words: 'úska waˀkahwistá⋅e<span class="underline">keˀ</span>', meanings: 'hour (one)', category: 'times'},
+	{ words: 'tékni waˀtkahwistá⋅e<span class="underline">keˀ</span>', meanings: 'hours (two)', category: 'times'},
+	{ words: 'tóhkaˀ naˀkahwistá⋅e<span class="underline">keˀ</span>', meanings: 'hours (several)', category: 'times'},
+	
+	{ words: 'úska', meanings: 'one / 1', category: 'numbers'},
+	{ words: 'téken<span class="underline">i</span>', meanings: 'two / 2', category: 'numbers'},
+	{ words: 'áh<span class="underline">sʌ</span>', meanings: 'three / 3', category: 'numbers'},
+	{ words: 'kayé⋅', meanings: 'four / 4', category: 'numbers'},
+	{ words: 'wísk', meanings: 'five / 5', category: 'numbers'},
+	{ words: 'yá⋅yahk', meanings: 'six / 6', category: 'numbers'},
+	{ words: 'tsya⋅ták', meanings: 'seven / 7', category: 'numbers'},
+	{ words: 'téke<span class="underline">luˀ</span>', meanings: 'eight / 8', category: 'numbers'},
+	{ words: 'wá⋅te<span class="underline">luˀ</span>', meanings: 'nine / 9', category: 'numbers'},
+	{ words: 'oye⋅<span class="underline">lí⋅</span>', meanings: 'ten / 10', category: 'numbers'},
+	{ words: 'úska yawʌ⋅<span class="underline">lé⋅</span>', meanings: 'eleven / 11', category: 'numbers'},
+	{ words: 'tékni yawʌ⋅<span class="underline">lé⋅</span>', meanings: 'twelve / 12', category: 'numbers'},
+	{ words: 'áhsʌ yawʌ⋅<span class="underline">lé⋅</span>', meanings: 'thirteen / 13', category: 'numbers'},
+	{ words: 'kayé yawʌ⋅<span class="underline">lé⋅</span>', meanings: 'fourteen / 14', category: 'numbers'},
+	{ words: 'wísk yawʌ⋅<span class="underline">lé⋅</span>', meanings: 'fifteen / 15', category: 'numbers'},
+	{ words: 'yá⋅yaˀk yawʌ⋅<span class="underline">lé⋅</span>', meanings: 'sixteen / 16', category: 'numbers'},
+	{ words: 'tsya⋅ták yawʌ⋅<span class="underline">lé⋅</span>', meanings: 'seventeen / 17', category: 'numbers'},
+	{ words: 'tékluˀ yawʌ⋅<span class="underline">lé⋅</span>', meanings: 'eighteen / 18', category: 'numbers'},
+	{ words: 'wá⋅tluˀ yawʌ⋅<span class="underline">lé⋅</span>', meanings: 'nineteen / 19', category: 'numbers'},
+	{ words: 'tewás<span class="underline">hʌ</span>', meanings: 'twenty / 20', category: 'numbers'},
+	{ words: 'áhsʌ niwás<span class="underline">hʌ</span>', meanings: 'thrity / 30', category: 'numbers'},
+	{ words: 'kayé niwás<span class="underline">hʌ</span>', meanings: 'fourty /40', category: 'numbers'},
+	{ words: 'wísk niwás<span class="underline">hʌ</span>', meanings: 'fifty / 50', category: 'numbers'},
+	{ words: 'yá⋅yaˀk niwás<span class="underline">hʌ</span>', meanings: 'sixty / 60', category: 'numbers'},
+	{ words: 'tsya⋅ták niwás<span class="underline">hʌ</span>', meanings: 'seventy / 70', category: 'numbers'},
+	{ words: 'tékluˀ niwás<span class="underline">hʌ</span>', meanings: 'eighty / 80', category: 'numbers'},
+	{ words: 'wá⋅tluˀ niwás<span class="underline">hʌ</span>', meanings: 'ninety / 90', category: 'numbers'},
+	{ words: 'úska tewʌˀnyáwe<span class="underline">luˀ</span>', meanings: 'one hundred / 100', category: 'numbers'},
+	{ words: 'tékni tewʌˀnyáwe<span class="underline">luˀ</span>', meanings: 'two hundred / 200', category: 'numbers'},
+	{ words: 'áhsʌ tewʌˀnyáwe<span class="underline">luˀ</span>', meanings: 'three hundred / 300', category: 'numbers'},
+	{ words: 'kayé tewʌˀnyáwe<span class="underline">luˀ</span>', meanings: 'four hundred / 400', category: 'numbers'},
+	{ words: 'wísk tewʌˀnyáwe<span class="underline">luˀ</span>', meanings: 'five hundred / 500', category: 'numbers'},
+	{ words: 'yá⋅yaˀk tewʌˀnyáwe<span class="underline">luˀ</span>', meanings: 'six hundred / 600', category: 'numbers'},
+	{ words: 'tsya⋅ták tewʌˀnyáwe<span class="underline">luˀ</span>', meanings: 'seven hundred / 700', category: 'numbers'},
+	{ words: 'tékluˀ tewʌˀnyáwe<span class="underline">luˀ</span>', meanings: 'eight hundred / 800', category: 'numbers'},
+	{ words: 'wá⋅tluˀ tewʌˀnyáwe<span class="underline">luˀ</span>', meanings: 'nine hundred / 900', category: 'numbers'},
+	{ words: 'oye⋅lí⋅ tewʌˀnyáwe<span class="underline">luˀ</span>', meanings: 'one thousand / 1000', category: 'numbers'},
+	{ words: 'tyotyelʌ́h<span class="underline">tu</span>', meanings: 'first', category: 'numbers'},
+	{ words: 'teknihatú⋅<span class="underline">thne</span>', meanings: 'second', category: 'numbers'},
+	{ words: 'ahsʌhatú⋅<span class="underline">thne</span>', meanings: 'third', category: 'numbers'},
+	{ words: 'kayelihatú⋅<span class="underline">thne</span>', meanings: 'fourth', category: 'numbers'},
+	{ words: 'wiskhatú⋅<span class="underline">thne</span>', meanings: 'fifth', category: 'numbers'},
+	{ words: 'yeskʌ⋅<span class="underline">há</span>', meanings: 'last', category: 'numbers'},
+	{ words: 'uskáts<span class="underline">huˀ</span>', meanings: 'one at a time / each one', category: 'numbers'},
+	{ words: 'teknís<span class="underline">huˀ</span>', meanings: 'two at a time / two each', category: 'numbers'},
+	{ words: 'ahsʌ́s<span class="underline">huˀ</span>', meanings: 'three at a time / three each', category: 'numbers'},
+	{ words: 'kayelís<span class="underline">huˀ</span>', meanings: 'four at a time / four each', category: 'numbers'},
+	
+	{ words: 'oˀswʌ́⋅<span class="underline">taˀ</span>', meanings: 'black', category: 'colors'},
+	{ words: 'olú⋅<span class="underline">yaˀ</span>', meanings: 'blue', category: 'colors'},
+	{ words: 'kaluhyawíske<span class="underline">laˀ</span>', meanings: 'blue / light blue', category: 'colors'},
+	{ words: 'athéh<span class="underline">saˀ</span>', meanings: 'brown', category: 'colors'},
+	{ words: 'ohsóh<span class="underline">kwaˀ</span>', meanings: 'color', category: 'colors'},
+	{ words: 'ohsohkwaˀshú<span class="underline">ha</span>', meanings: 'colors', category: 'colors'},
+	{ words: 'niwahsohkó⋅tʌ', meanings: 'color / the kind of color', category: 'colors'},
+	{ words: 'yohsóshwatet', meanings: 'color / bright color', category: 'colors'},
+	{ words: 'tetyohsohkwá⋅kalas', meanings: 'color / dark color', category: 'colors'},
+	{ words: 'ohwistano⋅<span class="underline">lú⋅</span>', meanings: 'gold / silver', category: 'colors'},
+	{ words: 'ataˀkʌ́⋅<span class="underline">laˀ</span>', meanings: 'gray', category: 'colors'},
+	{ words: 'awʌ⋅<span class="underline">lá⋅</span>', meanings: 'green', category: 'colors'},
+	{ words: 'otsí⋅nkwal / otsí⋅nkwa<span class="underline">laˀ</span> / katsiˀnkwalahú⋅tsi<span class="underline">ˀ</span>', meanings: 'orange', category: 'colors'},
+	{ words: 'kanikwʌhtalawíske<span class="underline">laˀ</span>', meanings: 'pink', category: 'colors'},
+	{ words: 'ohalanʌ́⋅<span class="underline">taˀ</span>', meanings: 'purple', category: 'colors'},
+	{ words: 'onikwʌ́hta<span class="underline">laˀ</span>', meanings: 'red', category: 'colors'},
+	{ words: 'owíske<span class="underline">laˀ</span>', meanings: 'white', category: 'colors'},
+	{ words: 'otsí⋅nkwal / otsí⋅nkwa<span class="underline">laˀ</span>', meanings: 'yellow', category: 'colors'},
+	
+	{ words: 'teyothweˀnu⋅n<span class="underline">í</span>', meanings: 'circle', category: 'shapes'},
+	{ words: 'kayé naˀteyotakwalu<span class="underline">té⋅</span>', meanings: 'square / diamond', category: 'shapes'},
+	{ words: 'áhsʌ naˀteyotakwalu⋅<span class="underline">té⋅</span>', meanings: 'triangle', category: 'shapes'},
+	
+	{ words: 'swahyo⋅wá<span class="underline">neˀ</span>', meanings: 'apple', category: 'foods'},
+	{ words: 'teyotahyá⋅<span class="underline">ktu</span>', meanings: 'banana', category: 'foods'},
+	{ words: 'osahé⋅<span class="underline">taˀ</span>', meanings: 'bean', category: 'foods'},
+	{ words: 'ohyótshe<span class="underline">liˀ</span>', meanings: 'bean / string bean', category: 'foods'},
+	{ words: 'osahé⋅taˀ ohnekáke<span class="underline">liˀ</span>', meanings: 'bean soup', category: 'foods'},
+	{ words: 'onikwʌ́htalaˀ nikahtehló⋅tʌ', meanings: 'beet', category: 'foods'},
+	{ words: 'káhik', meanings: 'berry / fruit', category: 'foods'},
+	{ words: 'shá⋅ye<span class="underline">seˀ</span>', meanings: 'blackberry / thimbleberry', category: 'foods'},
+	{ words: 'teyothutá⋅<span class="underline">ktu</span>', meanings: 'blackcap / black raspberry', category: 'foods'},
+	{ words: 'otstókh<span class="underline">wiˀ</span>', meanings: 'blueberry', category: 'foods'},
+	{ words: 'kaná⋅talok', meanings: 'bread / cake', category: 'foods'},
+	{ words: 'watná⋅talu<span class="underline">teˀ</span>', meanings: 'bread / baked bread', category: 'foods'},
+	{ words: 'kʌyé⋅ke watná⋅talu<span class="underline">teˀ</span>', meanings: 'bread / fried bread', category: 'foods'},
+	{ words: 'oˀnuwa⋅tsís<span class="underline">teˀ</span>', meanings: 'bread crust', category: 'foods'},
+	{ words: 'ohnekáke<span class="underline">liˀ</span>', meanings: 'broth / watery soup', category: 'foods'},
+	{ words: 'owistóhse<span class="underline">liˀ</span>', meanings: 'butter', category: 'foods'},
+	{ words: 'kanuˀtathé⋅<span class="underline">tu</span>', meanings: 'buttermilk', category: 'foods'},
+	{ words: 'yakonyák<span class="underline">taˀ</span>', meanings: 'cake / wedding cake', category: 'foods'},
+	{ words: 'otsí⋅nkwalaˀ nikahtehló⋅tʌ', meanings: 'carrot', category: 'foods'},
+	{ words: 'ostawinaˀshú<span class="underline">ha</span>', meanings: 'celery', category: 'foods'},
+	{ words: 'yonekwalahni⋅l<span class="underline">ú</span> / yonekwalátkʌh<span class="underline">seˀ</span>', meanings: 'cheese', category: 'foods'},
+	{ words: 'e⋅<span class="underline">lí⋅</span>', meanings: 'cherry', category: 'foods'},
+	{ words: 'elikkó⋅', meanings: 'cherry / wild cherry', category: 'foods'},
+	{ words: 'kheksu⋅<span class="underline">wé⋅</span>', meanings: 'cookie', category: 'foods'},
+	{ words: 'ohá⋅<span class="underline">taˀ</span>', meanings: 'core of a fruit', category: 'foods'},
+	{ words: 'o⋅nʌ́s<span class="underline">teˀ</span>', meanings: 'corn', category: 'foods'},
+	{ words: 'onoˀókh<span class="underline">waˀ</span>', meanings: 'corn / ground corn', category: 'foods'},
+	{ words: 'kanʌhʌ́⋅<span class="underline">taˀ</span>', meanings: 'corn kernels / dried corn', category: 'foods'},
+	{ words: 'okahsló⋅<span class="underline">taˀ</span>', meanings: 'corn mush / baked green', category: 'foods'},
+	{ words: 'ola⋅<span class="underline">ná⋅</span>', meanings: 'corn soup', category: 'foods'},
+	{ words: 'kanʌstóhal<span class="underline">e</span>', meanings: 'cornbread', category: 'foods'},
+	{ words: 'onaˀtaláke<span class="underline">liˀ</span>', meanings: 'cornbread broth', category: 'foods'},
+	{ words: 'osekwá⋅<span class="underline">lhaˀ</span>', meanings: 'cornmeal mush', category: 'foods'},
+	{ words: 'yonaˀtalastát<span class="underline">hʌ</span>', meanings: 'cracker', category: 'foods'},
+	{ words: 'oshé⋅<span class="underline">lhaˀ</span>', meanings: 'cream / dough / paste', category: 'foods'},
+	{ words: 'onuˀúse<span class="underline">laˀ</span> / onuˀúse<span class="underline">liˀ</span>', meanings: 'cucumber / melon / squash', category: 'foods'},
+	{ words: 'one⋅kwá<span class="underline">laˀ</span>', meanings: 'curd', category: 'foods'},
+	{ words: 'oˀnhúh<span class="underline">saˀ</span>', meanings: 'egg', category: 'foods'},
+	{ words: 'kaˀnhuhsó⋅lu', meanings: 'egg sandwich', category: 'foods'},
+	{ words: 'ala⋅sék', meanings: 'elderberry', category: 'foods'},
+	{ words: 'kʌ⋅<span class="underline">yé⋅</span>', meanings: 'fat / oil / grease / gravy', category: 'foods'},
+	{ words: 'othé⋅tshe<span class="underline">liˀ</span>', meanings: 'flour', category: 'foods'},
+	{ words: 'kákh<span class="underline">waˀ</span>', meanings: 'food', category: 'foods'},
+	{ words: 'tsiˀ nitwakhó⋅tʌh<span class="underline">seˀ</span>', meanings: 'foods / all kinds of food', category: 'foods'},
+	{ words: 'owistó⋅k<span class="underline">waˀ</span>', meanings: 'frozen / something frozen', category: 'foods'},
+	{ words: 'ohyáke<span class="underline">liˀ</span>', meanings: 'fruit drink', category: 'foods'},
+	{ words: 'oˀnʌhalhkó⋅', meanings: 'grape', category: 'foods'},
+	{ words: 'atʌná⋅tshe<span class="underline">liˀ</span>', meanings: 'groceries / lunch', category: 'foods'},
+	{ words: 'óshes', meanings: 'gum / syrup / sap / honey', category: 'foods'},
+	{ words: 'yosheˀlhawís<span class="underline">to</span>', meanings: 'ice cream', category: 'foods'},
+	{ words: 'kakhwaksʌ́ska', meanings: 'junk food', category: 'foods'},
+	{ words: 'kahnekáku<span class="underline">ˀ</span>', meanings: 'kool-aid / pop / soda', category: 'foods'},
+	{ words: 'oyaˀtakʌ⋅lá<span class="underline">teˀ</span>', meanings: 'lard / animal fat', category: 'foods'},
+	{ words: 'aˀnukkó⋅', meanings: 'leek', category: 'foods'},
+	{ words: 'teyohyahyó⋅tsis', meanings: 'lemon', category: 'foods'},
+	{ words: 'onlahtakáh<span class="underline">tuˀ</span>', meanings: 'lettuce', category: 'foods'},
+	{ words: 'ohne⋅<span class="underline">ká⋅</span>', meanings: 'liquid / liquor', category: 'foods'},
+	{ words: 'oholoˀtaˀshú<span class="underline">ha</span>', meanings: 'macaroni', category: 'foods'},
+	{ words: 'olutáke<span class="underline">liˀ</span>', meanings: 'maple sugar / maple syrup / brown sugar', category: 'foods'},
+	{ words: 'oˀwá⋅<span class="underline">luˀ</span>', meanings: 'meat', category: 'foods'},
+	{ words: 'oˀwahlakáh<span class="underline">tuˀ</span>', meanings: 'meat / raw meat', category: 'foods'},
+	{ words: 'kaˀwahló⋅lu', meanings: 'meat sandwich', category: 'foods'},
+	{ words: 'onú⋅<span class="underline">taˀ</span>', meanings: 'milk', category: 'foods'},
+	{ words: 'teyonuˀtahyó⋅tsis', meanings: 'milk / sour milk', category: 'foods'},
+	{ words: 'ohsó⋅<span class="underline">kwaˀ</span>', meanings: 'nut', category: 'foods'},
+	{ words: 'á⋅nuk', meanings: 'onion', category: 'foods'},
+	{ words: 'otsí⋅nkwalaˀ niwahyó⋅tʌ', meanings: 'orange', category: 'foods'},
+	{ words: 'katsihko⋅<span class="underline">tú⋅</span>', meanings: 'ovenbread', category: 'foods'},
+	{ words: 'ánikok', meanings: 'pancake', category: 'foods'},
+	{ words: 'teyotshaheˀtakweˀnu⋅n<span class="underline">í</span>', meanings: 'pea', category: 'foods'},
+	{ words: 'yonuhwé⋅lhoteˀ káhik', meanings: 'peach', category: 'foods'},
+	{ words: 'yotsheˀtʌ́⋅tu<span class="underline">heˀ</span>', meanings: 'pear', category: 'foods'},
+	{ words: 'olá⋅wis<span class="underline">teˀ</span>', meanings: 'peelings', category: 'foods'},
+	{ words: 'teyonuˀuslahyó⋅tsis', meanings: 'pickles / salt / brine', category: 'foods'},
+	{ words: 'wá⋅yat', meanings: 'pie', category: 'foods'},
+	{ words: 'kawaˀyatsláku<span class="underline">ˀ</span>', meanings: 'pie / tasty pie', category: 'foods'},
+	{ words: 'watnʌstatákwas', meanings: 'popcorn', category: 'foods'},
+	{ words: 'ohnaná⋅<span class="underline">taˀ</span>', meanings: 'potato', category: 'foods'},
+	{ words: 'kahnanaˀtakuˀústu', meanings: 'potato salad', category: 'foods'},
+	{ words: 'watahyalíhtu', meanings: 'preserves', category: 'foods'},
+	{ words: 'tewatyuˀkwalokwashá<span class="underline">⋅</span>', meanings: 'puffball', category: 'foods'},
+	{ words: 'onuˀuslaˀkó⋅', meanings: 'pumpkin', category: 'foods'},
+	{ words: 'ohtehlakáh<span class="underline">tuˀ</span>', meanings: 'radish', category: 'foods'},
+	{ words: 'tsyohtahkwaka⋅y<span class="underline">ú</span>', meanings: 'raspberry', category: 'foods'},
+	{ words: 'teyostawinahyó⋅tsis', meanings: 'rhubarb', category: 'foods'},
+	{ words: 'watnʌˀú⋅kwas', meanings: 'rice', category: 'foods'},
+	{ words: 'ohna⋅kwá<span class="underline">laˀ</span>', meanings: 'rind / skin', category: 'foods'},
+	{ words: 'ohté⋅<span class="underline">laˀ</span>', meanings: 'root', category: 'foods'},
+	{ words: 'tyohyó⋅tsis', meanings: 'salt', category: 'foods'},
+	{ words: 'teyoˀwahlahyó⋅tsis', meanings: 'salt pork', category: 'foods'},
+	{ words: 'awʌhéts<span class="underline">haˀ</span>', meanings: 'sausage / wiener', category: 'foods'},
+	{ words: 'onu⋅tá<span class="underline">laˀ</span>', meanings: 'soup / thick soup / mush', category: 'foods'},
+	{ words: 'yonuˀuslaké⋅to<span class="underline">teˀ</span>', meanings: 'squash', category: 'foods'},
+	{ words: 'awʌ́hih<span class="underline">teˀ</span>', meanings: 'strawberry', category: 'foods'},
+	{ words: 'kayá⋅taku watetaˀás<span class="underline">taˀ</span>', meanings: 'stuffing for fowl', category: 'foods'},
+	{ words: 'onutáke<span class="underline">liˀ</span>', meanings: 'sugar', category: 'foods'},
+	{ words: 'teskyanutakliˀtslatye⋅l<span class="underline">ʌ́</span>', meanings: 'sugar substitute', category: 'foods'},
+	{ words: 'teyonutaklí⋅tsla<span class="underline">leˀ</span>', meanings: 'sweets', category: 'foods'},
+	{ words: 'oyuˀkwáke<span class="underline">liˀ</span>', meanings: 'tobacco juice', category: 'foods'},
+	{ words: 'tewahyakháni<span class="underline">ˀ</span>', meanings: 'tomato', category: 'foods'},
+	{ words: 'otsíhk<span class="underline">waˀ</span>', meanings: 'turnip', category: 'foods'},
+	{ words: 'teyotshoˀkwakweˀnu⋅n<span class="underline">í</span>', meanings: 'walnut', category: 'foods'},
+	{ words: 'ohne⋅kánus', meanings: 'water', category: 'foods'},
+	
+	{ words: '<span class="underline"></span>', meanings: '', category: ''},
+];
+		
+document.getElementById('searchInput').addEventListener('input', filterRows);
+document.querySelectorAll('.filter-btn').forEach(button => button.addEventListener('click', applyFilter));
+
+let filteredRows = [...rows];
+let currentPage = 1;
+const rowsPerPage = 10;
+const tableHeader = document.getElementById('tableHeader');
+
+function displayRows() {
+    const start = (currentPage - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+    const rowsToDisplay = filteredRows.slice(start, end);
+    const tableBody = document.querySelector('#nounsTable tbody');
+    tableBody.innerHTML = '';
+
+    if (rowsToDisplay.length === 0) {
+        document.querySelector('.no-results').style.display = 'block';
+		tableHeader.style.display = 'none';
+    } else {
+        document.querySelector('.no-results').style.display = 'none';
+		tableHeader.style.display = '';
+        rowsToDisplay.forEach(row => {
+            const tr = document.createElement('tr');
+            const { words, meanings } = row;
+            const wordCell = document.createElement('td');
+            wordCell.innerHTML = words;
+            const translationCell = document.createElement('td');
+            translationCell.textContent = meanings;
+
+            tr.appendChild(wordCell);
+            tr.appendChild(translationCell);
+            tableBody.appendChild(tr);
+        });
+    }
+
+    updatePagination();
+}
+
+function changePage(direction) {
+    if (direction === 'prev' && currentPage > 1) {
+        currentPage--;
+    } else if (direction === 'next' && currentPage * rowsPerPage < filteredRows.length) {
+        currentPage++;
+    }
+    displayRows();
+}
+
+function updatePagination() {
+    const totalPages = Math.ceil(filteredRows.length / rowsPerPage);
+    document.getElementById('prevBtn').disabled = currentPage === 1;
+    document.getElementById('nextBtn').disabled = currentPage === totalPages || totalPages === 0;
+
+    document.getElementById('pageInfo').textContent = `Page ${currentPage} out of ${totalPages}`;
+}
+
+function filterRows() {
+    const searchText = document.getElementById('searchInput').value.toLowerCase();
+	
+	let captionText = searchText ? `Results for: "${searchText}"` : 'All Nouns';
+	document.getElementById('tableCaption').innerHTML = `<strong>Showing:</strong> ${captionText}`;
+	
+    filteredRows = rows.filter(row => {
+        return Object.values(row).some(val => val.toLowerCase().includes(searchText));
+    });
+    currentPage = 1;
+    displayRows();
+}
+
+function applyFilter(event) {
+    const filter = event.target.dataset.filter;
+	let captionText = 'All Nouns';
+    if (filter !== 'all') {
+		captionText = event.target.textContent;
+	}
+	
+	document.getElementById('tableCaption').innerHTML = `<strong>Showing:</strong> ${captionText}`;
+	
+	if (filter === 'all') {
+        filteredRows = [...rows];
+    } else {
+        filteredRows = rows.filter(row => row.category === filter);
+    }
+	
+    document.querySelectorAll('.filter-btn').forEach(button => button.classList.remove('active'));
+    event.target.classList.add('active');
+	
+    currentPage = 1;
+    displayRows();
+}
+
+displayRows();
+</script>
+</body>
+</html>
