@@ -215,6 +215,19 @@
 			margin-bottom: 15px;
 			text-align: center;
 		}
+		@media (hover: hover) {
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+        }
+
+        .dropdown-content {
+            display: none;
+        }
+
+        .dropdown.active .dropdown-content {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -232,11 +245,11 @@
         <div class="dropdown">
             <button class="dropbtn">Dictionary</button>
             <div class="dropdown-content">
+                <a href="nouns.html">Nouns</a>
                 <a href="particles.html">Particles</a>
-		<a href="nouns.html">Nouns</a>
             </div>
         </div>
-    </div>
+	</div>
 
     <div class="dictionary-container">
         <input type="text" id="searchInput" placeholder="Search...">
@@ -256,7 +269,7 @@
 					<button class="filter-btn" data-filter="weather">Weather</button>
 					<button class="filter-btn" data-filter="directions">Directions</button>
 					<button class="filter-btn" data-filter="times">Times</button>
-			  	</div>
+				</div>
 			</div>
 			<div class="dropdown">
 				<button class="filter-dropbtn">Concepts</button>
@@ -264,12 +277,21 @@
 					<button class="filter-btn" data-filter="numbers">Numbers</button>
 					<button class="filter-btn" data-filter="colors">Colors</button>
 					<button class="filter-btn" data-filter="shapes">Shapes</button>
-        </div>
-      </div>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="filter-dropbtn">People</button>
+                <div class="dropdown-table">
+                    <button class="filter-btn" data-filter="family">Family & Kinship</button>
+					<button class="filter-btn" data-filter="generations">Generations</button>
+					<button class="filter-btn" data-filter="attributes">Attributtes & Professions</button>
+					<button class="filter-btn" data-filter="body">Body Parts</button>
+                </div>
+            </div>
             <div class="dropdown">
                 <button class="filter-dropbtn">Household & Community</button>
                 <div class="dropdown-table">
-          <button class="filter-btn" data-filter="clothing">Clothing & Accessories</button>
+                    <button class="filter-btn" data-filter="clothing">Clothing & Accessories</button>
 					<button class="filter-btn" data-filter="cooking">Cooking Utensils</button>
 					<button class="filter-btn" data-filter="foods">Foods</button>
 					<button class="filter-btn" data-filter="housing">Housing</button>
@@ -889,6 +911,29 @@ function applyFilter(event) {
 }
 
 displayRows();
+
+        document.querySelectorAll('.dropdown').forEach(function(dropdown) {
+            const dropbtn = dropdown.querySelector('.dropbtn');
+            dropbtn.addEventListener('click', function() {
+                // Toggle 'active' class to show/hide dropdown
+                dropdown.classList.toggle('active');
+            });
+        });
+
+        const isTouchDevice = () => {
+            return ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+        };
+
+        if (!isTouchDevice()) {
+            document.querySelectorAll('.dropdown').forEach(function(dropdown) {
+                dropdown.addEventListener('mouseenter', function() {
+                    dropdown.classList.add('active');
+                });
+                dropdown.addEventListener('mouseleave', function() {
+                    dropdown.classList.remove('active');
+                });
+            });
+        }
 </script>
 </body>
 </html>
