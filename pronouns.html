@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oneida Language Pronouns</title>
-    <style>
-          html, body {
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+	<style>
+        html, body {
             margin: 0;
             padding: 0;
         }
@@ -15,7 +16,7 @@
             font-weight: 400;
         }
 
-              table {
+        table {
             border-collapse: collapse;
             width: auto;
             margin: 0;
@@ -41,23 +42,24 @@
         }
 
         .tables-container {
-           display: flex;
-          justify-content: center;
-          gap: 30px;
+			text-align: center;
         }
+		
+		.table-row {
+			display: flex;
+			justify-content: center;
+			gap: 30px;
+		}
       
         .table-container table {
             border-collapse: collapse;
-            width: auto;
             table-layout: fixed;
         }
 
         .table-container th, .table-container td {
             border: 1px solid #ccc;
-            width: 120px;
+            width: 160px;
             height: 40px;
-            overflow: hidden;
-            text-overflow: ellipsis;
             white-space: nowrap;
             text-align: center;
             vertical-align: middle;
@@ -78,16 +80,16 @@
 
         .navbar a {
           	float: left;
-        	  font-size: 20px;
-        	  color: white;
-        	  text-align: center;
-        	  padding: 20px;
-          	text-decoration: none;
-        	  transition: background-color 0.3s, color 0.3s;
+        	font-size: 20px;
+        	color: white;
+        	text-align: center;
+        	padding: 20px;
+			text-decoration: none;
+        	transition: background-color 0.3s, color 0.3s;
         }
 
         .navbar a:hover, .dropdown:hover .dropbtn {
-        	  background-color: #ddd;
+        	background-color: #ddd;
             color: black;
         }
 
@@ -134,10 +136,46 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
-    </style>
-  	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+		button {
+			width: 251px;
+			padding: 10px 20px;
+			font-size: 16px;
+			cursor: pointer;
+			background-color: #5D3F6A;
+			color: white;
+			border: none;
+			transition: background-color 0.3s;
+		}
+
+		button:disabled {
+			background-color: #ddd;
+			cursor: not-allowed;
+		}
+
+		button:hover:not(:disabled) {
+			background-color: #ddd;
+			color: black;
+		}
+
+		.stem-tab {
+			display: none;
+		}
+	
+		.stem-tab:first-child {
+			display: block;
+		}
+		
+		.navigation {
+			display: flex;
+			justify-content: center;
+			margin-top: 20px;
+			gap: 30px;
+		}
+</style>
 </head>
 <body>
+
     <div class="navbar">
         <a href="index.html">Home</a>
         <a href="keyboard.html">Keyboard</a>
@@ -156,6 +194,7 @@
             </div>
         </div>
     </div>
+
 <div class="table-container">
 	<table>
 		<caption>Meaning Chart</caption>
@@ -192,7 +231,14 @@
     </table>
 </div>
 
+<div class="navigation">
+        <button id="prevBtn" onclick="showPrevStem()">Back</button>
+        <button id="nextBtn" onclick="showNextStem()">Next</button>
+</div>
+
 <div class="tables-container">
+	<div id="c-stem" class="stem-tab">
+	<div class="table-row">
 	<table>
 		<caption>c-stem Subjective</caption>
         <tr>
@@ -260,9 +306,11 @@
             <td>yakwa</td>
         </tr>
     </table>
-</div>
+	</div>
+	</div>
 
-<div class="tables-container">
+	<div id="a-stem" class="stem-tab">
+	<div class="table-row">
 	<table>
 		<caption>a-stem Subjective</caption>
         <tr>
@@ -330,9 +378,11 @@
             <td>yukwa</td>
         </tr>
     </table>
-</div>
+	</div>
+	</div>
 
-<div class="tables-container">
+	<div id="e-stem" class="stem-tab">
+	<div class="table-row">
 	<table>
 		<caption>e-stem Subjective</caption>
         <tr>
@@ -400,9 +450,11 @@
             <td>yukwe</td>
         </tr>
     </table>
-</div>
-
-<div class="tables-container">
+	</div>
+	</div>
+	
+	<div id="i-stem" class="stem-tab">
+	<div class="table-row">
 	<table>
 		<caption>i-stem Subjective</caption>
         <tr>
@@ -470,9 +522,11 @@
             <td>yukwʌ</td>
         </tr>
     </table>
-</div>
+	</div>
+	</div>
 
-<div class="tables-container">
+	<div id="o-stem" class="stem-tab">
+	<div class="table-row">
 	<table>
 		<caption>o-stem Subjective</caption>
         <tr>
@@ -540,9 +594,11 @@
             <td>yukyo</td>
         </tr>
     </table>
-</div>
-
-<div class="tables-container">
+	</div>
+	</div>
+	
+	<div id="u-stem" class="stem-tab">
+	<div class="table-row">
 	<table>
 		<caption>u-stem Subjective</caption>
         <tr>
@@ -610,9 +666,11 @@
             <td>yukyu</td>
         </tr>
     </table>
-</div>
+	</div>
+	</div>
 
-<div class="tables-container">
+	<div id="ʌ-stem" class="stem-tab">
+	<div class="table-row">
 	<table>
 		<caption>ʌ-stem Subjective</caption>
         <tr>
@@ -681,5 +739,38 @@
         </tr>
     </table>
 </div>
+</div>
+</div>
+
+<script>
+const stems = ['c-stem', 'a-stem', 'e-stem', 'i-stem', 'o-stem', 'u-stem', 'ʌ-stem'];
+let currentStemIndex = 0;
+
+function showStem(index) {
+    document.querySelectorAll('.stem-tab').forEach(stem => {
+        stem.style.display = 'none';
+    });
+    document.getElementById(stems[index]).style.display = 'block';
+
+    document.getElementById('prevBtn').disabled = (index === 0);
+    document.getElementById('nextBtn').disabled = (index === stems.length - 1);
+}
+
+function showNextStem() {
+    if (currentStemIndex < stems.length - 1) {
+        currentStemIndex++;
+        showStem(currentStemIndex);
+    }
+}
+
+function showPrevStem() {
+    if (currentStemIndex > 0) {
+        currentStemIndex--;
+        showStem(currentStemIndex);
+    }
+}
+
+showStem(currentStemIndex);
+</script>
 </body>
 </html>
