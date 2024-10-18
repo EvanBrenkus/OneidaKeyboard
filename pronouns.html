@@ -772,6 +772,21 @@ function showPrevStem() {
 }
 
 showStem(currentStemIndex);
+
+        const isTouchDevice = () => {
+            return ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+        };
+
+        if (!isTouchDevice()) {
+            document.querySelectorAll('.dropdown').forEach(function(dropdown) {
+                dropdown.addEventListener('mouseenter', function() {
+                    dropdown.classList.add('active');
+                });
+                dropdown.addEventListener('mouseleave', function() {
+                    dropdown.classList.remove('active');
+                });
+            });
+        }
 </script>
 </body>
 </html>
