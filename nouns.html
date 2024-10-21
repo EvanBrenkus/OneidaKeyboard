@@ -173,6 +173,33 @@
 		.nouns-table td {
 			text-align: left;
 		}
+		.nouns-table tr:hover {
+			background-color: #f2e3ff;
+			transition: background-color 0.3s;
+			cursor: pointer;
+		}
+		.details-row:hover {
+			background-color: white !important;
+		}
+		.details-table {
+			background-color: white;
+			border: none;
+			cursor: default;
+		}
+		.details-table th, .details-table td {
+			padding: 8px;
+			border: 1px solid #ccc;
+			cursor: default;
+		}
+		.details-content {
+			background-color: white;
+			padding: 10px;
+			border: 1px solid #ddd;
+			cursor: default;
+		}
+		.selected-row {
+			background-color: #f2e3ff;
+		}
         .hidden-column {
             display: none;
         }
@@ -220,11 +247,9 @@
                 display: block;
             }
         }
-
         .dropdown-content {
             display: none;
         }
-
         .dropdown.active .dropdown-content {
             display: block;
         }
@@ -330,11 +355,11 @@
 	</div>
 <script>
 const rows = [
-	{ words: 'katshe⋅<span class="underline">nʌ́⋅</span>', meanings: 'animal / domestic animal / pet', category: 'animals'},
-	{ words: 'kutitshenʌˀshú<span class="underline">ha</span>', meanings: 'animals / pets / livestock', category: 'animals'},
-	{ words: 'kályoˀ', meanings: 'wild animal', category: 'animals'},
-	{ words: 'kutílyoˀ / kutilyoˀshú<span class="underline">ha</span>', meanings: 'wild animals', category: 'animals'},
-	{ words: 'onaˀkʌtkó⋅', meanings: 'badger', category: 'animals'},
+	{ words: 'katshe⋅<span class="underline">nʌ́⋅</span>', meanings: 'animal / domestic animal / pet', category: 'animals', type: 'Noun', root: '--', context: '--'},
+	{ words: 'kutitshenʌˀshú<span class="underline">ha</span>', meanings: 'animals / pets / livestock', category: 'animals', type: 'Noun', root: '--', context: '--'},
+	{ words: 'kályoˀ', meanings: 'wild animal', category: 'animals', type: 'Noun', root: '-lyoˀt-', context: '--'},
+	{ words: 'kutílyoˀ / kutilyoˀshú<span class="underline">ha</span>', meanings: 'wild animals', category: 'animals', type: '', root: '', context: ''},
+	{ words: 'onaˀkʌtkó⋅', meanings: 'badger', category: 'animals', type: '', root: '', context: ''},
 	{ words: 'tsiˀklaˀwístal', meanings: 'bat', category: 'animals'},
 	{ words: 'ohkwa⋅l<span class="underline">í</span>', meanings: 'bear', category: 'animals'},
 	{ words: 'tsyoní⋅<span class="underline">tuˀ</span>', meanings: 'beaver', category: 'animals'},
@@ -382,8 +407,8 @@ const rows = [
 	{ words: 'tsikwilʌ́⋅<span class="underline">tuˀ</span> / tsyokwilʌ́⋅<span class="underline">tuˀ</span>', meanings: 'squirrel', category: 'animals'},
 	{ words: 'tekahwa⋅sú<span class="underline">teˀ</span>', meanings: 'squirrel / flying squirrel', category: 'animals'},
 	{ words: 'tsyohsoˀkwaka⋅y<span class="underline">ú</span>', meanings: 'squirrel / red squirrel', category: 'animals'},
-	{ words: 'tsiniskwalakwalu⋅<span class="underline">tú⋅</span>', meanings: 'taod', category: 'animals'},
-	{ words: 'kwa⋅lál', meanings: 'taod / tree toad', category: 'animals'},
+	{ words: 'tsiniskwalakwalu⋅<span class="underline">tú⋅</span>', meanings: 'toad', category: 'animals'},
+	{ words: 'kwa⋅lál', meanings: 'toad / tree toad', category: 'animals'},
 	{ words: 'aˀno⋅wál', meanings: 'turtle', category: 'animals'},
 	{ words: 'onu⋅kót', meanings: 'weasel', category: 'animals'},
 	{ words: 'thahyu⋅n<span class="underline">í</span> / othahyu⋅n<span class="underline">í</span>', meanings: 'wolf', category: 'animals'},
@@ -1815,7 +1840,7 @@ const rows = [
 	{ words: '<span class="underline"></span>', meanings: 'large spoon / tablespoon', category: 'measures'},
 	{ words: '<span class="underline"></span>', meanings: 'small spoon / teaspoon', category: 'measures'},
 	
-	{ words: '<span class="underline"></span>', meanings: '', category: ''},
+	{ words: '<span class="underline"></span>', meanings: '', category: '', type: '', root: '', context: ''},
 ];
 		
 document.getElementById('searchInput').addEventListener('input', filterRows);
@@ -1825,6 +1850,7 @@ let filteredRows = [...rows];
 let currentPage = 1;
 const rowsPerPage = 10;
 const tableHeader = document.getElementById('tableHeader');
+let expandedRow = null;
 
 function displayRows() {
     const start = (currentPage - 1) * rowsPerPage;
@@ -1849,11 +1875,73 @@ function displayRows() {
 
             tr.appendChild(wordCell);
             tr.appendChild(translationCell);
+			
+			tr.addEventListener('click', () => toggleRowDetails(tr, row));
+			
             tableBody.appendChild(tr);
         });
     }
 
     updatePagination();
+}
+
+function toggleRowDetails(tr, row) {
+    const allRows = document.querySelectorAll('#nounsTable tbody tr');
+
+    if (expandedRow === tr) {
+        expandedRow.classList.remove('selected-row');
+
+        const nextRow = expandedRow.nextElementSibling;
+        if (nextRow && nextRow.classList.contains('details-row')) {
+            nextRow.remove();
+        }
+        expandedRow = null;
+        allRows.forEach(rowElement => rowElement.style.display = '');
+    } else {
+        if (expandedRow) {
+            expandedRow.classList.remove('selected-row');
+            const previousDetailRow = expandedRow.nextElementSibling;
+            if (previousDetailRow && previousDetailRow.classList.contains('details-row')) {
+                previousDetailRow.remove();
+            }
+        }
+
+        allRows.forEach(rowElement => rowElement.style.display = 'none');
+        tr.style.display = '';
+
+        tr.classList.add('selected-row');
+
+        const detailRow = document.createElement('tr');
+        detailRow.classList.add('details-row');
+
+        const detailCell = document.createElement('td');
+        detailCell.setAttribute('colspan', 2);
+        detailCell.innerHTML = `
+            <div class="details-content">
+                <table class="details-table">
+                    <thead>
+                        <tr>
+                            <th><strong>Type:</strong></th>
+                            <th><strong>Root:</strong></th>
+                            <th><strong>Context:</strong></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background-color: white !important">
+                            <td>${row.type}</td>
+                            <td>${row.root}</td>
+                            <td>${row.context}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        `;
+
+        detailRow.appendChild(detailCell);
+        tr.insertAdjacentElement('afterend', detailRow); // Insert details directly below the clicked row
+
+        expandedRow = tr; // Set the clicked row as the expanded row
+    }
 }
 
 function changePage(direction) {
