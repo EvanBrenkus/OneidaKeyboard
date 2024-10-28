@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Audio Player</title>
+    <style>
+        .audio-container {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .play-btn, .pause-btn {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            background-color: #008CBA;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        .pause-btn {
+            display: none;
+        }
+    </style>
+    <script>
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        function playAudio() {
+            const audio = document.getElementById('audio');
+            audio.play();
+            document.querySelector('.play-btn').style.display = 'none';
+            document.querySelector('.pause-btn').style.display = 'inline';
+        }
+
+        function pauseAudio() {
+            const audio = document.getElementById('audio');
+            audio.pause();
+            document.querySelector('.play-btn').style.display = 'inline';
+            document.querySelector('.pause-btn').style.display = 'none';
+        }
+    </script>
+</head>
+<body>
+    <div class="audio-container">
+        <button class="play-btn" onclick="playAudio()">Play</button>
+        <button class="pause-btn" onclick="pauseAudio()">Pause</button>
+    </div>
+
+    <audio id="audio">
+        <source src="audio/he_ate.mp3" type="audio/mpeg">
+        <source src="audio/he_is_eating.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+</body>
+</html>
