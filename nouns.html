@@ -355,63 +355,63 @@
 	</div>
 <script>
 const rows = [
-	{ words: 'katshe⋅<span class="underline">nʌ́⋅</span>', meanings: 'animal / domestic animal / pet', category: 'animals', type: 'Noun', root: '--', context: '--'},
-	{ words: 'kutitshenʌˀshú<span class="underline">ha</span>', meanings: 'animals / pets / livestock', category: 'animals', type: 'Noun', root: '--', context: '--'},
-	{ words: 'kályoˀ', meanings: 'wild animal', category: 'animals', type: 'Noun', root: '-lyoˀt-', context: '--'},
-	{ words: 'kutílyoˀ / kutilyoˀshú<span class="underline">ha</span>', meanings: 'wild animals', category: 'animals', type: '', root: '', context: ''},
-	{ words: 'onaˀkʌtkó⋅', meanings: 'badger', category: 'animals', type: '', root: '', context: ''},
-	{ words: 'tsiˀklaˀwístal', meanings: 'bat', category: 'animals'},
-	{ words: 'ohkwa⋅l<span class="underline">í</span>', meanings: 'bear', category: 'animals'},
-	{ words: 'tsyoní⋅<span class="underline">tuˀ</span>', meanings: 'beaver', category: 'animals'},
-	{ words: 'tsyotekliyá⋅ku', meanings: 'buffalo', category: 'animals'},
-	{ words: 'yoˀnowakwa⋅lú<span class="underline">teˀ</span>', meanings: 'camel', category: 'animals'},
-	{ words: 'takóhs', meanings: 'cat', category: 'animals'},
-	{ words: 'tsyolhyóh<span class="underline">kwaˀ</span>', meanings: 'chipmunk', category: 'animals'},
-	{ words: 'ata⋅kʌ́⋅', meanings: 'clam', category: 'animals'},
-	{ words: 'tyonhúskwalut', meanings: 'cow', category: 'animals'},
-	{ words: 'kanú⋅tat', meanings: 'cow / milk cow', category: 'animals'},
-	{ words: 'tsyeˀelo⋅l<span class="underline">ú</span>', meanings: 'crab / lobster / crayfish', category: 'animals'},
-	{ words: 'oskanu⋅<span class="underline">tú⋅</span> / oskʌnu⋅<span class="underline">tú⋅</span>', meanings: 'deer', category: 'animals'},
-	{ words: 'kayaˀkwáhe<span class="underline">leˀ</span>', meanings: 'dinosaur', category: 'animals'},
-	{ words: 'é⋅lhal', meanings: 'dog', category: 'animals'},
-	{ words: 'tewahúhtes', meanings: 'donkey', category: 'animals'},
-    { words: 'ohnaˀkwalohsaˀkó⋅ / ohnakwalohsaˀkó⋅', meanings: 'elephant', category: 'animals'},
-	{ words: 'kʌ́tsi<span class="underline">ˀ</span>', meanings: 'fish', category: 'animals'},
-	{ words: 'kʌtsyʌˀshú<span class="underline">ha</span>', meanings: 'fishes', category: 'animals'},
-	{ words: 'skʌhnák<span class="underline">sʌˀ</span>', meanings: 'fox', category: 'animals'},
-	{ words: 'wale⋅l<span class="underline">ʌ́</span> / wale⋅l<span class="underline">ú</span>', meanings: 'frog', category: 'animals'},
-	{ words: 'to⋅tís', meanings: 'frog / spring frog', category: 'animals'},
-	{ words: 'kayaˀ táklah<span class="underline">seˀ</span>', meanings: 'goat', category: 'animals'},
-	{ words: 'tsikawihsakihaˀkó⋅', meanings: 'gorilla', category: 'animals'},
-	{ words: 'oná⋅kʌt', meanings: 'groundhog', category: 'animals'},
-	{ words: 'kohsa⋅tʌ́s', meanings: 'horse', category: 'animals'},
-	{ words: 'yohnaˀtátsles', meanings: 'kangaroo', category: 'animals'},
-	{ words: 'kʌ́⋅leks', meanings: 'lion', category: 'animals'},
-	{ words: 'okalanʌ́⋅<span class="underline">taˀ</span>', meanings: 'lizard', category: 'animals'},
-	{ words: 'tsyotsya⋅ká<span class="underline">weˀ</span>', meanings: 'mink', category: 'animals'},
-	{ words: 'tsiˀnyu⋅ká<span class="underline">leˀ</span>', meanings: 'mole', category: 'animals'},
-	{ words: 'tsikawihsakí<span class="underline">haˀ</span>', meanings: 'monkey', category: 'animals'},
-	{ words: 'skaˀnyúh<span class="underline">saˀ</span>', meanings: 'moose', category: 'animals'},
-	{ words: 'otsiˀno⋅w<span class="underline">ʌ́</span>', meanings: 'mouse', category: 'animals'},
-	{ words: 'anó⋅ki<span class="underline">ˀ</span>', meanings: 'muskrat', category: 'animals'},
-	{ words: 'kóskos', meanings: 'pig', category: 'animals'},
-	{ words: 'onhéh<span class="underline">taˀ</span>', meanings: 'porcupine', category: 'animals'},
-	{ words: 'kwaˀyʌ́<span class="underline">ha</span>', meanings: 'rabbit', category: 'animals'},
-	{ words: 'tshuˀkalo⋅l<span class="underline">ʌ́</span>', meanings: 'rabbit / jackrabbit', category: 'animals'},
-	{ words: 'ʌti⋅l<span class="underline">ú</span>', meanings: 'raccoon', category: 'animals'},
-	{ words: 'otsiˀnowʌhkó⋅', meanings: 'rat', category: 'animals'},
-	{ words: 'síksik', meanings: 'sheep', category: 'animals'},
-	{ words: 'aní⋅tas', meanings: 'skunk', category: 'animals'},
-	{ words: 'tsyonisklo⋅l<span class="underline">ú</span>', meanings: 'snail', category: 'animals'},
-	{ words: 'ót<span class="underline">kuˀ</span>', meanings: 'snake', category: 'animals'},
-	{ words: 'tsikwilʌ́⋅<span class="underline">tuˀ</span> / tsyokwilʌ́⋅<span class="underline">tuˀ</span>', meanings: 'squirrel', category: 'animals'},
-	{ words: 'tekahwa⋅sú<span class="underline">teˀ</span>', meanings: 'squirrel / flying squirrel', category: 'animals'},
-	{ words: 'tsyohsoˀkwaka⋅y<span class="underline">ú</span>', meanings: 'squirrel / red squirrel', category: 'animals'},
-	{ words: 'tsiniskwalakwalu⋅<span class="underline">tú⋅</span>', meanings: 'toad', category: 'animals'},
-	{ words: 'kwa⋅lál', meanings: 'toad / tree toad', category: 'animals'},
-	{ words: 'aˀno⋅wál', meanings: 'turtle', category: 'animals'},
-	{ words: 'onu⋅kót', meanings: 'weasel', category: 'animals'},
-	{ words: 'thahyu⋅n<span class="underline">í</span> / othahyu⋅n<span class="underline">í</span>', meanings: 'wolf', category: 'animals'},
+	{ words: 'katshe⋅<span class="underline">nʌ́⋅</span>', meanings: 'animal / domestic animal / pet', category: 'animals', type: '', root: '', requires: ''},
+	{ words: 'kutitshenʌˀshú<span class="underline">ha</span>', meanings: 'animals / pets / livestock', category: 'animals', type: '', root: '', requires: ''},
+	{ words: 'kályoˀ', meanings: 'wild animal', category: 'animals', type: 'Incorporable', root: '-lyoˀt-', requires: ''},
+	{ words: 'kutílyoˀ / kutilyoˀshú<span class="underline">ha</span>', meanings: 'wild animals', category: 'animals', type: 'Incorporable', root: '-lyoˀt-', requires: ''},
+	{ words: 'onaˀkʌtkó⋅', meanings: 'badger', category: 'animals', type: 'Derived', root: '', requires: ''},
+	{ words: 'tsiˀklaˀwístal', meanings: 'bat', category: 'animals', type: 'Single', root: '', requires: ''},
+	{ words: 'ohkwa⋅l<span class="underline">í</span>', meanings: 'bear', category: 'animals', type: 'Incorporable', root: '-ahkwaliˀt-', requires: ''},
+	{ words: 'tsyoní⋅<span class="underline">tuˀ</span>', meanings: 'beaver', category: 'animals', type: 'Single', root: '', requires: ''},
+	{ words: 'tsyotekliyá⋅ku', meanings: 'buffalo', category: 'animals', type: '', root: '', requires: ''},
+	{ words: 'yoˀnowakwa⋅lú<span class="underline">teˀ</span>', meanings: 'camel', category: 'animals', type: 'Derived', root: '', requires: ''},
+	{ words: 'takóhs', meanings: 'cat', category: 'animals', type: 'Single', root: '', requires: ''},
+	{ words: 'tsyolhyóh<span class="underline">kwaˀ</span>', meanings: 'chipmunk', category: 'animals', type: 'Single', root: '', requires: ''},
+	{ words: 'ata⋅kʌ́⋅', meanings: 'clam', category: 'animals', type: 'Single', root: '', requires: ''},
+	{ words: 'tyonhúskwalut', meanings: 'cow', category: 'animals', type: 'Single', root: '', requires: ''},
+	{ words: 'kanú⋅tat', meanings: 'cow / milk cow', category: 'animals', type: 'Derived', root: '', requires: ''},
+	{ words: 'tsyeˀelo⋅l<span class="underline">ú</span>', meanings: 'crab / lobster / crayfish', category: 'animals', type: 'Derived', root: '', requires: ''},
+	{ words: 'oskanu⋅<span class="underline">tú⋅</span> / oskʌnu⋅<span class="underline">tú⋅</span>', meanings: 'deer', category: 'animals', type: 'Single', root: '', requires: ''},
+	{ words: 'kayaˀkwáhe<span class="underline">leˀ</span>', meanings: 'dinosaur', category: 'animals', type: 'Derived', root: '', requires: ''},
+	{ words: 'é⋅lhal', meanings: 'dog', category: 'animals', type: 'Single', root: '', requires: ''},
+	{ words: 'tewahúhtes', meanings: 'donkey', category: 'animals', type: '', root: '', requires: ''},
+    { words: 'ohnaˀkwalohsaˀkó⋅ / ohnakwalohsaˀkó⋅', meanings: 'elephant', category: 'animals', type: 'Derived', root: '', requires: ''},
+	{ words: 'kʌ́tsi<span class="underline">ˀ</span>', meanings: 'fish', category: 'animals', type: 'Incorporable', root: '-itsy-', requires: ''},
+	{ words: 'kʌtsyʌˀshú<span class="underline">ha</span>', meanings: 'fishes', category: 'animals', type: 'Incorporable', root: '-itsy-', requires: ''},
+	{ words: 'skʌhnák<span class="underline">sʌˀ</span>', meanings: 'fox', category: 'animals', type: 'Derived', root: '', requires: ''},
+	{ words: 'wale⋅l<span class="underline">ʌ́</span> / wale⋅l<span class="underline">ú</span>', meanings: 'frog', category: 'animals', type: 'Single', root: '', requires: ''},
+	{ words: 'to⋅tís', meanings: 'frog / spring frog', category: 'animals', type: 'Single', root: '', requires: ''},
+	{ words: 'kayaˀ táklah<span class="underline">seˀ</span>', meanings: 'goat', category: 'animals', type: 'Derived', root: '', requires: ''},
+	{ words: 'tsikawihsakihaˀkó⋅', meanings: 'gorilla', category: 'animals', type: 'Derived', root: '', requires: ''},
+	{ words: 'oná⋅kʌt', meanings: 'groundhog', category: 'animals', type: 'Single', root: '', requires: ''},
+	{ words: 'kohsa⋅tʌ́s', meanings: 'horse', category: 'animals', type: 'Derived', root: '', requires: ''},
+	{ words: 'yohnaˀtátsles', meanings: 'kangaroo', category: 'animals', type: '', root: '', requires: ''},
+	{ words: 'kʌ́⋅leks', meanings: 'lion', category: 'animals', type: 'Single', root: '', requires: ''},
+	{ words: 'okalanʌ́⋅<span class="underline">taˀ</span>', meanings: 'lizard', category: 'animals', type: 'Derived', root: '', requires: ''},
+	{ words: 'tsyotsya⋅ká<span class="underline">weˀ</span>', meanings: 'mink', category: 'animals', type: 'Derived', root: '', requires: ''},
+	{ words: 'tsiˀnyu⋅ká<span class="underline">leˀ</span>', meanings: 'mole', category: 'animals', type: '', root: '', requires: ''},
+	{ words: 'tsikawihsakí<span class="underline">haˀ</span>', meanings: 'monkey', category: 'animals', type: 'Derived', root: '', requires: ''},
+	{ words: 'skaˀnyúh<span class="underline">saˀ</span>', meanings: 'moose', category: 'animals', type: 'Incorporable', root: '-tsiˀnowʌt-', requires: ''},
+	{ words: 'otsiˀno⋅w<span class="underline">ʌ́</span>', meanings: 'mouse', category: 'animals', type: '', root: '', requires: ''},
+	{ words: 'anó⋅ki<span class="underline">ˀ</span>', meanings: 'muskrat', category: 'animals', type: 'Single', root: '', requires: ''},
+	{ words: 'kóskos', meanings: 'pig', category: 'animals', type: 'Single', root: '', requires: ''},
+	{ words: 'onhéh<span class="underline">taˀ</span>', meanings: 'porcupine', category: 'animals', type: '', root: '', requires: ''},
+	{ words: 'kwaˀyʌ́<span class="underline">ha</span>', meanings: 'rabbit', category: 'animals', type: '', root: '', requires: ''},
+	{ words: 'tshuˀkalo⋅l<span class="underline">ʌ́</span>', meanings: 'rabbit / jackrabbit', category: 'animals', type: 'Derived', root: '', requires: ''},
+	{ words: 'ʌti⋅l<span class="underline">ú</span>', meanings: 'raccoon', category: 'animals', type: 'Single', root: '', requires: ''},
+	{ words: 'otsiˀnowʌhkó⋅', meanings: 'rat', category: 'animals', type: 'Derived', root: '', requires: ''},
+	{ words: 'síksik', meanings: 'sheep', category: 'animals', type: 'Single', root: '', requires: ''},
+	{ words: 'aní⋅tas', meanings: 'skunk', category: 'animals', type: 'Single', root: '', requires: ''},
+	{ words: 'tsyonisklo⋅l<span class="underline">ú</span>', meanings: 'snail', category: 'animals', type: 'Derived', root: '', requires: ''},
+	{ words: 'ót<span class="underline">kuˀ</span>', meanings: 'snake', category: 'animals', type: 'Derived', root: '', requires: ''},
+	{ words: 'tsikwilʌ́⋅<span class="underline">tuˀ</span> / tsyokwilʌ́⋅<span class="underline">tuˀ</span>', meanings: 'squirrel / grey squirrel', category: 'animals', type: 'Single', root: '', requires: ''},
+	{ words: 'tekahwa⋅sú<span class="underline">teˀ</span>', meanings: 'squirrel / flying squirrel', category: 'animals', type: '', root: '', requires: ''},
+	{ words: 'tsyohsoˀkwaka⋅y<span class="underline">ú</span>', meanings: 'squirrel / red squirrel', category: 'animals', type: 'Derived', root: '', requires: ''},
+	{ words: 'tsiniskwalakwalu⋅<span class="underline">tú⋅</span>', meanings: 'toad', category: 'animals', type: 'Derived', root: '', requires: ''},
+	{ words: 'kwa⋅lál', meanings: 'toad / tree toad', category: 'animals', type: '', root: '', requires: ''},
+	{ words: 'aˀno⋅wál', meanings: 'turtle', category: 'animals', type: 'Single', root: '', requires: ''},
+	{ words: 'onu⋅kót', meanings: 'weasel', category: 'animals', type: 'Single', root: '', requires: ''},
+	{ words: 'thahyu⋅n<span class="underline">í</span> / othahyu⋅n<span class="underline">í</span>', meanings: 'wolf', category: 'animals', type: 'Single', root: '', requires: ''},
 	
 	{ words: 'otsiˀtʌ⋅<span class="underline">ha</span>', meanings: 'bird', category: 'birds'},
 	{ words: 'otsiˀtʌhaˀshú<span class="underline">ha</span>', meanings: 'birds', category: 'birds'},
@@ -1840,7 +1840,7 @@ const rows = [
 	{ words: '<span class="underline"></span>', meanings: 'large spoon / tablespoon', category: 'measures'},
 	{ words: '<span class="underline"></span>', meanings: 'small spoon / teaspoon', category: 'measures'},
 	
-	{ words: '<span class="underline"></span>', meanings: '', category: '', type: '', root: '', context: ''},
+	{ words: '<span class="underline"></span>', meanings: '', category: '', type: '', root: '', requires: ''},
 ];
 		
 document.getElementById('searchInput').addEventListener('input', filterRows);
@@ -1923,14 +1923,14 @@ function toggleRowDetails(tr, row) {
                         <tr>
                             <th><strong>Type:</strong></th>
                             <th><strong>Root:</strong></th>
-                            <th><strong>Context:</strong></th>
+                            <th><strong>Requires:</strong></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr style="background-color: white !important">
                             <td>${row.type}</td>
                             <td>${row.root}</td>
-                            <td>${row.context}</td>
+                            <td>${row.requires}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -1938,9 +1938,9 @@ function toggleRowDetails(tr, row) {
         `;
 
         detailRow.appendChild(detailCell);
-        tr.insertAdjacentElement('afterend', detailRow); // Insert details directly below the clicked row
+        tr.insertAdjacentElement('afterend', detailRow);
 
-        expandedRow = tr; // Set the clicked row as the expanded row
+        expandedRow = tr;
     }
 }
 
