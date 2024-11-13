@@ -3,8 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secure Audio Player</title>
+    <title>Oneida Orthography - Table of Contents</title>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
+	    html, body {
+            margin: 0;
+            padding: 0;
+            font-family: "Roboto", sans-serif;
+        }
+        body {
+            font-weight: 400;
+        }
+        table {
+            border-collapse: collapse;
+            width: auto;
+            margin: 0;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #5D3F6A;
+            display: flex;
+            justify-content: left;
+        }
+        .navbar a {
+            float: left;
+            font-size: 20px;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .navbar a:hover, .dropdown:hover .dropbtn {
+            background-color: #ddd;
+            color: black;
+        }
+        .dropdown {
+            float: left;
+            background-color: #5D3F6A;
+            overflow: hidden;
+        }
+        .dropdown .dropbtn {
+            font-size: 20px;  
+            border: none;
+            outline: none;
+            color: white;
+            padding: 20px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+            transition: background-color 0.3s, color 0.3s;
+			pointer-events: none;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            transition: background-color 0.3s;
+        }
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+		.pagination {
+			margin: 10px 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.page-btn {
+			padding: 10px 20px;
+			font-size: 16px;
+			cursor: pointer;
+			background-color: #5D3F6A;
+			color: white;
+			border: none;
+			margin: 0 5px;
+			transition: background-color 0.3s;
+		}
+		.page-btn:hover, .page-btn:disabled {
+			background-color: #ddd;
+			color: black;
+		}
+		.page-btn:disabled {
+			cursor: not-allowed;
+		}
         .audio-container {
             display: flex;
             align-items: center;
@@ -24,34 +128,95 @@
             display: none;
         }
     </style>
-    <script>
-        document.addEventListener('contextmenu', event => event.preventDefault());
-
-        function playAudio() {
-            const audio = document.getElementById('audio');
-            audio.play();
-            document.querySelector('.play-btn').style.display = 'none';
-            document.querySelector('.pause-btn').style.display = 'inline';
-        }
-
-        function pauseAudio() {
-            const audio = document.getElementById('audio');
-            audio.pause();
-            document.querySelector('.play-btn').style.display = 'inline';
-            document.querySelector('.pause-btn').style.display = 'none';
-        }
-    </script>
 </head>
 <body>
-    <div class="audio-container">
-        <button class="play-btn" onclick="playAudio()">Play</button>
-        <button class="pause-btn" onclick="pauseAudio()">Pause</button>
-    </div>
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="keyboard.html">Keyboard</a>
+        <div class="dropdown">
+            <button class="dropbtn">Charts</button>
+            <div class="dropdown-content">
+		<a href="possessives.html">Possessives</a>
+                <a href="pronouns.html">Pronouns</a>
+                <a href="transitives.html">Transitives</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Dictionaries</button>
+            <div class="dropdown-content">
+                <a href="nouns.html">Nouns</a>
+                <a href="particles.html">Particles</a>
+            </div>
+        </div>
+		<a href="orthography.html">Orthography</a>
+	</div>
 
-    <audio id="audio">
-        <source src="audio/he_ate.mp3" type="audio/mpeg">
-        <source src="audio/he_is_eating.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
+	<div class="pagination">
+		<button class="page-btn" id="tocBtn" onclick="window.location.href='orthography.html">Table of Contents</button>
+	</div>
+	<div class="pagination">
+		<button class="page-btn" id="prevBtn" onclick="navigateToPage('prev')">Back</button>
+		<button class="page-btn" id="nextBtn" onclick="navigateToPage('next')">Next</button>
+	</div>
+
+    <header>
+        <h1>Oneida Orthography</h1>
+    </header>
+
+    <main>
+        <ul>
+            <li><a href="orthography/page1.html">1. Oneida Sounds and Symbols</a></li>
+            <li><a href="orthography/page2.html">2. Rhythms</a></li>
+            <li><a href="orthography/page3.html">3. Greetings</a></li>
+            <li><a href="orthography/page4.html">4. Names</a></li>
+			<li><a href="orthography/page5.html">5. Mother, Grandmother, Father, and Gradfather</a></li>
+			<li><a href="orthography/page6.html">6. Where do you live?</a></li>
+			<li><a href="orthography/page7.html">7. Introduction to Transitive Verbs</a></li>
+			<li><a href="orthography/page8.html">8. Numbers</a></li>
+			<li><a href="orthography/page9.html">9. Ages</a></li>
+			<li><a href="orthography/page10.html">10. Telling Time</a></li>
+			<li><a href="orthography/page11.html">11. Colors</a></li>
+			<li><a href="orthography/page12.html">12. Cousin, Friend</a></li>
+			<li><a href="orthography/page13.html">13. Physical Characteristics</a></li>
+			<li><a href="orthography/page14.html">14. Behavioral Characteristics</a></li>
+			<li><a href="orthography/page15.html">15. Physical States</a></li>
+			<li><a href="orthography/page16.html">16. Girlfriend, Boyfrind, Wife, and Husband</a></li>
+			<li><a href="orthography/page17.html">17. Foods</a></li>
+			<li><a href="orthography/page18.html">18. Body</a></li>
+			<li><a href="orthography/page19.html">19. Emotions</a></li>
+			<li><a href="orthography/page20.html">20. House</a></li>
+			<li><a href="orthography/page21.html">21. Daughter, Granddaughter, Niece, Son, Grandson, and Nephew</a></li>
+			<li><a href="orthography/page22.html">22. Commands</a></li>
+			<li><a href="orthography/page23.html">23. Verb: Like Something</a></li>
+			<li><a href="orthography/page24.html">24. Verb: Read and Write</a></li>
+			<li><a href="orthography/page25.html">25. Classroom Conversational Vocabulary</a></li>
+			<li><a href="orthography/page26.html">26. Family Charts</a></li>
+        </ul>
+    </main>
+
 </body>
+<script>
+function navigateToPage(direction) {
+    const match = window.location.pathname.match(/page(\d+)/);
+    const currentPage = match ? parseInt(match[1]) : 1;
+
+    let targetPage;
+    if (direction === 'next') {
+        targetPage = currentPage < 26 ? currentPage + 1 : 26;
+    } else if (direction === 'prev') {
+        targetPage = currentPage > 1 ? currentPage - 1 : 1;
+    }
+    
+    window.location.href = `page${targetPage}.html`;
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    const match = window.location.pathname.match(/page(\d+)/);
+    const currentPage = match ? parseInt(match[1]) : 1;
+    
+    if (currentPage === 1) document.getElementById("prevBtn").disabled = true;
+    if (currentPage === 26) document.getElementById("nextBtn").disabled = true;
+});
+
+</script>
 </html>
