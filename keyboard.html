@@ -45,7 +45,7 @@
             margin-top: 10px;
         }
 
-        #copyButton, #toggleButton {
+        #copyButton, #clearTextBtn, #toggleButton {
             padding: 10px 15px;
             font-size: 16px;
             background-color: #5D3F6A;
@@ -56,7 +56,7 @@
             margin: 5px;
         }
 
-        #copyButton:hover, #toggleButton:hover {
+        #copyButton:hover, #clearTextBtn:hover, #toggleButton:hover {
             	background-color: #ddd;
 		color: black;
         }
@@ -207,10 +207,11 @@
     <div id="app">
         <input type="text" id="textInput" placeholder="Type here...">
         <div id="ipaOutput"></div>
-        <div class="button-container">
-            <button id="copyButton">Copy Oneida Text</button>
+            <button id="copyButton">Copy Text</button>
+			<button id="clearTextBtn">Clear Text</button>
+		<div id="button-container">
             <button id="toggleButton">Hide Key Mappings</button>
-        </div>
+		</div>
     </div>
 
     <div class="table-container">
@@ -268,7 +269,7 @@
     </div>
 
     <script>
-        const ipaMapping = {
+    const ipaMapping = {
         'A': 'á',
         'E': 'é',
         'I': 'í',
@@ -291,7 +292,7 @@
         'v': '',
         'x': '',
         'z': '',
-	'B': '',
+		'B': '',
         'C': '',
         'D': '',
         'F': '',
@@ -302,16 +303,16 @@
         'Q': '',
         'R': '',
         'V': '',
-	'X': '',
-	'Z': '',
-	'H': 'h',
-	'K': 'k',
-	'L': 'l',
-	'N': 'n',
-	'S': 's',
-	'T': 't',
-	'W': 'w',
-	'Y': 'y',
+		'X': '',
+		'Z': '',
+		'H': 'h',
+		'K': 'k',
+		'L': 'l',
+		'N': 'n',
+		'S': 's',
+		'T': 't',
+		'W': 'w',
+		'Y': 'y',
 	};
 
 function convertToIPA(text) {
@@ -357,8 +358,12 @@ document.getElementById('textInput').addEventListener('input', updateIPAOutput);
         document.getElementById('copyButton').addEventListener('click', function() {
             const ipaOutput = document.getElementById('ipaOutput').textContent;
             copyToClipboard(ipaOutput);
-            alert('Oneida Text copied!');
         });
+		
+		document.getElementById("clearTextBtn").addEventListener("click", function() {
+			document.getElementById("textInput").value = "";
+			document.getElementById("ipaOutput").innerHTML = "";
+		});
 
         document.getElementById('toggleButton').addEventListener('click', function() {
             const table = document.getElementById('keyMappings');
@@ -384,7 +389,7 @@ document.getElementById('textInput').addEventListener('input', updateIPAOutput);
                     dropdown.classList.remove('active');
                 });
             });
-        }
+        };
     </script>
 </body>
 </html>
