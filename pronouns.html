@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" href="favicon.ico" type="image/x-icon">
     <title>Oneida Language Pronouns</title>
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 	<style>
@@ -43,15 +42,15 @@
         }
 
         .tables-container {
-		text-align: center;
+			text-align: center;
         }
 		
-	.table-row {
-		display: flex;
-		justify-content: center;
-		gap: 30px;
-	}
-      
+		.table-row {
+			display: flex;
+			justify-content: center;
+			gap: 30px;
+		}
+		
         .table-container table {
             border-collapse: collapse;
             table-layout: fixed;
@@ -84,14 +83,14 @@
         	font-size: 20px;
         	color: white;
         	text-align: center;
-        	padding: 20px;
-		text-decoration: none;
+			padding: 20px;
+			text-decoration: none;
         	transition: background-color 0.3s, color 0.3s;
         }
 
         .navbar a:hover, .dropdown:hover .dropbtn {
         	background-color: #ddd;
-		color: black;
+			color: black;
         }
 
         .dropdown {
@@ -127,7 +126,7 @@
             text-decoration: none;
             display: block;
             text-align: left;
-	          transition: background-color 0.3s;
+	        transition: background-color 0.3s;
         }
 
         .dropdown-content a:hover {
@@ -173,10 +172,9 @@
 			margin-top: 20px;
 			gap: 30px;
 		}
-</style>
+	</style>
 </head>
 <body>
-
     <div class="navbar">
         <a href="index.html">Home</a>
         <a href="keyboard.html">Keyboard</a>
@@ -197,56 +195,56 @@
         </div>
     </div>
 
-<div class="table-container">
-	<table>
-		<caption>Meaning Chart</caption>
-        <tr>
-            <th>Single (1)</th>
-            <th>Dual (2)</th>
-            <th>Plural (3+)</th>
-        </tr>
-        <tr>
-            <td>Me</td>
-            <td>Me and you</td>
-            <td>All of us</td>
-        </tr>
-        <tr>
-            <td>You</td>
-            <td>You two</td>
-            <td>All of you</td>
-        </tr>
-        <tr>
-            <td>Him</td>
-            <td>Two Males or Mixed</td>
-            <td>Three+ Males or Mixed</td>
-        </tr>
-        <tr>
-            <td>Her</td>
-            <td>Two Females</td>
-            <td>Three+ Females</td>
-        </tr>
-        <tr>
-            <td>Older Female / It</td>
-            <td>Us two, but not you</td>
-            <td>All of us, but not you</td>
-        </tr>
-    </table>
-</div>
+	<div class="table-container">
+		<table>
+			<caption>Meaning Chart</caption>
+			<tr>
+				<th>Single (1)</th>
+				<th>Dual (2)</th>
+				<th>Plural (3+)</th>
+			</tr>
+			<tr>
+				<td>Me</td>
+				<td>Me and you</td>
+				<td>All of us</td>
+			</tr>
+			<tr>
+				<td>You</td>
+				<td>You two</td>
+				<td>All of you</td>
+			</tr>
+			<tr>
+				<td>Him</td>
+				<td>Two Males or Mixed</td>
+				<td>Three+ Males or Mixed</td>
+			</tr>
+			<tr>
+				<td>Her</td>
+				<td>Two Females</td>
+				<td>Three+ Females</td>
+			</tr>
+			<tr>
+				<td>Older Female / It</td>
+				<td>Us two, but not you</td>
+				<td>All of us, but not you</td>
+			</tr>
+		</table>
+	</div>
 
-<div class="navigation">
+	<div class="navigation">
         <button id="prevBtn" onclick="showPrevStem()">Back</button>
         <button id="nextBtn" onclick="showNextStem()">Next</button>
-</div>
+	</div>
 
-<div class="tables-container">
-	<div id="c-stem" class="stem-tab">
-	<div class="table-row">
+	<div class="tables-container">
+		<div id="c-stem" class="stem-tab">
+		<div class="table-row">
 	<table>
 		<caption>c-stem Subjective</caption>
-        <tr>
-            <th>Single (1)</th>
-            <th>Dual (2)</th>
-            <th>Plural (3+)</th>
+		<tr>
+			<th>Single (1)</th>
+			<th>Dual (2)</th>
+			<th>Plural (3+)</th>
         </tr>
         <tr>
             <td>k</td>
@@ -740,54 +738,38 @@
             <td>yukwʌ</td>
         </tr>
     </table>
-</div>
-</div>
-</div>
+	</div>
+	</div>
+	</div>
+	<script>
+	const stems = ['c-stem', 'a-stem', 'e-stem', 'i-stem', 'o-stem', 'u-stem', 'ʌ-stem'];
+	let currentStemIndex = 0;
 
-<script>
-const stems = ['c-stem', 'a-stem', 'e-stem', 'i-stem', 'o-stem', 'u-stem', 'ʌ-stem'];
-let currentStemIndex = 0;
+	function showStem(index) {
+		document.querySelectorAll('.stem-tab').forEach(stem => {
+			stem.style.display = 'none';
+		});
+		document.getElementById(stems[index]).style.display = 'block';
 
-function showStem(index) {
-    document.querySelectorAll('.stem-tab').forEach(stem => {
-        stem.style.display = 'none';
-    });
-    document.getElementById(stems[index]).style.display = 'block';
+		document.getElementById('prevBtn').disabled = (index === 0);
+		document.getElementById('nextBtn').disabled = (index === stems.length - 1);
+	}
 
-    document.getElementById('prevBtn').disabled = (index === 0);
-    document.getElementById('nextBtn').disabled = (index === stems.length - 1);
-}
+	function showNextStem() {
+		if (currentStemIndex < stems.length - 1) {
+			currentStemIndex++;
+			showStem(currentStemIndex);
+		}
+	}
 
-function showNextStem() {
-    if (currentStemIndex < stems.length - 1) {
-        currentStemIndex++;
-        showStem(currentStemIndex);
-    }
-}
+	function showPrevStem() {
+		if (currentStemIndex > 0) {
+			currentStemIndex--;
+			showStem(currentStemIndex);
+		}
+	}
 
-function showPrevStem() {
-    if (currentStemIndex > 0) {
-        currentStemIndex--;
-        showStem(currentStemIndex);
-    }
-}
-
-showStem(currentStemIndex);
-
-        const isTouchDevice = () => {
-            return ('ontouchstart' in window || navigator.maxTouchPoints > 0);
-        };
-
-        if (!isTouchDevice()) {
-            document.querySelectorAll('.dropdown').forEach(function(dropdown) {
-                dropdown.addEventListener('mouseenter', function() {
-                    dropdown.classList.add('active');
-                });
-                dropdown.addEventListener('mouseleave', function() {
-                    dropdown.classList.remove('active');
-                });
-            });
-        }
-</script>
+	showStem(currentStemIndex);
+	</script>
 </body>
 </html>

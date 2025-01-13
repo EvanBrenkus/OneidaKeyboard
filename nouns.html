@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" href="favicon.ico" type="image/x-icon">
     <title>Oneida Language Nouns</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -257,7 +256,6 @@
     </style>
 </head>
 <body>
-
     <div class="navbar">
         <a href="index.html">Home</a>
         <a href="keyboard.html">Keyboard</a>
@@ -331,7 +329,7 @@
                 </div>
             </div>
         </div>
-	<div class="table-container">
+		<div class="table-container">
 		<div class="pagination">
 			<button class="page-btn" id="prevBtn" onclick="changePage('prev')">Back</button>
 			<span id="pageInfo" style="margin: 0 15px;">Page 1 out of 1</span>
@@ -352,10 +350,10 @@
             </tbody>
         </table>
         <div class="no-results">No results found.</div>
-    </div>
+		</div>
 	</div>
-<script>
-const rows = [
+	<script>
+	const rows = [
 	{ words: 'katshe⋅<span class="underline">nʌ́⋅</span>', meanings: 'animal / domestic animal / pet', category: 'animals', type: '', root: '', requires: ''},
 	{ words: 'kutitshenʌˀshú<span class="underline">ha</span>', meanings: 'animals / pets / livestock', category: 'animals', type: '', root: '', requires: ''},
 	{ words: 'kályoˀ', meanings: 'wild animal', category: 'animals', type: 'Incorporable', root: '-lyoˀt-', requires: ''},
@@ -1842,184 +1840,169 @@ const rows = [
 	{ words: '<span class="underline"></span>', meanings: 'small spoon / teaspoon', category: 'measures'},
 	
 	{ words: '<span class="underline"></span>', meanings: '', category: '', type: '', root: '', requires: ''},
-];
+	];
 		
-document.getElementById('searchInput').addEventListener('input', filterRows);
-document.querySelectorAll('.filter-btn').forEach(button => button.addEventListener('click', applyFilter));
+	document.getElementById('searchInput').addEventListener('input', filterRows);
+	document.querySelectorAll('.filter-btn').forEach(button => button.addEventListener('click', applyFilter));
 
-let filteredRows = [...rows];
-let currentPage = 1;
-const rowsPerPage = 10;
-const tableHeader = document.getElementById('tableHeader');
-let expandedRow = null;
+	let filteredRows = [...rows];
+	let currentPage = 1;
+	const rowsPerPage = 10;
+	const tableHeader = document.getElementById('tableHeader');
+	let expandedRow = null;
 
-function displayRows() {
-    const start = (currentPage - 1) * rowsPerPage;
-    const end = start + rowsPerPage;
-    const rowsToDisplay = filteredRows.slice(start, end);
-    const tableBody = document.querySelector('#nounsTable tbody');
-    tableBody.innerHTML = '';
+	function displayRows() {
+		const start = (currentPage - 1) * rowsPerPage;
+		const end = start + rowsPerPage;
+		const rowsToDisplay = filteredRows.slice(start, end);
+		const tableBody = document.querySelector('#nounsTable tbody');
+		tableBody.innerHTML = '';
 
-    if (rowsToDisplay.length === 0) {
-        document.querySelector('.no-results').style.display = 'block';
-		tableHeader.style.display = 'none';
-    } else {
-        document.querySelector('.no-results').style.display = 'none';
-		tableHeader.style.display = '';
-        rowsToDisplay.forEach(row => {
-            const tr = document.createElement('tr');
-            const { words, meanings } = row;
-            const wordCell = document.createElement('td');
-            wordCell.innerHTML = words;
-            const translationCell = document.createElement('td');
-            translationCell.textContent = meanings;
+		if (rowsToDisplay.length === 0) {
+			document.querySelector('.no-results').style.display = 'block';
+			tableHeader.style.display = 'none';
+		} else {
+			document.querySelector('.no-results').style.display = 'none';
+			tableHeader.style.display = '';
+			rowsToDisplay.forEach(row => {
+				const tr = document.createElement('tr');
+				const { words, meanings } = row;
+				const wordCell = document.createElement('td');
+				wordCell.innerHTML = words;
+				const translationCell = document.createElement('td');
+				translationCell.textContent = meanings;
 
-            tr.appendChild(wordCell);
-            tr.appendChild(translationCell);
+				tr.appendChild(wordCell);
+				tr.appendChild(translationCell);
 			
-			tr.addEventListener('click', () => toggleRowDetails(tr, row));
+				tr.addEventListener('click', () => toggleRowDetails(tr, row));
 			
-            tableBody.appendChild(tr);
-        });
-    }
+				tableBody.appendChild(tr);
+			});
+		}
 
-    updatePagination();
-}
+		updatePagination();
+	}
 
-function toggleRowDetails(tr, row) {
-    const allRows = document.querySelectorAll('#nounsTable tbody tr');
+	function toggleRowDetails(tr, row) {
+		const allRows = document.querySelectorAll('#nounsTable tbody tr');
 
-    if (expandedRow === tr) {
-        expandedRow.classList.remove('selected-row');
+		if (expandedRow === tr) {
+			expandedRow.classList.remove('selected-row');
 
-        const nextRow = expandedRow.nextElementSibling;
-        if (nextRow && nextRow.classList.contains('details-row')) {
-            nextRow.remove();
-        }
-        expandedRow = null;
-        allRows.forEach(rowElement => rowElement.style.display = '');
-    } else {
-        if (expandedRow) {
-            expandedRow.classList.remove('selected-row');
-            const previousDetailRow = expandedRow.nextElementSibling;
-            if (previousDetailRow && previousDetailRow.classList.contains('details-row')) {
-                previousDetailRow.remove();
-            }
-        }
+			const nextRow = expandedRow.nextElementSibling;
+			if (nextRow && nextRow.classList.contains('details-row')) {
+				nextRow.remove();
+			}
+			expandedRow = null;
+			allRows.forEach(rowElement => rowElement.style.display = '');
+		} else {
+			if (expandedRow) {
+				expandedRow.classList.remove('selected-row');
+				const previousDetailRow = expandedRow.nextElementSibling;
+				if (previousDetailRow && previousDetailRow.classList.contains('details-row')) {
+					previousDetailRow.remove();
+				}
+			}
 
-        allRows.forEach(rowElement => rowElement.style.display = 'none');
-        tr.style.display = '';
+			allRows.forEach(rowElement => rowElement.style.display = 'none');
+			tr.style.display = '';
 
-        tr.classList.add('selected-row');
+			tr.classList.add('selected-row');
 
-        const detailRow = document.createElement('tr');
-        detailRow.classList.add('details-row');
+			const detailRow = document.createElement('tr');
+			detailRow.classList.add('details-row');
 
-        const detailCell = document.createElement('td');
-        detailCell.setAttribute('colspan', 2);
-        detailCell.innerHTML = `
-            <div class="details-content">
-                <table class="details-table">
-                    <thead>
+			const detailCell = document.createElement('td');
+			detailCell.setAttribute('colspan', 2);
+			detailCell.innerHTML = `
+				<div class="details-content">
+					<table class="details-table">
+						<thead>
                         <tr>
                             <th><strong>Type:</strong></th>
                             <th><strong>Root:</strong></th>
                             <th><strong>Requires:</strong></th>
                         </tr>
-                    </thead>
-                    <tbody>
+						</thead>
+						<tbody>
                         <tr style="background-color: white !important">
                             <td>${row.type}</td>
                             <td>${row.root}</td>
                             <td>${row.requires}</td>
                         </tr>
                     </tbody>
-                </table>
-            </div>
-        `;
+					</table>
+				</div>
+			`;
 
-        detailRow.appendChild(detailCell);
-        tr.insertAdjacentElement('afterend', detailRow);
+			detailRow.appendChild(detailCell);
+			tr.insertAdjacentElement('afterend', detailRow);
 
-        expandedRow = tr;
-    }
-}
-
-function changePage(direction) {
-    if (direction === 'prev' && currentPage > 1) {
-        currentPage--;
-    } else if (direction === 'next' && currentPage * rowsPerPage < filteredRows.length) {
-        currentPage++;
-    }
-    displayRows();
-}
-
-function updatePagination() {
-    const totalPages = Math.ceil(filteredRows.length / rowsPerPage);
-    document.getElementById('prevBtn').disabled = currentPage === 1;
-    document.getElementById('nextBtn').disabled = currentPage === totalPages || totalPages === 0;
-
-    document.getElementById('pageInfo').textContent = `Page ${currentPage} out of ${totalPages}`;
-}
-
-function filterRows() {
-    const searchText = document.getElementById('searchInput').value.toLowerCase();
-	
-	let captionText = searchText ? `Results for: "${searchText}"` : 'All Nouns';
-	document.getElementById('tableCaption').innerHTML = `<strong>Showing:</strong> ${captionText}`;
-	
-    filteredRows = rows.filter(row => {
-        return Object.values(row).some(val => val.toLowerCase().includes(searchText));
-    });
-    currentPage = 1;
-    displayRows();
-}
-
-function applyFilter(event) {
-    const filter = event.target.dataset.filter;
-	let captionText = 'All Nouns';
-    if (filter !== 'all') {
-		captionText = event.target.textContent;
+			expandedRow = tr;
+		}
 	}
-	
-	document.getElementById('tableCaption').innerHTML = `<strong>Showing:</strong> ${captionText}`;
-	
-	if (filter === 'all') {
-        filteredRows = [...rows];
-    } else {
-        filteredRows = rows.filter(row => row.category === filter);
-    }
-	
-    document.querySelectorAll('.filter-btn').forEach(button => button.classList.remove('active'));
-    event.target.classList.add('active');
-	
-    currentPage = 1;
-    displayRows();
-}
 
-displayRows();
+	function changePage(direction) {
+		if (direction === 'prev' && currentPage > 1) {
+			currentPage--;
+		} else if (direction === 'next' && currentPage * rowsPerPage < filteredRows.length) {
+			currentPage++;
+		}
+		displayRows();
+	}
 
-        document.querySelectorAll('.dropdown').forEach(function(dropdown) {
-            const dropbtn = dropdown.querySelector('.dropbtn');
-            dropbtn.addEventListener('click', function() {
-                dropdown.classList.toggle('active');
-            });
-        });
+	function updatePagination() {
+		const totalPages = Math.ceil(filteredRows.length / rowsPerPage);
+		document.getElementById('prevBtn').disabled = currentPage === 1;
+		document.getElementById('nextBtn').disabled = currentPage === totalPages || totalPages === 0;
 
-        const isTouchDevice = () => {
-            return ('ontouchstart' in window || navigator.maxTouchPoints > 0);
-        };
+		document.getElementById('pageInfo').textContent = `Page ${currentPage} out of ${totalPages}`;
+	}
 
-        if (!isTouchDevice()) {
-            document.querySelectorAll('.dropdown').forEach(function(dropdown) {
-                dropdown.addEventListener('mouseenter', function() {
-                    dropdown.classList.add('active');
-                });
-                dropdown.addEventListener('mouseleave', function() {
-                    dropdown.classList.remove('active');
-                });
-            });
-        }
-</script>
+	function filterRows() {
+		const searchText = document.getElementById('searchInput').value.toLowerCase();
+	
+		let captionText = searchText ? `Results for: "${searchText}"` : 'All Nouns';
+		document.getElementById('tableCaption').innerHTML = `<strong>Showing:</strong> ${captionText}`;
+	
+		filteredRows = rows.filter(row => {
+			return Object.values(row).some(val => val.toLowerCase().includes(searchText));
+		});
+		currentPage = 1;
+		displayRows();
+	}
+
+	function applyFilter(event) {
+		const filter = event.target.dataset.filter;
+		let captionText = 'All Nouns';
+		if (filter !== 'all') {
+			captionText = event.target.textContent;
+		}
+	
+		document.getElementById('tableCaption').innerHTML = `<strong>Showing:</strong> ${captionText}`;
+	
+		if (filter === 'all') {
+			filteredRows = [...rows];
+		} else {
+			filteredRows = rows.filter(row => row.category === filter);
+		}
+	
+		document.querySelectorAll('.filter-btn').forEach(button => button.classList.remove('active'));
+		event.target.classList.add('active');
+	
+		currentPage = 1;
+		displayRows();
+	}
+
+	displayRows();
+
+			document.querySelectorAll('.dropdown').forEach(function(dropdown) {
+				const dropbtn = dropdown.querySelector('.dropbtn');
+				dropbtn.addEventListener('click', function() {
+					dropdown.classList.toggle('active');
+				});
+			});		
+	</script>
 </body>
 </html>

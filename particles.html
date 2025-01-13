@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" href="favicon.ico" type="image/x-icon">
     <title>Oneida Language Nouns</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -268,11 +267,11 @@
             </tbody>
         </table>
         <div class="no-results">No results found.</div>
-    </div>
+		</div>
 	</div>
-<script>
-const rows = [
-  { particle: 'kʌ', meanings: 'yes? / no?', category: 'question' },
+	<script>
+	const rows = [
+	{particle: 'kʌ', meanings: 'yes? / no?', category: 'question' },
 	{ particle: 'náhteˀ', meanings: 'what?', category: 'question' },
 	{ particle: 'náhoht<span class="underline">e</span>', meanings: 'what?', category: 'question' },
 	{ particle: 'úhka náhteˀ', meanings: 'who?', category: 'question' },
@@ -363,101 +362,86 @@ const rows = [
 	{ particle: 'ni⋅yót', meanings: 'how it is / look at that!', category: 'conversational' },
 	{ particle: 'otsé', meanings: 'wow!', category: 'conversational' },
 	{ particle: 'tho ni⋅k<span class="underline">ú</span>', meanings: "that's enough", category: 'conversational' },
-];
+	];
 
-document.getElementById('searchInput').addEventListener('input', filterRows);
-document.querySelectorAll('.filter-btn').forEach(button => button.addEventListener('click', applyFilter));
+	document.getElementById('searchInput').addEventListener('input', filterRows);
+	document.querySelectorAll('.filter-btn').forEach(button => button.addEventListener('click', applyFilter));
 
-let filteredRows = [...rows];
-let currentPage = 1;
-const rowsPerPage = 10;
-const tableHeader = document.getElementById('tableHeader');
+	let filteredRows = [...rows];
+	let currentPage = 1;
+	const rowsPerPage = 10;
+	const tableHeader = document.getElementById('tableHeader');
 
-function displayRows() {
-    const start = (currentPage - 1) * rowsPerPage;
-    const end = start + rowsPerPage;
-    const rowsToDisplay = filteredRows.slice(start, end);
-    const tableBody = document.querySelector('#particlesTable tbody');
-    tableBody.innerHTML = '';
+	function displayRows() {
+		const start = (currentPage - 1) * rowsPerPage;
+		const end = start + rowsPerPage;
+		const rowsToDisplay = filteredRows.slice(start, end);
+		const tableBody = document.querySelector('#particlesTable tbody');
+		tableBody.innerHTML = '';
 
-    if (rowsToDisplay.length === 0) {
-        document.querySelector('.no-results').style.display = 'block';
-        tableHeader.style.display = 'none';
-    } else {
-        document.querySelector('.no-results').style.display = 'none';
-        tableHeader.style.display = '';
-        rowsToDisplay.forEach(row => {
-            const tr = document.createElement('tr');
-            const { particle, meanings } = row;
-            const wordCell = document.createElement('td');
-            wordCell.innerHTML = particle;
-            const translationCell = document.createElement('td');
-            translationCell.textContent = meanings;
+		if (rowsToDisplay.length === 0) {
+			document.querySelector('.no-results').style.display = 'block';
+			tableHeader.style.display = 'none';
+		} else {
+			document.querySelector('.no-results').style.display = 'none';
+			tableHeader.style.display = '';
+			rowsToDisplay.forEach(row => {
+				const tr = document.createElement('tr');
+				const { particle, meanings } = row;
+				const wordCell = document.createElement('td');
+				wordCell.innerHTML = particle;
+				const translationCell = document.createElement('td');
+				translationCell.textContent = meanings;
 
-            tr.appendChild(wordCell);
-            tr.appendChild(translationCell);
-            tableBody.appendChild(tr);
-        });
-    }
+				tr.appendChild(wordCell);
+				tr.appendChild(translationCell);
+				tableBody.appendChild(tr);
+			});
+		}
 
-    updatePagination();
-}
+		updatePagination();
+	}
 
-function changePage(direction) {
-    if (direction === 'prev' && currentPage > 1) {
-        currentPage--;
-    } else if (direction === 'next' && currentPage * rowsPerPage < filteredRows.length) {
-        currentPage++;
-    }
-    displayRows();
-}
+	function changePage(direction) {
+		if (direction === 'prev' && currentPage > 1) {
+			currentPage--;
+		} else if (direction === 'next' && currentPage * rowsPerPage < filteredRows.length) {
+			currentPage++;
+		}
+		displayRows();
+	}
 
-function updatePagination() {
-    const totalPages = Math.ceil(filteredRows.length / rowsPerPage);
-    document.getElementById('prevBtn').disabled = currentPage === 1;
-    document.getElementById('nextBtn').disabled = currentPage === totalPages || totalPages === 0;
+	function updatePagination() {
+		const totalPages = Math.ceil(filteredRows.length / rowsPerPage);
+		document.getElementById('prevBtn').disabled = currentPage === 1;
+		document.getElementById('nextBtn').disabled = currentPage === totalPages || totalPages === 0;
 
-    document.getElementById('pageInfo').textContent = `Page ${currentPage} out of ${totalPages}`;
-}
+		document.getElementById('pageInfo').textContent = `Page ${currentPage} out of ${totalPages}`;
+	}
 
-function filterRows() {
-    const searchText = document.getElementById('searchInput').value.toLowerCase();
-    filteredRows = rows.filter(row => {
-        return Object.values(row).some(val => val.toLowerCase().includes(searchText));
-    });
-    currentPage = 1;
-    displayRows();
-}
+	function filterRows() {
+		const searchText = document.getElementById('searchInput').value.toLowerCase();
+		filteredRows = rows.filter(row => {
+			return Object.values(row).some(val => val.toLowerCase().includes(searchText));
+		});
+		currentPage = 1;
+		displayRows();
+	}
 
-function applyFilter(event) {
-    const filter = event.target.dataset.filter;
-    if (filter === 'all') {
-        filteredRows = [...rows];
-    } else {
-        filteredRows = rows.filter(row => row.category === filter);
-    }
-    document.querySelectorAll('.filter-btn').forEach(button => button.classList.remove('active'));
-    event.target.classList.add('active');
-    currentPage = 1;
-    displayRows();
-}
+	function applyFilter(event) {
+		const filter = event.target.dataset.filter;
+		if (filter === 'all') {
+			filteredRows = [...rows];
+		} else {
+			filteredRows = rows.filter(row => row.category === filter);
+		}
+		document.querySelectorAll('.filter-btn').forEach(button => button.classList.remove('active'));
+		event.target.classList.add('active');
+		currentPage = 1;
+		displayRows();
+	}
 
-displayRows();
-
-        const isTouchDevice = () => {
-            return ('ontouchstart' in window || navigator.maxTouchPoints > 0);
-        };
-
-        if (!isTouchDevice()) {
-            document.querySelectorAll('.dropdown').forEach(function(dropdown) {
-                dropdown.addEventListener('mouseenter', function() {
-                    dropdown.classList.add('active');
-                });
-                dropdown.addEventListener('mouseleave', function() {
-                    dropdown.classList.remove('active');
-                });
-            });
-        }
-</script>
+	displayRows();
+	</script>
 </body>
 </html>
