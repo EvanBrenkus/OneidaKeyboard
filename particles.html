@@ -249,6 +249,7 @@
 		<button class="filter-btn" data-filter="connective">Connective</button>
 		<button class="filter-btn" data-filter="relative">Relative</button>
 		<button class="filter-btn" data-filter="conversational">Conversational</button>
+		<button class="filter-btn" data-filter="negative">Negative</button>
  	</div>
 	<div class="table-container">
 		<div class="pagination">
@@ -302,15 +303,16 @@
 	{ particle: 'ákta', meanings: 'nearby', category: 'place' },
 	{ particle: 'ákte', meanings: 'somewhere else', category: 'place' },
 	{ particle: 'átste', meanings: 'outside', category: 'place' },
-	{ particle: 'é⋅nike', meanings: 'up / above', category: 'place' },
+	{ particle: 'é⋅nike', meanings: 'up / above / over', category: 'place' },
 	{ particle: 'ehtá⋅ke', meanings: 'down / below', category: 'place' },
 	{ particle: 'kʌ́⋅tho', meanings: 'here', category: 'place' },
 	{ particle: 'kʌh nu', meanings: 'here', category: 'place' },
 	{ particle: 'kʌh nukwá', meanings: 'this way', category: 'place' },
 	{ particle: 'ohná⋅kʌ', meanings: 'back / behind', category: 'place' },
-	{ particle: 'ohʌ⋅tú', meanings: 'ahead / in front', category: 'place' },
-	{ particle: 'ná⋅ku', meanings: 'underneath', category: 'place' },
+	{ particle: 'ohʌ⋅tú', meanings: 'ahead / in front / before', category: 'place' },
+	{ particle: 'ná⋅ku', meanings: 'underneath / under', category: 'place' },
 	{ particle: 'tho nukwá', meanings: 'there', category: 'place' },
+	{ particle: 'nukwá', meanings: 'toward', category: 'place' },
 	{ particle: 'aˀe nukwá́', meanings: 'over there / away', category: 'place' },
 	{ particle: 'isi nukwá', meanings: 'over there / far away', category: 'place' },
 	
@@ -330,6 +332,7 @@
 	{ particle: 'to⋅káh', meanings: 'I do not know', category: 'agreement' },
 	{ particle: 'áhsu', meanings: 'not yet', category: 'agreement' },
 	
+	{ particle: 'tákʌ', meanings: 'do not!', category: 'command' },
 	{ particle: 'ka⋅tsh<span class="underline">í</span>', meanings: 'come here!', category: 'command' },
 	{ particle: 'tehsashlí<span class="underline">hʌ</span>', meanings: 'hurry!', category: 'command' },
 	{ particle: 'téhsek', meanings: 'pick it up!', category: 'command' },
@@ -396,6 +399,9 @@
 	{ particle: 'só⋅tsiˀ', meanings: 'very much / too much', category: 'extent' },
 	{ particle: 'akwe⋅kú', meanings: 'all', category: 'extent' },
 	{ particle: 'tsiléhkwah', meanings: 'almost', category: 'extent' },
+	{ particle: 'nok ʌwa⋅tú', meanings: 'nescessity / must', category: 'extent' },
+	{ particle: 'ʌwa⋅tú', meanings: 'possible / might', category: 'extent' },
+	{ particle: 'yah thau⋅tú', meanings: 'impossible / may not', category: 'extent' },
 	
 	{ particle: 'okhaleˀ', meanings: 'and', category: 'connective' },
 	{ particle: 'ok', meanings: 'and / connecting #s', category: 'connective' },
@@ -444,6 +450,17 @@
 	{ particle: 'ni⋅yót', meanings: 'how it is', category: 'conversational' },
 	{ particle: 'otsé', meanings: 'wow', category: 'conversational' },
 	{ particle: 'tho ni⋅k<span class="underline">ú</span>', meanings: "that's enough", category: 'conversational' },
+	
+	{ particle: 'tákʌ', meanings: 'do not!', category: 'negative' },
+	{ particle: 'yah teˀ', meanings: 'not (present tense)', category: 'negative' },
+	{ particle: 'yah thaˀte', meanings: 'not (dualic present tense)', category: 'negative' },
+	{ particle: 'yah thaˀ', meanings: 'have not (past tense)', category: 'negative' },
+	{ particle: 'yah thaˀt', meanings: 'have not (dualic past tense)', category: 'negative' },
+	{ particle: 'yah tʌ', meanings: 'will not (future tense)', category: 'negative' },
+	{ particle: 'yah thaˀtʌ', meanings: 'will not (dualic future tense)', category: 'negative' },
+	{ particle: 'yah tha', meanings: 'c/s/w not (indefinite tense)', category: 'negative' },
+	{ particle: 'yah thaˀta', meanings: 'c/s/w not (dualic indefinite tense)', category: 'negative' },
+	
 	];
 
 	document.getElementById('searchInput').addEventListener('input', filterRows);
