@@ -228,7 +228,7 @@
         <a href="index.html">Home</a>
         <a href="keyboard.html">Keyboard</a>
         <div class="dropdown">
-            <a class="dropbtn">Charts</a>
+            <a>Charts</a>
             <div class="dropdown-content">
                 <a href="possessives.html">Possessives</a>
                 <a href="pronouns.html">Pronouns</a>
@@ -236,7 +236,7 @@
             </div>
         </div>
         <div class="dropdown">
-            <a class="dropbtn">Dictionaries</a>
+            <a>Dictionaries</a>
             <div class="dropdown-content">
                 <a href="nouns.html">Nouns</a>
                 <a href="particles.html">Particles</a>
@@ -427,11 +427,11 @@
         const dropdowns = document.querySelectorAll('.dropdown');
 
         dropdowns.forEach(dropdown => {
-            const toggle = dropdown.querySelector('a'); // The main button (e.g., "charts" or "dictionaries")
+            const toggle = dropdown.querySelector('a');
             const dropdownContent = dropdown.querySelector('.dropdown-content');
 
             toggle.addEventListener('click', (e) => {
-                e.preventDefault(); // Prevent default navigation
+                e.preventDefault();
                 dropdownContent.classList.toggle('show');
             });
 
