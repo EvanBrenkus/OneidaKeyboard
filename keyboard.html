@@ -134,14 +134,15 @@
 			top: 100%;
 			left: 0;
         }
+		
+		.dropdown-content.show {
+			display: block;
+		}
 
         .dropdown:hover .dropdown-content {
             display: block;
         }
 		
-		.dropdown:click .dropdown-content {
-            display: block;
-        }
 		
 		.dropdown:hover > a {
 			background-color: #ddd;
@@ -421,6 +422,26 @@
 			}, 1000);
 		}, 2000);
 	});
+	
+	document.addEventListener('DOMContentLoaded', () => {
+        const dropdowns = document.querySelectorAll('.dropdown');
+
+        dropdowns.forEach(dropdown => {
+            const toggle = dropdown.querySelector('a'); // The main button (e.g., "charts" or "dictionaries")
+            const dropdownContent = dropdown.querySelector('.dropdown-content');
+
+            toggle.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent default navigation
+                dropdownContent.classList.toggle('show');
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!dropdown.contains(event.target)) {
+                    dropdownContent.classList.remove('show');
+                }
+            });
+        });
+    });
     </script>
 </body>
 </html>
