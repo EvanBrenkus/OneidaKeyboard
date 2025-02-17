@@ -18,6 +18,27 @@
             font-style: normal;
         }
 
+        .welcome {
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+            font-size: 1.2em;
+        }
+
+        .welcome h1 {
+            font-size: 2em;
+        }
+
+        .welcome p {
+            margin: 10px 0;
+        }
+
         .navbar {
             background-color: #5D3F6A;
             display: flex;
@@ -78,7 +99,22 @@
         }
 
         @media (max-width: 768px) {
+			.navbar {
+				justify-content: center;
+			}
 			
+			.navbar a {
+                font-size: 0.8em;
+                padding: 10px 20px;
+            }
+
+            .welcome {
+                font-size: 1em;
+            }
+
+            .welcome h1 {
+                font-size: 1.5em;
+            }
         }
 
         @media (max-width: 480px) {
@@ -89,6 +125,14 @@
 			.navbar a {
                 font-size: 0.8em;
                 padding: 10px 20px;
+            }
+
+            .welcome {
+                font-size: .8em;
+            }
+
+            .welcome h1 {
+                font-size: 1.2em;
             }
 		}
 		
@@ -114,6 +158,19 @@
             </div>
         </div>
     </div>
+
+    <div class="welcome">
+        <h1>Welcome to a collection of Oneida Language Resources!</h1>
+        <p>This is a simple website: It has a navigation bar, organized dropdown menus, searchable dicitionaries, and a language keyboard.</p>
+        <p>It is a work in progress, and I hope to add more resources in the future.</p>
+        <p>Of course, this is not <i> THE </i> resource - it is simply <i> A </i> resource.</p>
+        <p>Resoruces used:</p>
+        <p><a href="https://www.uwgb.edu/dictionary/" target="_blank">Oneida Dictionary</a> by Clifford Abbott</p>
+        <p><a href="https://www.uwgb.edu/UWGBCMS/media/Oneida-Language/files/teaching-grammar-revised4.pdf" target="_blank">Oneida Teaching Grammar</a> by Clifford Abbott</p>
+        <p><a href="https://search.library.wisc.edu/digital/AOneida" target="_blank">The Wisconsin Oneida Language Preservation Project</a> by WPA Federal Writers Project</p>
+        <p>Orthography and Pronoun Charts by Forrest Brooks</p>
+    </div>
+
 	<script>
 	document.addEventListener('DOMContentLoaded', () => {
         const dropdowns = document.querySelectorAll('.dropdown');
