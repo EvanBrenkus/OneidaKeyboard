@@ -20,9 +20,11 @@
 
         .welcome {
             text-align: center;
-            padding: 20px;
-            margin: 0;
-            height: 90vh;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            margin-left: 30px;
+            margin-right: 30px;
+            height: 90%;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -32,11 +34,18 @@
         }
 
         .welcome h1 {
+            margin-top: 10px;
             font-size: 2em;
         }
 
         .welcome p {
-            margin: 10px 0;
+            margin: 7px 0;
+        }
+
+        .sources {
+            margin-top: 10px;
+            font-size: 1em;
+            margin-bottom: 10px;
         }
 
         .navbar {
@@ -44,10 +53,11 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: left;
+            text-align: center;
         }
 
         .navbar a {
-            font-size: 1em;
+            font-size: 1.3em;
             color: white;
             text-decoration: none;
             padding: 15px 25px;
@@ -104,7 +114,7 @@
 			}
 			
 			.navbar a {
-                font-size: 0.8em;
+                font-size: 1.1em;
                 padding: 10px 20px;
             }
 
@@ -123,7 +133,7 @@
 			}
 			
 			.navbar a {
-                font-size: 0.8em;
+                font-size: .8em;
                 padding: 10px 20px;
             }
 
@@ -164,11 +174,14 @@
         <p>This is a simple website: It has a navigation bar, organized dropdown menus, searchable dicitionaries, and a language keyboard.</p>
         <p>It is a work in progress, and I hope to add more resources in the future.</p>
         <p>Of course, this is not <i> THE </i> resource - it is simply <i> A </i> resource.</p>
-        <p>Resoruces used:</p>
-        <p><a href="https://www.uwgb.edu/dictionary/" target="_blank">Oneida Dictionary</a> by Clifford Abbott</p>
-        <p><a href="https://www.uwgb.edu/UWGBCMS/media/Oneida-Language/files/teaching-grammar-revised4.pdf" target="_blank">Oneida Teaching Grammar</a> by Clifford Abbott</p>
-        <p><a href="https://search.library.wisc.edu/digital/AOneida" target="_blank">The Wisconsin Oneida Language Preservation Project</a> by WPA Federal Writers Project</p>
-        <p>Orthography and Pronoun Charts by Forrest Brooks</p>
+        <div class="sources">
+            <p><strong>Resoruces used:</strong></p>
+            <p><a href="https://www.uwgb.edu/dictionary/" target="_blank">Oneida Dictionary</a> by Clifford Abbott</p>
+            <p><a href="https://www.uwgb.edu/UWGBCMS/media/Oneida-Language/files/teaching-grammar-revised4.pdf" target="_blank">Oneida Teaching Grammar</a> by Clifford Abbott</p>
+            <p><a href="https://www.jstor.org/stable/10.3138/j.ctt15jjcmk" target="_blank">Oneida-English "Green" Dictionary</a> by Karin Michelson & Mercy Doxtator</p>
+            <p><a href="https://search.library.wisc.edu/digital/AOneida" target="_blank">The Wisconsin Oneida Language Preservation Project</a> by WPA Federal Writers Project</p>
+            <p>Orthography and Pronoun Charts by Forrest Brooks</p>
+        </div>
     </div>
 
 	<script>
