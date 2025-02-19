@@ -79,22 +79,22 @@
         }
 		
 		.table-container {
-            overflow-x: auto;
-            margin: 20px auto;
+            margin: 20px;
 			display: flex;
 			justify-content: center;
         }
 
         table {
+            width: 1200px;
             border-collapse: collapse;
-			font-size: .6em;
+			font-size: 1.2em;
         }
 
         th, td {
             border: 1px solid #ccc;
             padding: 3px;
             text-align: center;
-			height: 20px;
+			height: 25px;
         }
 		
 		th, .left-column {
@@ -164,6 +164,38 @@
 			display: block;
 		}
 
+        @media (max-width: 1300px) {
+
+            table {
+                width: 900px;
+            }
+			
+			table th, table td {
+                font-size: 0.8em;
+            }
+			
+			
+			table.large-caption caption {
+				font-size: 1.4em;
+			}
+        }
+
+        @media (max-width: 950px) {
+
+            table {
+                width: 750px;
+            }
+			
+			table th, table td {
+                font-size: 0.7em;
+            }
+			
+			
+			table.large-caption caption {
+				font-size: 1.3em;
+			}
+        }
+
         @media (max-width: 768px) {
 			.navbar {
 				justify-content: center;
@@ -173,14 +205,22 @@
                 font-size: 1.1em;
                 padding: 10px 20px;
             }
+
+            th, .left-column {
+                width: 70px;
+            }
+
+            table {
+                max-width: 450px;
+            }
 			
 			table th, table td {
-                font-size: 0.4em;
+                font-size: 0.6em;
             }
 			
 			
 			table.large-caption caption {
-				font-size: 1.2em;
+				font-size: 1.1em;
 			}
         }
 
@@ -194,21 +234,18 @@
                 padding: 10px 20px;
             }
 			
-			.table-container {
-				width:325px;
+			table {
+				width: 350px;
 			}
 			
 			table.large-caption caption {
-				font-size: 1.4em;
+				font-size: .9em;
 			}
 			
 			table th, table td {
-				font-size: .3em;
+				font-size: .4em;
 			}
-			
-			table th, table td {
-				width: 10px;
-			}
+		
 		}
 	</style>
 </head>
