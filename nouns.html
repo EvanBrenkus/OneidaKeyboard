@@ -2043,6 +2043,26 @@
 		displayRows();
 	}
 
+	document.addEventListener('DOMContentLoaded', () => {
+        const dropdowns = document.querySelectorAll('.dropdown');
+
+        dropdowns.forEach(dropdown => {
+            const toggle = dropdown.querySelector('a');
+            const dropdownContent = dropdown.querySelector('.dropdown-content');
+
+            toggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                dropdownContent.classList.toggle('show');
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!dropdown.contains(event.target)) {
+                    dropdownContent.classList.remove('show');
+                }
+            });
+        });
+    });
+
 	displayRows();
 
 			document.querySelectorAll('.dropdown').forEach(function(dropdown) {
@@ -2050,7 +2070,7 @@
 				dropbtn.addEventListener('click', function() {
 					dropdown.classList.toggle('active');
 				});
-			});		
+			});
 	</script>
 </body>
 </html>
