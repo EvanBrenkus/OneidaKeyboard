@@ -38,12 +38,8 @@
             border-radius: 4px;
 			text-align: center;
 			word-wrap: break-word;
-        }
-
-        #textOutput {
-            padding: 20px;
-            font-size: 1em;
-            word-wrap: break-word;
+            resize: vertical;
+            height: auto;
         }
 
         #copyButton, #clearTextBtn {
@@ -254,10 +250,11 @@
         </div>
     </div>
     <div id="container">
-        <input type="text" id="textInput" placeholder="Type here...">
-        <div id="textOutput"></div>
+        <textarea id="textInput" rows="4" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="Type here..."></textarea>
+    </div>
+    <div id="container">
         <button id="copyButton">Copy Text</button>
-        <button id="clearTextBtn">Clear Text</button>
+     <button id="clearTextBtn">Clear Text</button>
     </div>
     <div id="copyMessage">Text copied!</div>
     <div id="clearMessage">Text cleared!</div>
@@ -293,11 +290,11 @@
                     <td>ú</td>
                 </tr>
                 <tr>
-                    <td>></td>
+                    <td>&gt;</td>
                     <td>ʌ́</td>
                 </tr>
                 <tr>
-                    <td><</td>
+                    <td>&lt;</td>
                     <td>ʌ</td>
                 </tr>
                 <tr>
@@ -317,109 +314,50 @@
     </div>
 
     <script>
-    const keyMapping = {
-        'A': 'á',
-        'E': 'é',
-        'I': 'í',
-        'O': 'ó',
-        'U': 'ú',
-        '<': 'ʌ',
-        '>': 'ʌ́',
-        '?': 'ˀ',
-        '-': '⋅',
-        'b': '',
-        'c': '',
-        'd': '',
-        'f': '',
-        'g': '',
-        'j': '',
-        'm': '',
-        'p': '',
-        'q': '',
-        'r': '',
-        'v': '',
-        'x': '',
-        'z': '',
-		'B': '',
-        'C': '',
-        'D': '',
-        'F': '',
-        'G': '',
-        'J': '',
-        'M': '',
-        'P': '',
-        'Q': '',
-        'R': '',
-        'V': '',
-		'X': '',
-		'Z': '',
-		'H': 'h',
-		'K': 'k',
-		'L': 'l',
-		'N': 'n',
-		'S': 's',
-		'T': 't',
-		'W': 'w',
-		'Y': 'y',
-	};
+    const ipaMap = {
+    'A': 'á', 'E': 'é', 'I': 'í', 'O': 'ó', 'U': 'ú',
+    '<': 'ʌ', '>': 'ʌ́', '?': 'ˀ', '-': '⋅',
+    'b': '', 'c': '', 'd': '', 'f': '', 'g': '', 'j': '',
+    'm': '', 'p': '', 'q': '', 'r': '', 'v': '', 'x': '', 'z': '',
+    'B': '', 'C': '', 'D': '', 'F': '', 'G': '', 'J': '',
+    'M': '', 'P': '', 'Q': '', 'R': '', 'V': '', 'X': '', 'Z': '',
+    'H': 'h', 'K': 'k', 'L': 'l', 'N': 'n', 'S': 's', 'T': 't',
+    'W': 'w', 'Y': 'y'
+    };
 
-	function convert(text) {
-		let convertedText = '';
-		for (let char of text) {
-			if (keyMapping.hasOwnProperty(char)) {
-				convertedText += keyMapping[char];
-			} else {
-				convertedText += char;
-			}
-		}
-
-		convertedText = convertedText.replace(/\(([^)]+)\)/g, function(match, p1) {
-			return `<span style="text-decoration: underline;">${p1}</span>`;
-		});
-
-		return convertedText;
-	}
-
-	function updateTextOutput() {
-		const textInput = document.getElementById('textInput').value;
-		const textOutput = document.getElementById('textOutput');
-		textOutput.innerHTML = convert(textInput);
-	}
-
-	document.getElementById('textInput').addEventListener('input', updateTextOutput);
-
-    function copyToClipboard(text) {
-        const textarea = document.createElement('textarea');
-        textarea.value = text;
-        document.body.appendChild(textarea);
-
-        textarea.select();
-        textarea.setSelectionRange(0, 99999);
-
-        document.execCommand('copy');
-
-        document.body.removeChild(textarea);
+    function convertToIPA(text) {
+        return text.split("").map(char => ipaMap[char] || char).join("");
     }
 
-    document.getElementById('copyButton').addEventListener('click', function() {
-        const textOutput = document.getElementById('textOutput').textContent;
-        copyToClipboard(textOutput);
-			
-		const copyMessage = document.getElementById('copyMessage');
-		copyMessage.style.display = 'block';
-		copyMessage.style.opacity = '1';
-			
-		setTimeout(() => {
-			copyMessage.style.opacity = '0';
-			setTimeout(() => {
-				copyMessage.style.display = 'none';
-			}, 1000);
-		}, 2000);
+    document.getElementById("textInput").addEventListener("input", function(e) {
+        const original = e.target.value;
+        const converted = convertToIPA(original);
+        if (original !== converted) {
+         e.target.value = converted;
+         }
     });
+
+    function copyToClipboard() {
+    const input = document.getElementById('textInput');
+    input.select();
+    input.setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(input.value).then(() => {
+        const copyMessage = document.getElementById('copyMessage');
+        copyMessage.style.display = 'block';
+        copyMessage.style.opacity = '1';
+        setTimeout(() => {
+            copyMessage.style.opacity = '0';
+            setTimeout(() => {
+                copyMessage.style.display = 'none';
+            }, 1000);
+        }, 2000);
+    });
+}
+
+document.getElementById('copyButton').addEventListener('click', copyToClipboard);
 		
 	document.getElementById("clearTextBtn").addEventListener("click", function() {
 		document.getElementById("textInput").value = "";
-		document.getElementById("textOutput").innerHTML = "";
 			
 		const clearMessage = document.getElementById('clearMessage');
 		clearMessage.style.display = 'block';
