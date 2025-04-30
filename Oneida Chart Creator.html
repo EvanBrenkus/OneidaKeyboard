@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Oneida Chart Creator</title>
+  <link rel="icon" type="image/x-icon" href="C:/Users/evanb/Downloads/favicon_io/favicon.ico">
+  <style>
+    body {
+      font-family: "Roboto", sans-serif;
+      font-weight: 400;
+      padding: 20px;
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 10px;
+    }
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    input {
+      padding: 10px;
+      width: 300px;
+      font-size: 1em;
+      text-align: center;
+    }
+	select {
+      padding: 10px;
+      width: 324px;
+      font-size: 1em;
+      text-align: center;
+    }
+    .prefix  { color: #1155cc; font-weight: bold; }
+    .pronoun { color: red; font-weight: bold; }
+    .root    { color: black; }
+    .suffix  { color: #6aa84f; font-weight: bold; text-decoration: underline;}
+	.meaning { color: red; }
+    button {
+      padding: 10px 20px;
+      width: 300px;
+      background-color: #5D3F6A;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      margin: 10px 0;
+    }
+    button:hover {
+      background-color: #ddd;
+      color: black;
+    }
+	table.compact {
+	  border-collapse: collapse;
+	  margin: auto;
+	  font-size: 9px;
+	  width: 600px;
+	  font-family: "Times New Roman", serif;
+	  border: 1px solid black;
+	}
+	table.compact td {
+	  text-align: left;
+	  width: 200px;
+	  border: 1px solid black;
+	  padding: 2px;
+	  vertical-align: middle;
+	}
+	table.compact th {
+	  text-align: center;
+	  font-weight: bold;
+	  background-color: #efefef;
+	  border: 1px solid black;
+	  padding: 2px;
+	  vertical-align: middle;
+	}
+  </style>
+</head>
+<body>
+
+  <h2>Oneida Chart Creator</h2>
+  <p>All four tenses will be generated below.</p>
+
+  <div class="input-group">
+	<select id="pronounInput">
+		<option value="c-stem"> c-stem </option>
+		<option value="a-stem"> a-stem </option>
+		<option value="e-stem"> e-stem </option>
+		<option value="i-stem"> i-stem </option>
+		<option value="o-stem"> o-stem </option>
+		<option value="u-stem"> u-stem </option>
+		<option value="ʌ-stem"> ʌ-stem </option>
+	</select>
+    <input type="text" id="rootInput" placeholder="Enter root">
+    <select id="suffixPresent">
+		<option value=" "> Suffix: Present </option>
+		<option value="heˀ"> heˀ </option>
+		<option value="haˀ"> haˀ </option>
+		<option value="as"> as </option>
+		<option value="s"> s </option>
+		<option value="ˀseˀ"> ˀseˀ </option>
+		<option value="hseˀ"> hseˀ </option>
+		<option value="u"> u </option>
+		<option value="ʌ"> ʌ </option>
+		<option value="ˀu"> ˀu </option>
+		<option value="nu"> nu </option>
+	</select>
+	<select id="suffixPast">
+		<option value=" "> Suffix: Past </option>
+		<option value="eˀ"> eˀ </option>
+		<option value="ʌˀ"> ʌˀ </option>
+		<option value="neˀ"> neˀ </option>
+		<option value="ˀ"> ˀ </option>
+		<option value="⋅"> ⋅ </option>
+		<option value="u"> u </option>
+		<option value="ʌ"> ʌ </option>
+		<option value="ˀu"> ˀu </option>
+		<option value="nu"> nu </option>
+	</select>
+	<select id="suffixFuture">
+		<option value=" "> Suffix: Future </option>
+		<option value="eˀ"> eˀ </option>
+		<option value="ʌˀ"> ʌˀ </option>
+		<option value="neˀ"> neˀ </option>
+		<option value="ˀ"> ˀ </option>
+		<option value="⋅"> ⋅ </option>
+		<option value="u"> u </option>
+		<option value="ʌ"> ʌ </option>
+		<option value="ˀu"> ˀu </option>
+		<option value="nu"> nu </option>
+	</select>
+	<select id="suffixIndefinite">
+		<option value=" "> Suffix: Indefinite </option>
+		<option value="eˀ"> eˀ </option>
+		<option value="ʌˀ"> ʌˀ </option>
+		<option value="neˀ"> neˀ </option>
+		<option value="ˀ"> ˀ </option>
+		<option value="⋅"> ⋅ </option>
+		<option value="u"> u </option>
+		<option value="ʌ"> ʌ </option>
+		<option value="ˀu"> ˀu </option>
+		<option value="nu"> nu </option>
+	</select>
+	<button onclick="resetInputs()">Reset Inputs</button>
+	<button onclick="copyChart()">Copy Table</button>
+	<div id="copyMsg" style="display: none;">Table copied!</div>
+  </div>
+
+  <div id="chartContainer"></div>
+  <div id="hiddenClipboard" contenteditable="true" style="position:absolute; left:-9999px;"></div>
+
+  <script>
+const pronounInput = {
+  "c-stem": [
+    [{prefix: "k", meaning: "I"}, {prefix: "tni", meaning: "Us two"}, {prefix: "twa", meaning: "We all"}],
+    [{prefix: "s", meaning: "You"}, {prefix: "sni", meaning: "You two"}, {prefix: "swa", meaning: "You all"}],
+    [{prefix: "la", meaning: "He"}, {prefix: "ni", meaning: "Those two people"}, {prefix: "lati", meaning: "Those people"}],
+    [{prefix: "ye", meaning: "She"}, {prefix: "kni", meaning: "Those two females"}, {prefix: "kuti", meaning: "Those females"}],
+    [{prefix: "ka", meaning: "(Elder) She / It"}, {prefix: "yakni", meaning: "Us two, not you,"}, {prefix: "yakwa", meaning: "We all, not you,"}]
+  ],
+  
+  "a-stem": [
+    [{prefix: "ka", meaning: "I"}, {prefix: "tya", meaning: "Us two"}, {prefix: "twa", meaning: "We all"}],
+    [{prefix: "sa", meaning: "You"}, {prefix: "tsya", meaning: "You two"}, {prefix: "swa", meaning: "You all"}],
+    [{prefix: "la", meaning: "He"}, {prefix: "ya", meaning: "Those two people"}, {prefix: "lu", meaning: "Those people"}],
+    [{prefix: "yu", meaning: "She"}, {prefix: "kya", meaning: "Those two females"}, {prefix: "ku", meaning: "Those females"}],
+    [{prefix: "wa", meaning: "(Elder) She / It"}, {prefix: "yakya", meaning: "Us two, not you,"}, {prefix: "yakwa", meaning: "We all, not you,"}]
+  ],
+  
+  "e-stem": [
+    [{prefix: "ke", meaning: "I"}, {prefix: "tne", meaning: "Us two"}, {prefix: "twe", meaning: "We all"}],
+    [{prefix: "se", meaning: "You"}, {prefix: "sne", meaning: "You two"}, {prefix: "swe", meaning: "You all"}],
+    [{prefix: "le", meaning: "He"}, {prefix: "ne", meaning: "Those two people"}, {prefix: "lʌne", meaning: "Those people"}],
+    [{prefix: "yake", meaning: "She"}, {prefix: "kne", meaning: "Those two females"}, {prefix: "kune", meaning: "Those females"}],
+    [{prefix: "we", meaning: "(Elder) She / It"}, {prefix: "yakne", meaning: "Us two, not you,"}, {prefix: "yakwe", meaning: "We all, not you,"}]
+  ],
+  
+  "i-stem": [
+    [{prefix: "ki", meaning: "I"}, {prefix: "tni", meaning: "Us two"}, {prefix: "twʌ", meaning: "We all"}],
+    [{prefix: "si", meaning: "You"}, {prefix: "sni", meaning: "You two"}, {prefix: "swʌ", meaning: "You all"}],
+    [{prefix: "lʌ", meaning: "He"}, {prefix: "ni", meaning: "Those two people"}, {prefix: "lati", meaning: "Those people"}],
+    [{prefix: "ye", meaning: "She"}, {prefix: "kni", meaning: "Those two females"}, {prefix: "kuti", meaning: "Those females"}],
+    [{prefix: "kʌ", meaning: "(Elder) She / It"}, {prefix: "yakni", meaning: "Us two, not you,"}, {prefix: "yakwʌ", meaning: "We all, not you,"}]
+  ],
+  
+  "o-stem": [
+    [{prefix: "ko", meaning: "I"}, {prefix: "tno", meaning: "Us two"}, {prefix: "tyo", meaning: "We all"}],
+    [{prefix: "so", meaning: "You"}, {prefix: "sno", meaning: "You two"}, {prefix: "tsyo", meaning: "You all"}],
+    [{prefix: "lo", meaning: "He"}, {prefix: "no", meaning: "Those two people"}, {prefix: "lʌno", meaning: "Those people"}],
+    [{prefix: "yako", meaning: "She"}, {prefix: "kno", meaning: "Those two females"}, {prefix: "kuno", meaning: "Those females"}],
+    [{prefix: "yo", meaning: "(Elder) She / It"}, {prefix: "yakno", meaning: "Us two, not you,"}, {prefix: "yakyo", meaning: "We all, not you,"}]
+  ],
+  
+  "u-stem": [
+    [{prefix: "ku", meaning: "I"}, {prefix: "tnu", meaning: "Us two"}, {prefix: "tyu", meaning: "We all"}],
+    [{prefix: "su", meaning: "You"}, {prefix: "snu", meaning: "You two"}, {prefix: "tsyu", meaning: "You all"}],
+    [{prefix: "lu", meaning: "He"}, {prefix: "nu", meaning: "Those two people"}, {prefix: "lʌnu", meaning: "Those people"}],
+    [{prefix: "yaku", meaning: "She"}, {prefix: "knu", meaning: "Those two females"}, {prefix: "kunu", meaning: "Those females"}],
+    [{prefix: "yu", meaning: "(Elder) She / It"}, {prefix: "yaknu", meaning: "Us two, not you,"}, {prefix: "yakyu", meaning: "We all, not you,"}]
+  ],
+  
+  "ʌ-stem": [
+    [{prefix: "kʌ", meaning: "I"}, {prefix: "tnʌ", meaning: "Us two"}, {prefix: "twʌ", meaning: "We all"}],
+    [{prefix: "sʌ", meaning: "You"}, {prefix: "snʌ", meaning: "You two"}, {prefix: "swʌ", meaning: "You all"}],
+    [{prefix: "lʌ", meaning: "He"}, {prefix: "ʌ", meaning: "Those two people"}, {prefix: "lʌnʌ", meaning: "Those people"}],
+    [{prefix: "yakʌ", meaning: "She"}, {prefix: "knʌ", meaning: "Those two females"}, {prefix: "kunʌ", meaning: "Those females"}],
+    [{prefix: "wʌ", meaning: "(Elder) She / It"}, {prefix: "yaknʌ", meaning: "Us two, not you,"}, {prefix: "yakwʌ", meaning: "We all, not you,"}]
+  ]
+};
+
+const ipaMap = {
+  'A': 'á', 'E': 'é', 'I': 'í', 'O': 'ó', 'U': 'ú',
+  '<': 'ʌ', '>': 'ʌ́', '?': 'ˀ', '-': '⋅',
+  'b': '', 'c': '', 'd': '', 'f': '', 'g': '', 'j': '',
+  'm': '', 'p': '', 'q': '', 'r': '', 'v': '', 'x': '', 'z': '',
+  'B': '', 'C': '', 'D': '', 'F': '', 'G': '', 'J': '',
+  'M': '', 'P': '', 'Q': '', 'R': '', 'V': '', 'X': '', 'Z': '',
+  'H': 'h', 'K': 'k', 'L': 'l', 'N': 'n', 'S': 's', 'T': 't',
+  'W': 'w', 'Y': 'y'
+};
+
+function convertToIPA(text) {
+  return text.split("").map(char => ipaMap[char] || char).join("");
+}
+
+document.getElementById("rootInput").addEventListener("input", function(e) {
+  const original = e.target.value;
+  const converted = convertToIPA(original);
+  if (original !== converted) {
+    e.target.value = converted;
+  }
+});
+
+function generateChart() {
+  const rootInput = document.getElementById('rootInput').value.trim();
+  const stem = document.getElementById('pronounInput').value;
+
+  const suffixPresent = document.getElementById('suffixPresent').value.trim();
+  const suffixPast = document.getElementById('suffixPast').value.trim();
+  const suffixFuture = document.getElementById('suffixFuture').value.trim();
+  const suffixIndefinite = document.getElementById('suffixIndefinite').value.trim();
+
+  const root = convertToIPA(rootInput);
+  const presentSuffix = convertToIPA(suffixPresent);
+  const pastSuffix = convertToIPA(suffixPast);
+  const futureSuffix = convertToIPA(suffixFuture);
+  const indefiniteSuffix = convertToIPA(suffixIndefinite);
+
+  const pronouns = pronounInput[stem];
+
+  const tenses = [
+    { name: "Present", prefix: "", suffix: presentSuffix },
+    { name: "Past", prefix: "waˀ", suffix: pastSuffix },
+    { name: "Future", prefix: "ʌ", suffix: futureSuffix },
+    { name: "Indefinite", prefix: "a", suffix: indefiniteSuffix }
+  ];
+
+  let tableHTML = `<table class="compact">`;
+
+  tableHTML += `<tr><th colspan="3">-${rootInput}-<br><em></em></br></th></tr></span>`;
+
+  tenses.forEach(({ name, prefix, suffix }) => {
+    tableHTML += `<tr><th colspan="3">${name}</th></tr>`;
+
+    for (let row = 0; row < 5; row++) {
+      tableHTML += `<tr>`;
+      for (let col = 0; col < 3; col++) {
+        const idx = row;
+        const pronounData = pronouns[row][col];
+
+        let oneidaWord = `<span class="prefix">${prefix}</span><span class="pronoun">${pronounData.prefix}</span><span class="root">${root}</span><span class="suffix">${suffix}</span>`;
+
+        let meaning = `<span style="color:red; font-style: italic;">${pronounData.meaning}</span>`;
+
+        tableHTML += `<td>${oneidaWord}<br>${meaning}</td>`;
+      }
+      tableHTML += `</tr>`;
+    }
+  });
+
+  tableHTML += `</table>`;
+  document.getElementById('chartContainer').innerHTML = tableHTML;
+}
+
+function resetInputs() {
+  document.getElementById("rootInput").value = "";
+  document.getElementById("pronounInput").selectedIndex = 0;
+  document.getElementById("suffixPresent").selectedIndex = 0;
+  document.getElementById("suffixPast").selectedIndex = 0;
+  document.getElementById("suffixFuture").selectedIndex = 0;
+  document.getElementById("suffixIndefinite").selectedIndex = 0;
+  document.getElementById("chartContainer").innerHTML = "";
+  generateChart();
+}
+
+function copyChart() {
+  const chartHTML = document.getElementById('chartContainer').innerHTML;
+  const clipboardDiv = document.getElementById('hiddenClipboard');
+  clipboardDiv.innerHTML = chartHTML;
+
+  const range = document.createRange();
+  range.selectNodeContents(clipboardDiv);
+  const selection = window.getSelection();
+  selection.removeAllRanges();
+  selection.addRange(range);
+
+  try {
+    document.execCommand('copy');
+    selection.removeAllRanges();
+    document.getElementById('copyMsg').style.display = 'block';
+    setTimeout(() => {
+      document.getElementById('copyMsg').style.display = 'none';
+    }, 1500);
+  } catch (err) {
+    alert('Failed to copy chart.');
+  }
+}
+document.getElementById("rootInput").addEventListener("input", generateChart);
+document.getElementById("pronounInput").addEventListener("change", generateChart);
+document.getElementById("suffixPresent").addEventListener("change", generateChart);
+document.getElementById("suffixPast").addEventListener("change", generateChart);
+document.getElementById("suffixFuture").addEventListener("change", generateChart);
+document.getElementById("suffixIndefinite").addEventListener("change", generateChart);
+generateChart();
+</script>
+</body>
+</html>
