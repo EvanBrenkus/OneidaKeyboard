@@ -36,7 +36,7 @@
     .prefix  { color: #1155cc; font-weight: bold; }
     .pronoun { color: red; font-weight: bold; }
     .root    { color: black; }
-    .suffix  { color: #6aa84f; font-weight: bold; text-decoration: underline;}
+    .suffix  { color: #6aa84f; font-weight: bold;}
 	.meaning { color: red; }
     button {
       padding: 10px 20px;
@@ -270,11 +270,44 @@ function generateChart() {
         const idx = row;
         const pronounData = pronouns[row][col];
 
-        let oneidaWord = `<span class="prefix">${prefix}</span><span class="pronoun">${pronounData.prefix}</span><span class="root">${root}</span><span class="suffix">${suffix}</span>`;
+        let pronoun = pronounData.prefix;
+        let adjustedPrefix = prefix;
 
-        let meaning = `<span style="color:red; font-style: italic;">${pronounData.meaning}</span>`;
+// Special Case: waˀ + wa = u
+if (prefix === "waˀ" && pronoun.startsWith("wa")) {
+  adjustedPrefix = "";
+  pronoun = "u";
+} else {
+  // Rule 1: l → h
+  if (prefix && pronoun.startsWith("l")) {
+    pronoun = "h" + pronoun.slice(1);
+  }
 
-        tableHTML += `<td>${oneidaWord}<br>${meaning}</td>`;
+  // Rule 2: Remove ˀ if followed by s or h
+  if ((pronoun.startsWith("s") || pronoun.startsWith("h")) && prefix.endsWith("ˀ")) {
+    adjustedPrefix = prefix.slice(0, -1);
+  }
+
+  // Rule 3: Remove y if prefix ends in ˀ
+  if (pronoun.startsWith("y") && prefix.endsWith("ˀ")) {
+    pronoun = pronoun.slice(1);
+  }
+
+}
+
+  let oneidaWord = `
+    <span class="prefix">${adjustedPrefix}</span><span class="pronoun">${pronoun}</span><span class="root">${root}</span><span class="suffix">${suffix}</span>`;
+
+        let meaning = `<span style="color:red; font-style:italic;">${pronounData.meaning}</span>`;
+
+        if (name === "Future") {
+          meaning += `<span style="color: #1155cc; font-style:italic;"> will </span>`;
+        }
+        if (name === "Indefinite") {
+          meaning += `<span style="color: #1155cc; font-style:italic;"> c/s/w </span>`;
+        }
+
+        tableHTML += `<td>${oneidaWord}<br>${meaning} </td>`;
       }
       tableHTML += `</tr>`;
     }
