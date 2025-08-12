@@ -328,32 +328,34 @@
     '>': 'ʌ́', 
     '?': 'ˀ', 
     '-': '⋅', 
-    'b': ' ', 
-    'c': ' ', 
-    'd': ' ', 
-    'f': ' ', 
-    'g': ' ', 
-    'j': ' ',
-    'm': ' ', 
-    'p': ' ', 
-    'q': ' ', 
-    'r': ' ', 
-    'v': ' ', 
-    'x': ' ', 
-    'z': ' ',
-    'B': ' ', 
-    'C': ' ', 
-    'D': ' ', 
-    'F': ' ', 
-    'G': ' ', 
-    'J': ' ',
-    'M': ' ', 
-    'P': ' ', 
-    'Q': ' ', 
-    'R': ' ', 
-    'V': ' ', 
-    'X': ' ', 
-    'Z': ' ',
+    'b': '', 
+    'c': '', 
+    'd': '', 
+    'f': '', 
+    'g': '', 
+    'j': '',
+    'm': '', 
+    'p': '', 
+    'q': '', 
+    'r': '', 
+    'v': '', 
+    'x': '', 
+    'z': '',
+    'B': '', 
+    'C': '', 
+    'D': '', 
+    'F': '', 
+    'G': '', 
+    'J': '',
+    'M': '', 
+    'P': '', 
+    'Q': '', 
+    'R': '', 
+    'V': '', 
+    'X': '', 
+    'Z': '',
+    '(': '',
+    ')': '',
     'H': 'h', 
     'K': 'k', 
     'L': 'l', 
@@ -371,16 +373,35 @@
     '7': 'Ʌ'
     };
 
+    let isUnderlining = false;
+    
     function convertToIPA(text) {
-        return text.split("").map(char => ipaMap[char] || char).join("");
+        let result = '';
+        for (let i = 0; i < text.length; i++) {
+            const char = text[i];
+            if (char === '(') {
+                isUnderlining = true;
+                continue;
+            } else if (char === ')') {
+                isUnderlining = false;
+                continue;
+            }
+            
+            let convertedChar = ipaMap[char] || char;
+            if (isUnderlining && convertedChar !== ' ') {
+                convertedChar += '\u2381'; // Add combining underline
+            }
+            result += convertedChar;
+        }
+        return result;
     }
 
     document.getElementById("textInput").addEventListener("input", function(e) {
         const original = e.target.value;
         const converted = convertToIPA(original);
         if (original !== converted) {
-         e.target.value = converted;
-         }
+            e.target.value = converted;
+        }
     });
 
     function copyToClipboard() {
