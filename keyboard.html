@@ -361,7 +361,7 @@
             
             let convertedChar = ipaMap[char] || char;
             if (isUnderlining && convertedChar !== ' ') {
-                convertedChar += '\uFF3F'; // Add underline
+                convertedChar += '\u0332'; // Add combining underline
             }
             result += convertedChar;
         }
@@ -369,11 +369,8 @@
     }
 
     const allowedChars = new Set([
-        'A', 'E', 'I', 'O', 'U',
-        'H', 'K', 'L', 'N', 'S', 'T', 'W', 'Y',
-        '<', '>', '?', '-', '(', ')',
-        '1', '2', '3', '4', '5', '6', '7',
-        ' ', '\n'  // Allow space and newline
+        'A', 'á', 'E', 'é', 'I', 'í', 'O', 'ó', 'U', 'ú', 'H', 'K', 'L', 'N', 'S', 'T', 'W', 'Y', '<', 'ʌ', '>', 'ʌ́', '?', 'ˀ', '-', '⋅', '(', ')',
+        '1', 'Á', '2', 'É', '3', 'Í', '4','Ó', '5', 'Ú', '6', 'Ʌ́', '7', 'Ʌ', ' ', '\n' // Allow space and newline
     ]);
 
     document.getElementById("textInput").addEventListener("input", function(e) {
