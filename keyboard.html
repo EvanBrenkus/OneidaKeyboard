@@ -344,23 +344,23 @@
     '6': 'Ʌ́',
     '7': 'Ʌ'
     };
-
-    let isUnderlining = false;
     
     function convertToIPA(text) {
         let result = '';
+        let currentlyUnderlining = false;
+        
         for (let i = 0; i < text.length; i++) {
             const char = text[i];
             if (char === '(') {
-                isUnderlining = true;
+                currentlyUnderlining = true;
                 continue;
             } else if (char === ')') {
-                isUnderlining = false;
+                currentlyUnderlining = false;
                 continue;
             }
             
             let convertedChar = ipaMap[char] || char;
-            if (isUnderlining && convertedChar !== ' ') {
+            if (currentlyUnderlining && convertedChar !== ' ') {
                 convertedChar += '\u0332'; // Add combining underline
             }
             result += convertedChar;
