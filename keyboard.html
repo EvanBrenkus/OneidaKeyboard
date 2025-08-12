@@ -319,43 +319,15 @@
 
     <script>
     const ipaMap = {
-    'A': 'á', 
-    'E': 'é', 
-    'I': 'í', 
-    'O': 'ó', 
-    'U': 'ú',
+    'A': 'á', 
+    'E': 'é', 
+    'I': 'í', 
+    'O': 'ó', 
+    'U': 'ú',
     '<': 'ʌ', 
     '>': 'ʌ́', 
     '?': 'ˀ', 
-    '-': '⋅', 
-    'b': '', 
-    'c': '', 
-    'd': '', 
-    'f': '', 
-    'g': '', 
-    'j': '',
-    'm': '', 
-    'p': '', 
-    'q': '', 
-    'r': '', 
-    'v': '', 
-    'x': '', 
-    'z': '',
-    'B': '', 
-    'C': '', 
-    'D': '', 
-    'F': '', 
-    'G': '', 
-    'J': '',
-    'M': '', 
-    'P': '', 
-    'Q': '', 
-    'R': '', 
-    'V': '', 
-    'X': '', 
-    'Z': '',
-    '(': '',
-    ')': '',
+    '-': '⋅',
     'H': 'h', 
     'K': 'k', 
     'L': 'l', 
@@ -389,19 +361,30 @@
             
             let convertedChar = ipaMap[char] || char;
             if (isUnderlining && convertedChar !== ' ') {
-                convertedChar += '\u2381'; // Add combining underline
+                convertedChar += '\uFF3F'; // Add underline
             }
             result += convertedChar;
         }
         return result;
     }
 
+    const allowedChars = new Set([
+        'A', 'E', 'I', 'O', 'U',
+        'H', 'K', 'L', 'N', 'S', 'T', 'W', 'Y',
+        '<', '>', '?', '-', '(', ')',
+        '1', '2', '3', '4', '5', '6', '7',
+        ' ', '\n'  // Allow space and newline
+    ]);
+
     document.getElementById("textInput").addEventListener("input", function(e) {
-        const original = e.target.value;
-        const converted = convertToIPA(original);
-        if (original !== converted) {
-            e.target.value = converted;
-        }
+        const value = e.target.value;
+        // Filter out unwanted characters and then convert allowed ones
+        const filtered = value.split('').filter(char => 
+            allowedChars.has(char.toUpperCase()) || allowedChars.has(char)
+        ).join('');
+        
+        const converted = convertToIPA(filtered);
+        e.target.value = converted;
     });
 
     function copyToClipboard() {
