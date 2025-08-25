@@ -346,24 +346,24 @@
     };
     
     function convertToIPA(text) {
-        let result = '';
-        let currentlyUnderlining = false;
-        
-        for (let i = 0; i < text.length; i++) {
-            const char = text[i];
-            if (char === '_') {
-                currentlyUnderlining = true;
-                continue;
+    let result = '';
+    for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        if (char === '_') {
+            // If there's a previous character, add underline to it
+            if (result.length > 0) {
+                // Remove last char, add underline to it, then put back
+                let lastChar = result[result.length - 1];
+                result = result.slice(0, -1) + lastChar + '\u0332';
             }
-            
-            let convertedChar = ipaMap[char] || char;
-            if (currentlyUnderlining && convertedChar !== ' ') {
-                convertedChar += '\u0332'; // Add combining underline
-            }
-            result += convertedChar;
+            // Do not add anything for the underscore itself
+            continue;
         }
-        return result;
+        let convertedChar = ipaMap[char] || char;
+        result += convertedChar;
     }
+    return result;
+}
 
     const allowedChars = new Set([
         'A', 'á', 'E', 'é', 'I', 'í', 'O', 'ó', 'U', 'ú', 'H', 'K', 'L', 'N', 'S', 'T', 'W', 'Y', '<', 'ʌ', '>', 'ʌ́', '?', 'ˀ', '-', '⋅',
