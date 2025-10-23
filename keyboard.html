@@ -345,18 +345,25 @@
     '7': 'Ʌ'
     };
     
-    function convertToIPA(text) {
+function convertToIPA(text) {
     let result = '';
     for (let i = 0; i < text.length; i++) {
         const char = text[i];
         if (char === '_') {
             // If there's a previous character, add underline to it
             if (result.length > 0) {
-                // Remove last char, add underline to it, then put back
-                let lastChar = result[result.length - 1];
-                result = result.slice(0, -1) + lastChar + '\u0332';
+                // Check if the last character is a combining accent
+                const lastChar = result[result.length - 1];
+                if (lastChar === '\u0301' && result.length >= 2) {
+                    // There's a combining accent, so get the base char + accent
+                    const baseChar = result[result.length - 2];
+                    const accent = result[result.length - 1];
+                    result = result.slice(0, -2) + baseChar + '\u0332' + accent;
+                } else {
+                    // No combining accent, just underline the last character
+                    result = result.slice(0, -1) + lastChar + '\u0332';
+                }
             }
-            // Do not add anything for the underscore itself
             continue;
         }
         let convertedChar = ipaMap[char] || char;
