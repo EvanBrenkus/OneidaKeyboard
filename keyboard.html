@@ -318,14 +318,14 @@
     </div>
 
     <script>
-    const ipaMap = {
+const ipaMap = {
     'A': 'á', 
     'E': 'é', 
     'I': 'í', 
     'O': 'ó', 
     'U': 'ú',
     '<': 'ʌ', 
-    '>': 'ʌ́', 
+    '>': 'ʌ\u0301',  // ʌ + combining acute accent
     '?': 'ˀ', 
     '-': '⋅',
     'H': 'h', 
@@ -341,41 +341,60 @@
     '3': 'Í',
     '4': 'Ó',
     '5': 'Ú',
-    '6': 'Ʌ́',
+    '6': 'Ʌ\u0301',  // Ʌ + combining acute accent
     '7': 'Ʌ'
-    };
-    
+};
+
 function convertToIPA(text) {
     let result = '';
     for (let i = 0; i < text.length; i++) {
         const char = text[i];
+        
         if (char === '_') {
-            // If there's a previous character, add underline to it
-            if (result.length > 0) {
-                // Check if the last character is a combining accent
+            // Check the last 2 characters to see if we have an accented character
+            if (result.length >= 2) {
                 const lastChar = result[result.length - 1];
-                if (lastChar === '\u0301' && result.length >= 2) {
-                    // There's a combining accent, so get the base char + accent
-                    const baseChar = result[result.length - 2];
-                    const accent = result[result.length - 1];
-                    result = result.slice(0, -2) + baseChar + '\u0332' + accent;
-                } else {
-                    // No combining accent, just underline the last character
-                    result = result.slice(0, -1) + lastChar + '\u0332';
+                const secondLast = result[result.length - 2];
+                
+                // Check if last char is an acute accent (combining mark)
+                if (lastChar === '\u0301') {
+                    // Check if already underlined
+                    if (result.length >= 3 && result[result.length - 2] === '\u0332') {
+                        continue;
+                    }
+                    // Add underline between base char and accent
+                    result = result.slice(0, -2) + secondLast + '\u0332' + '\u0301';
+                    continue;
                 }
+                // Check if already underlined (no accent)
+                else if (lastChar === '\u0332') {
+                    continue;
+                }
+                // Regular character, just add underline
+                else {
+                    result = result.slice(0, -1) + lastChar + '\u0332';
+                    continue;
+                }
+            } else if (result.length === 1) {
+                const lastChar = result[result.length - 1];
+                result = result.slice(0, -1) + lastChar + '\u0332';
+                continue;
             }
-            continue;
         }
+        
         let convertedChar = ipaMap[char] || char;
         result += convertedChar;
     }
     return result;
 }
 
-    const allowedChars = new Set([
-        'A', 'á', 'E', 'é', 'I', 'í', 'O', 'ó', 'U', 'ú', 'H', 'K', 'L', 'N', 'S', 'T', 'W', 'Y', '<', 'ʌ', '>', 'ʌ́', '?', 'ˀ', '-', '⋅',
-        '1', 'Á', '2', 'É', '3', 'Í', '4','Ó', '5', 'Ú', '6', 'Ʌ́', '7', 'Ʌ', ' ', '\n', '_', '\u0332'
-    ]);
+const allowedChars = new Set([
+    'A', 'á', 'E', 'é', 'I', 'í', 'O', 'ó', 'U', 'ú', 
+    'H', 'h', 'K', 'k', 'L', 'l', 'N', 'n', 'S', 's', 'T', 't', 'W', 'w', 'Y', 'y',
+    '<', 'ʌ', '>', '?', 'ˀ', '-', '⋅',
+    '1', 'Á', '2', 'É', '3', 'Í', '4', 'Ó', '5', 'Ú', '6', 'Ʌ', '7',
+    ' ', '\n', '_', '\u0332', '\u0301'  // Added \u0301 to allowed chars
+]);
 
     document.getElementById("textInput").addEventListener("input", function(e) {
         const value = e.target.value;
