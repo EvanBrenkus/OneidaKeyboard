@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oneida Language Keyboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-	<link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <style>
         html, body {
             margin: 0;
@@ -24,21 +24,21 @@
             margin: 20px auto;
             padding: 10px;
             max-width: 90%;
-			justify-content: center;
+            justify-content: center;
         }
         
         #textInput {
             width: 90%;
-			max-width: 500px;
+            max-width: 500px;
             padding: 10px;
             margin-top: 10px;
-			margin-left: 10px;
-			margin-right: 10px;
+            margin-left: 10px;
+            margin-right: 10px;
             font-size: 1em;
             border: 1px solid #ccc;
             border-radius: 4px;
-			text-align: center;
-			word-wrap: break-word;
+            text-align: center;
+            word-wrap: break-word;
             resize: vertical;
             height: 20px;
             min-height: 20px;
@@ -63,6 +63,43 @@
             color: black;
         }
 
+        /* Mode Toggle Styles */
+        .mode-toggle-container {
+            text-align: center;
+            margin: 30px auto 20px;
+            max-width: 400px;
+        }
+
+        .mode-toggle {
+            display: inline-flex;
+            background-color: #f2f2f2;
+            border-radius: 25px;
+            padding: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .mode-btn {
+            padding: 12px 30px;
+            font-size: 1em;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background-color: transparent;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .mode-btn.active {
+            background-color: #5D3F6A;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .mode-btn:hover:not(.active) {
+            background-color: #e0e0e0;
+        }
+
         .table-container {
             overflow-x: auto;
             margin: 20px auto;
@@ -71,10 +108,10 @@
 
         table {
             border-collapse: collapse;
-			width: auto;
+            width: auto;
             max-width: 300px;
             margin: auto;
-			font-size: 1em;
+            font-size: 1em;
         }
 
         th, td {
@@ -83,8 +120,8 @@
             text-align: center;
             overflow: hidden;
             white-space: nowrap;
-			width: 150px;
-			max-width: 300px;
+            width: 150px;
+            max-width: 300px;
         }
 
         th {
@@ -120,11 +157,11 @@
 
         .dropdown {
             position: relative;
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: center;
-        }	
-		
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }   
+        
         .dropdown-content {
             display: none;
             position: absolute;
@@ -132,23 +169,22 @@
             min-width: 100px;
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
             z-index: 1;
-			top: 100%;
-			left: 0;
+            top: 100%;
+            left: 0;
         }
-		
-		.dropdown-content.show {
-			display: block;
-		}
+        
+        .dropdown-content.show {
+            display: block;
+        }
 
         .dropdown:hover .dropdown-content {
             display: block;
         }
-		
-		
-		.dropdown:hover > a {
-			background-color: #ddd;
-			color: black;
-		}
+        
+        .dropdown:hover > a {
+            background-color: #ddd;
+            color: black;
+        }
 
         .dropdown-content a {
             color: black;
@@ -174,15 +210,15 @@
         }
 
         @media (max-width: 768px) {
-			.navbar {
-				justify-content: center;
-			}
-			
-			.navbar a {
+            .navbar {
+                justify-content: center;
+            }
+            
+            .navbar a {
                 font-size: 1.1em;
                 padding: 10px 20px;
             }
-			
+            
             #textInput {
                 font-size: 0.8em;
                 padding: 8px;
@@ -193,21 +229,26 @@
                 padding: 10px 15px;
             }
 
+            .mode-btn {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+
             table th, table td {
                 font-size: 0.8em;
             }
-			
-			caption {
-			font-size: 1em;
-			}
+            
+            caption {
+                font-size: 1em;
+            }
         }
 
         @media (max-width: 480px) {
             .navbar {
-				justify-content: center;
-			}
-			
-			.navbar a {
+                justify-content: center;
+            }
+            
+            .navbar a {
                 font-size: 0.8em;
                 padding: 10px 20px;
             }
@@ -222,15 +263,19 @@
                 padding: 8px 12px;
             }
 
+            .mode-btn {
+                padding: 8px 15px;
+                font-size: 0.8em;
+            }
+
             table th, table td {
                 font-size: 0.6em;
             }
-			
-			caption {
-				font-size: 0.8em;
-			}
+            
+            caption {
+                font-size: 0.8em;
+            }
         }
-		
     </style>
 </head>
 <body>
@@ -253,16 +298,25 @@
             </div>
         </div>
     </div>
+
+    <!-- Mode Toggle -->
+    <div class="mode-toggle-container">
+        <div class="mode-toggle">
+            <button class="mode-btn active" id="typeModeBtn">Type Mode</button>
+            <button class="mode-btn" id="convertModeBtn">Convert Mode</button>
+        </div>
+    </div>
+
     <div id="container">
-        <textarea id="textInput" rows="4" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="Type here..."></textarea>
+        <textarea id="textInput" rows="4" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="Type here using the Unicode keyboard..."></textarea>
     </div>
     <div id="container">
         <button id="copyButton">Copy Text</button>
-     <button id="clearTextBtn">Clear Text</button>
+        <button id="clearTextBtn">Clear Text</button>
     </div>
     <div id="copyMessage">Text copied!</div>
     <div id="clearMessage">Text cleared!</div>
-	
+    
     <div class="table-container">
         <table id="keyMappings">
             <caption>Key Mappings</caption>
@@ -272,178 +326,244 @@
                     <th>Oneida Symbol</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>A</td>
-                    <td>á</td>
-                </tr>
-                <tr>
-                    <td>E</td>
-                    <td>é</td>
-                </tr>
-                <tr>
-                    <td>I</td>
-                    <td>í</td>
-                </tr>
-                <tr>
-                    <td>O</td>
-                    <td>ó</td>
-                </tr>
-                <tr>
-                    <td>U</td>
-                    <td>ú</td>
-                </tr>
-                <tr>
-                    <td>&gt;</td>
-                    <td>ʌ́</td>
-                </tr>
-                <tr>
-                    <td>&lt;</td>
-                    <td>ʌ</td>
-                </tr>
-                <tr>
-                    <td>?</td>
-                    <td>ˀ</td>
-                </tr>
-                <tr>
-                    <td>-</td>
-                    <td>⋅</td>
-                </tr>
-    			<tr>
-                    <td>_</td>
-                    <td>⋅̲⋅̲⋅̲</td>
-                </tr>
+            <tbody id="mappingsBody">
+                <!-- Mappings will be inserted here by JavaScript -->
             </tbody>
         </table>
     </div>
 
     <script>
-const ipaMap = {
-    'A': 'á', 
-    'E': 'é', 
-    'I': 'í', 
-    'O': 'ó', 
-    'U': 'ú',
-    '<': 'ʌ', 
-    '>': 'ʌ\u0301',  // ʌ + combining acute accent
-    '?': 'ˀ', 
-    '-': '⋅',
-    'H': 'h', 
-    'K': 'k', 
-    'L': 'l', 
-    'N': 'n', 
-    'S': 's', 
-    'T': 't',
-    'W': 'w', 
-    'Y': 'y',
-    '1': 'Á',
-    '2': 'É',
-    '3': 'Í',
-    '4': 'Ó',
-    '5': 'Ú',
-    '6': 'Ʌ\u0301',  // Ʌ + combining acute accent
-    '7': 'Ʌ'
-};
+    // Mode state
+    let currentMode = 'type'; // 'type' or 'convert'
 
-function convertToIPA(text) {
-    let result = '';
-    for (let i = 0; i < text.length; i++) {
-        const char = text[i];
-        
-        if (char === '_') {
-            // Check the last 2 characters to see if we have an accented character
-            if (result.length >= 2) {
-                const lastChar = result[result.length - 1];
-                const secondLast = result[result.length - 2];
-                
-                // Check if last char is an acute accent (combining mark)
-                if (lastChar === '\u0301') {
-                    // Check if already underlined
-                    if (result.length >= 3 && result[result.length - 2] === '\u0332') {
+    // Type Mode mappings (Unicode Keyboard) - Updated with combining accents
+    const typeModeMap = {
+        'A': 'á', 
+        'E': 'é', 
+        'I': 'í', 
+        'O': 'ó', 
+        'U': 'ú',
+        '<': 'ʌ', 
+        '>': 'ʌ\u0301',  // ʌ + combining acute accent
+        '?': 'ˀ', 
+        '-': '⋅',
+        'H': 'h', 
+        'K': 'k', 
+        'L': 'l', 
+        'N': 'n', 
+        'S': 's', 
+        'T': 't',
+        'W': 'w', 
+        'Y': 'y',
+        '1': 'Á',
+        '2': 'É',
+        '3': 'Í',
+        '4': 'Ó',
+        '5': 'Ú',
+        '6': 'Ʌ\u0301',  // Ʌ + combining acute accent
+        '7': 'Ʌ'
+    };
+
+    // Convert Mode mappings (Font Converter)
+    const convertModeMap = {
+        '@': 'á', 
+        '#': 'é', 
+        '$': 'í', 
+        '%': 'ó', 
+        '&': 'ú',
+        '<': 'ʌ', 
+        '^': 'ʌ\u0301', 
+        '>': 'ˀ', 
+        '=': '⋅',
+        'H': 'h', 'K': 'k', 'L': 'l', 'N': 'n', 'S': 's', 'T': 't',
+        'W': 'w', 'Y': 'y'
+    };
+
+    // Allowed characters for Type mode - Updated with combining marks
+    const typeModeAllowedChars = new Set([
+        'A', 'á', 'E', 'é', 'I', 'í', 'O', 'ó', 'U', 'ú', 
+        'H', 'h', 'K', 'k', 'L', 'l', 'N', 'n', 'S', 's', 'T', 't', 'W', 'w', 'Y', 'y',
+        '<', 'ʌ', '>', '?', 'ˀ', '-', '⋅',
+        '1', 'Á', '2', 'É', '3', 'Í', '4', 'Ó', '5', 'Ú', '6', 'Ʌ', '7',
+        ' ', '\n', '_', '\u0332', '\u0301',  // combining underline and accent
+        'a', 'e', 'i', 'o', 'u'
+    ]);
+
+    // Allowed characters for Convert mode
+    const convertModeAllowedChars = new Set([
+        '@', 'á', '#', 'é', '$', 'í', '%', 'ó', '&', 'ú', 'H', 'K', 'L', 'N', 'S', 'T', 'W', 'Y', 
+        '<', 'ʌ', '>', 'ʌ́', '^', 'ˀ', '=', '⋅',
+        'a', 'e', 'i', 'o', 'u', ' ', '\n', '\u0332', '\u0301'
+    ]);
+
+    // Display mappings for the table
+    const typeModeDisplay = [
+        ['A', 'á'], ['E', 'é'], ['I', 'í'], ['O', 'ó'], ['U', 'ú'],
+        ['>', 'ʌ́'], ['<', 'ʌ'], ['?', 'ˀ'], ['-', '⋅'], ['_', '⋅̲⋅̲⋅̲']
+    ];
+
+    const convertModeDisplay = [
+        ['@', 'á'], ['#', 'é'], ['$', 'í'], ['%', 'ó'], ['&', 'ú'],
+        ['^', 'ʌ́'], ['<', 'ʌ'], ['>', 'ˀ'], ['=', '⋅']
+    ];
+
+    function updateMappingsTable(mappings) {
+        const tbody = document.getElementById('mappingsBody');
+        tbody.innerHTML = '';
+        mappings.forEach(([key, symbol]) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `<td>${key}</td><td>${symbol}</td>`;
+            tbody.appendChild(row);
+        });
+    }
+
+    // Type Mode conversion with proper underline handling
+    function convertToIPATypeMode(text) {
+        let result = '';
+        for (let i = 0; i < text.length; i++) {
+            const char = text[i];
+            
+            if (char === '_') {
+                // Check the last 2 characters to see if we have an accented character
+                if (result.length >= 2) {
+                    const lastChar = result[result.length - 1];
+                    const secondLast = result[result.length - 2];
+                    
+                    // Check if last char is an acute accent (combining mark)
+                    if (lastChar === '\u0301') {
+                        // Check if already underlined
+                        if (result.length >= 3 && result[result.length - 2] === '\u0332') {
+                            continue;
+                        }
+                        // Add underline between base char and accent
+                        result = result.slice(0, -2) + secondLast + '\u0332' + '\u0301';
                         continue;
                     }
-                    // Add underline between base char and accent
-                    result = result.slice(0, -2) + secondLast + '\u0332' + '\u0301';
-                    continue;
-                }
-                // Check if already underlined (no accent)
-                else if (lastChar === '\u0332') {
-                    continue;
-                }
-                // Regular character, just add underline
-                else {
+                    // Check if already underlined (no accent)
+                    else if (lastChar === '\u0332') {
+                        continue;
+                    }
+                    // Regular character, just add underline
+                    else {
+                        result = result.slice(0, -1) + lastChar + '\u0332';
+                        continue;
+                    }
+                } else if (result.length === 1) {
+                    const lastChar = result[result.length - 1];
                     result = result.slice(0, -1) + lastChar + '\u0332';
                     continue;
                 }
-            } else if (result.length === 1) {
-                const lastChar = result[result.length - 1];
-                result = result.slice(0, -1) + lastChar + '\u0332';
+            }
+            
+            let convertedChar = typeModeMap[char] || char;
+            result += convertedChar;
+        }
+        return result;
+    }
+
+    // Convert Mode conversion
+    function convertToIPAConvertMode(text) {
+        let result = '';
+        for (let i = 0; i < text.length; i++) {
+            const char = text[i];
+            if (char === '_') {
+                if (result.length > 0) {
+                    let lastChar = result[result.length - 1];
+                    result = result.slice(0, -1) + lastChar + '\u0332';
+                }
                 continue;
             }
+            let convertedChar = convertModeMap[char] || char;
+            result += convertedChar;
         }
-        
-        let convertedChar = ipaMap[char] || char;
-        result += convertedChar;
+        return result;
     }
-    return result;
-}
 
-const allowedChars = new Set([
-    'A', 'á', 'E', 'é', 'I', 'í', 'O', 'ó', 'U', 'ú', 
-    'H', 'h', 'K', 'k', 'L', 'l', 'N', 'n', 'S', 's', 'T', 't', 'W', 'w', 'Y', 'y',
-    '<', 'ʌ', '>', '?', 'ˀ', '-', '⋅',
-    '1', 'Á', '2', 'É', '3', 'Í', '4', 'Ó', '5', 'Ú', '6', 'Ʌ', '7',
-    ' ', '\n', '_', '\u0332', '\u0301'  // Added \u0301 to allowed chars
-]);
+    function setMode(mode) {
+        currentMode = mode;
+        const textInput = document.getElementById('textInput');
+        const typeModeBtn = document.getElementById('typeModeBtn');
+        const convertModeBtn = document.getElementById('convertModeBtn');
 
-    document.getElementById("textInput").addEventListener("input", function(e) {
+        if (mode === 'type') {
+            typeModeBtn.classList.add('active');
+            convertModeBtn.classList.remove('active');
+            textInput.placeholder = 'Type text here to use keyboard...';
+            updateMappingsTable(typeModeDisplay);
+        } else {
+            convertModeBtn.classList.add('active');
+            typeModeBtn.classList.remove('active');
+            textInput.placeholder = 'Paste font text here to convert...';
+            updateMappingsTable(convertModeDisplay);
+        }
+
+        // Clear the text input when switching modes
+        textInput.value = '';
+    }
+
+    document.getElementById('textInput').addEventListener('input', function(e) {
         const value = e.target.value;
-        // Filter out unwanted characters and then convert allowed ones
-        const filtered = value.split('').filter(char => 
-            allowedChars.has(char.toUpperCase()) || allowedChars.has(char)
-        ).join('');
-        
-        const converted = convertToIPA(filtered);
+        let converted;
+
+        if (currentMode === 'type') {
+            // Filter and convert for type mode
+            const filtered = value.split('').filter(char => 
+                typeModeAllowedChars.has(char.toUpperCase()) || typeModeAllowedChars.has(char)
+            ).join('');
+            converted = convertToIPATypeMode(filtered);
+        } else {
+            // Filter and convert for convert mode
+            const filtered = value.split('').filter(char => 
+                convertModeAllowedChars.has(char.toUpperCase()) || convertModeAllowedChars.has(char)
+            ).join('');
+            converted = convertToIPAConvertMode(filtered);
+        }
+
         e.target.value = converted;
     });
 
     function copyToClipboard() {
-    const input = document.getElementById('textInput');
-    input.select();
-    input.setSelectionRange(0, 99999);
-    navigator.clipboard.writeText(input.value).then(() => {
-        const copyMessage = document.getElementById('copyMessage');
-        copyMessage.style.display = 'block';
-        copyMessage.style.opacity = '1';
-        setTimeout(() => {
-            copyMessage.style.opacity = '0';
+        const input = document.getElementById('textInput');
+        input.select();
+        input.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(input.value).then(() => {
+            const copyMessage = document.getElementById('copyMessage');
+            copyMessage.style.display = 'block';
+            copyMessage.style.opacity = '1';
             setTimeout(() => {
-                copyMessage.style.display = 'none';
+                copyMessage.style.opacity = '0';
+                setTimeout(() => {
+                    copyMessage.style.display = 'none';
+                }, 1000);
+            }, 2000);
+        });
+    }
+
+    document.getElementById('copyButton').addEventListener('click', copyToClipboard);
+    
+    document.getElementById('clearTextBtn').addEventListener('click', function() {
+        document.getElementById('textInput').value = '';
+        
+        const clearMessage = document.getElementById('clearMessage');
+        clearMessage.style.display = 'block';
+        clearMessage.style.opacity = '1';
+        
+        setTimeout(() => {
+            clearMessage.style.opacity = '0';
+            setTimeout(() => {
+                clearMessage.style.display = 'none';
             }, 1000);
         }, 2000);
     });
-}
 
-document.getElementById('copyButton').addEventListener('click', copyToClipboard);
-		
-	document.getElementById("clearTextBtn").addEventListener("click", function() {
-		document.getElementById("textInput").value = "";
-			
-		const clearMessage = document.getElementById('clearMessage');
-		clearMessage.style.display = 'block';
-		clearMessage.style.opacity = '1';
-			
-		setTimeout(() => {
-			clearMessage.style.opacity = '0';
-			setTimeout(() => {
-				clearMessage.style.display = 'none';
-			}, 1000);
-		}, 2000);
-	});
-	
-	document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('typeModeBtn').addEventListener('click', () => setMode('type'));
+    document.getElementById('convertModeBtn').addEventListener('click', () => setMode('convert'));
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        // Initialize with type mode
+        setMode('type');
+
         const dropdowns = document.querySelectorAll('.dropdown');
-
         dropdowns.forEach(dropdown => {
             const toggle = dropdown.querySelector('a');
             const dropdownContent = dropdown.querySelector('.dropdown-content');
