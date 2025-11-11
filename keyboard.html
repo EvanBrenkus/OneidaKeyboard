@@ -100,6 +100,82 @@
             background-color: #e0e0e0;
         }
 
+        /* Option Toggles Styles */
+        .options-container {
+            text-align: center;
+            margin: 20px auto;
+            max-width: 600px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .toggle-option {
+            display: flex;
+            align-items: center;
+            background-color: #f9f9f9;
+            padding: 10px 20px;
+            border-radius: 25px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .toggle-option:hover {
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .toggle-option label {
+            margin-right: 10px;
+            font-weight: 500;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 26px;
+            cursor: pointer;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.3s;
+            border-radius: 26px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+
+        .toggle-switch input:checked + .toggle-slider {
+            background-color: #5D3F6A;
+        }
+
+        .toggle-switch input:checked + .toggle-slider:before {
+            transform: translateX(24px);
+        }
+
         .table-container {
             overflow-x: auto;
             margin: 20px auto;
@@ -234,6 +310,14 @@
                 font-size: 0.9em;
             }
 
+            .toggle-option {
+                padding: 8px 15px;
+            }
+
+            .toggle-option label {
+                font-size: 0.9em;
+            }
+
             table th, table td {
                 font-size: 0.8em;
             }
@@ -266,6 +350,29 @@
             .mode-btn {
                 padding: 8px 15px;
                 font-size: 0.8em;
+            }
+
+            .toggle-option {
+                padding: 6px 12px;
+            }
+
+            .toggle-option label {
+                font-size: 0.8em;
+                margin-right: 8px;
+            }
+
+            .toggle-switch {
+                width: 40px;
+                height: 22px;
+            }
+
+            .toggle-slider:before {
+                height: 16px;
+                width: 16px;
+            }
+
+            .toggle-switch input:checked + .toggle-slider:before {
+                transform: translateX(18px);
             }
 
             table th, table td {
@@ -317,6 +424,24 @@
     <div id="copyMessage">Text copied!</div>
     <div id="clearMessage">Text cleared!</div>
     
+    <!-- Option Toggles -->
+    <div class="options-container">
+        <div class="toggle-option">
+            <label for="allowEnglishToggle">Allow English Keys</label>
+            <label class="toggle-switch">
+                <input type="checkbox" id="allowEnglishToggle">
+                <span class="toggle-slider"></span>
+            </label>
+        </div>
+        <div class="toggle-option">
+            <label for="dialectToggle">Change Dialect</label>
+            <label class="toggle-switch">
+                <input type="checkbox" id="dialectToggle">
+                <span class="toggle-slider"></span>
+            </label>
+        </div>
+    </div>
+
     <div class="table-container">
         <table id="keyMappings">
             <caption>Key Mappings</caption>
@@ -334,7 +459,9 @@
 
     <script>
     // Mode state
-    let currentMode = 'type'; // 'type' or 'convert'
+    let currentMode = 'type';
+    let allowEnglish = false;
+    let alternateDialect = false;
 
     // Type Mode mappings (Unicode Keyboard) - Updated with combining accents
     const typeModeMap = {
@@ -344,7 +471,7 @@
         'O': 'ó', 
         'U': 'ú',
         '<': 'ʌ', 
-        '>': 'ʌ\u0301',  // ʌ + combining acute accent
+        '>': 'ʌ\u0301',
         '?': 'ˀ', 
         '-': '⋅',
         'H': 'h', 
@@ -360,7 +487,7 @@
         '3': 'Í',
         '4': 'Ó',
         '5': 'Ú',
-        '6': 'Ʌ\u0301',  // Ʌ + combining acute accent
+        '6': 'Ʌ\u0301',
         '7': 'Ʌ'
     };
 
@@ -385,42 +512,85 @@
         'W': 'w', 'Y': 'y', 'A': 'a', 'E': 'e', 'I': 'i', 'O': 'o', 'U': 'u', 'Ʌ': 'ʌ'
     };
 
-    // Allowed characters for Type mode - Updated with combining marks
-    const typeModeAllowedChars = new Set([
+    // Base allowed characters for Type mode
+    const typeModeBaseChars = new Set([
         'A', 'á', 'E', 'é', 'I', 'í', 'O', 'ó', 'U', 'ú', 
         'H', 'h', 'K', 'k', 'L', 'l', 'N', 'n', 'S', 's', 'T', 't', 'W', 'w', 'Y', 'y',
         '<', 'ʌ', '>', '?', 'ˀ', '-', '⋅',
         '1', 'Á', '2', 'É', '3', 'Í', '4', 'Ó', '5', 'Ú', '6', 'Ʌ', '7',
-        ' ', '\n', '_', '\u0332', '\u0301',  // combining underline and accent
-        'a', 'e', 'i', 'o', 'u'
+        ' ', '\n', '_', '\u0332', '\u0301',
+        'a', 'e', 'i', 'o', 'u', "'", ':'
     ]);
 
-    // Allowed characters for Convert mode
-    const convertModeAllowedChars = new Set([
+    // Base allowed characters for Convert mode
+    const convertModeBaseChars = new Set([
         '@', 'á', '#', 'é', '$', 'í', '%', 'ó', '&', 'ú', 'H', 'K', 'L', 'N', 'S', 'T', 'W', 'Y', 'A', 'E', 'I', 'O', 'U', 
         '<', 'ʌ', '>', 'ʌ́', '^', 'ˀ', '=', '⋅', 'Á', 'É', 'Í', 'Ó', 'Ú', 'Ʌ\u0301',
-        'a', 'e', 'i', 'o', 'u', ' ', '\n', '\u0332', '\u0301'
+        'a', 'e', 'i', 'o', 'u', ' ', '\n', '\u0332', '\u0301', "'", ':'
     ]);
 
-    // Display mappings for the table
-    const typeModeDisplay = [
+    // English characters to add when English mode is enabled (no capitals except special cases)
+    const englishChars = new Set([
+        'b', 'c', 'd', 'f', 'g', 'j', 'm', 'p', 'q', 'r', 'v', 'x', 'z',
+        'B', 'C', 'D', 'F', 'G', 'J', 'M', 'P', 'Q', 'R', 'V', 'X', 'Z',
+        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+        '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '[', ']', '{', '}',
+        ',', '.', ';', ':', '?', '/', '\\', '|', '~', '`', '+', '=', '"', "'"
+    ]);
+
+    function getAllowedChars() {
+        const baseChars = currentMode === 'type' ? typeModeBaseChars : convertModeBaseChars;
+        if (allowEnglish) {
+            return new Set([...baseChars, ...englishChars]);
+        }
+        return baseChars;
+    }
+
+    // Display mappings for the table (standard dialect)
+    const typeModeDisplayStandard = [
         ['A', 'á'], ['E', 'é'], ['I', 'í'], ['O', 'ó'], ['U', 'ú'],
         ['>', 'ʌ́'], ['<', 'ʌ'], ['?', 'ˀ'], ['-', '⋅'], ['_', '⋅̲⋅̲⋅̲']
     ];
 
-    const convertModeDisplay = [
+    const convertModeDisplayStandard = [
         ['@', 'á'], ['#', 'é'], ['$', 'í'], ['%', 'ó'], ['&', 'ú'],
         ['^', 'ʌ́'], ['<', 'ʌ'], ['>', 'ˀ'], ['=', '⋅']
     ];
 
-    function updateMappingsTable(mappings) {
+    // Display mappings for the table (alternate dialect)
+    const typeModeDisplayAlternate = [
+        ['A', 'á'], ['E', 'é'], ['I', 'í'], ['O', 'ó'], ['U', 'ú'],
+        ['>', 'ʌ́'], ['<', 'ʌ'], ['?', "'"], ['-', ':'], ['_', '⋅̲⋅̲⋅̲']
+    ];
+
+    const convertModeDisplayAlternate = [
+        ['@', 'á'], ['#', 'é'], ['$', 'í'], ['%', 'ó'], ['&', 'ú'],
+        ['^', 'ʌ́'], ['<', 'ʌ'], ['>', "'"], ['=', ':']
+    ];
+
+    function updateMappingsTable() {
         const tbody = document.getElementById('mappingsBody');
         tbody.innerHTML = '';
+        
+        let mappings;
+        if (currentMode === 'type') {
+            mappings = alternateDialect ? typeModeDisplayAlternate : typeModeDisplayStandard;
+        } else {
+            mappings = alternateDialect ? convertModeDisplayAlternate : convertModeDisplayStandard;
+        }
+        
         mappings.forEach(([key, symbol]) => {
             const row = document.createElement('tr');
             row.innerHTML = `<td>${key}</td><td>${symbol}</td>`;
             tbody.appendChild(row);
         });
+    }
+
+    function applyDialectConversion(text) {
+        if (!alternateDialect) return text;
+        
+        // Replace glottal and raised dot with apostrophe and colon
+        return text.replace(/ˀ/g, "'").replace(/⋅/g, ':');
     }
 
     // Type Mode conversion with proper underline handling
@@ -430,26 +600,20 @@
             const char = text[i];
             
             if (char === '_') {
-                // Check the last 2 characters to see if we have an accented character
                 if (result.length >= 2) {
                     const lastChar = result[result.length - 1];
                     const secondLast = result[result.length - 2];
                     
-                    // Check if last char is an acute accent (combining mark)
                     if (lastChar === '\u0301') {
-                        // Check if already underlined
                         if (result.length >= 3 && result[result.length - 2] === '\u0332') {
                             continue;
                         }
-                        // Add underline between base char and accent
                         result = result.slice(0, -2) + secondLast + '\u0332' + '\u0301';
                         continue;
                     }
-                    // Check if already underlined (no accent)
                     else if (lastChar === '\u0332') {
                         continue;
                     }
-                    // Regular character, just add underline
                     else {
                         result = result.slice(0, -1) + lastChar + '\u0332';
                         continue;
@@ -464,7 +628,8 @@
             let convertedChar = typeModeMap[char] || char;
             result += convertedChar;
         }
-        return result;
+        
+        return applyDialectConversion(result);
     }
 
     // Convert Mode conversion
@@ -482,7 +647,8 @@
             let convertedChar = convertModeMap[char] || char;
             result += convertedChar;
         }
-        return result;
+        
+        return applyDialectConversion(result);
     }
 
     function setMode(mode) {
@@ -495,32 +661,29 @@
             typeModeBtn.classList.add('active');
             convertModeBtn.classList.remove('active');
             textInput.placeholder = 'Type text here to use keyboard...';
-            updateMappingsTable(typeModeDisplay);
         } else {
             convertModeBtn.classList.add('active');
             typeModeBtn.classList.remove('active');
             textInput.placeholder = 'Paste font text here to convert...';
-            updateMappingsTable(convertModeDisplay);
         }
 
-        // Clear the text input when switching modes
+        updateMappingsTable();
         textInput.value = '';
     }
 
     document.getElementById('textInput').addEventListener('input', function(e) {
         const value = e.target.value;
+        const allowedChars = getAllowedChars();
         let converted;
 
         if (currentMode === 'type') {
-            // Filter and convert for type mode
             const filtered = value.split('').filter(char => 
-                typeModeAllowedChars.has(char.toUpperCase()) || typeModeAllowedChars.has(char)
+                allowedChars.has(char.toUpperCase()) || allowedChars.has(char)
             ).join('');
             converted = convertToIPATypeMode(filtered);
         } else {
-            // Filter and convert for convert mode
             const filtered = value.split('').filter(char => 
-                convertModeAllowedChars.has(char.toUpperCase()) || convertModeAllowedChars.has(char)
+                allowedChars.has(char.toUpperCase()) || allowedChars.has(char)
             ).join('');
             converted = convertToIPAConvertMode(filtered);
         }
@@ -565,8 +728,24 @@
     document.getElementById('typeModeBtn').addEventListener('click', () => setMode('type'));
     document.getElementById('convertModeBtn').addEventListener('click', () => setMode('convert'));
     
+    // Toggle handlers
+    document.getElementById('allowEnglishToggle').addEventListener('change', function(e) {
+        allowEnglish = e.target.checked;
+    });
+
+    document.getElementById('dialectToggle').addEventListener('change', function(e) {
+        alternateDialect = e.target.checked;
+        updateMappingsTable();
+        
+        // Reprocess current text
+        const textInput = document.getElementById('textInput');
+        const currentText = textInput.value;
+        textInput.value = '';
+        textInput.value = currentText;
+        textInput.dispatchEvent(new Event('input'));
+    });
+    
     document.addEventListener('DOMContentLoaded', () => {
-        // Initialize with type mode
         setMode('type');
 
         const dropdowns = document.querySelectorAll('.dropdown');
