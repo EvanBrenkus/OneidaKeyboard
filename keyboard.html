@@ -462,17 +462,7 @@
         </div>
     </div>
 
-    <div id="container">
-        <textarea id="textInput" rows="4" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="Type here using the Unicode keyboard..."></textarea>
-    </div>
-    <div id="container">
-        <button id="copyButton">Copy Text</button>
-        <button id="clearTextBtn">Clear Text</button>
-    </div>
-    <div id="copyMessage">Text copied!</div>
-    <div id="clearMessage">Text cleared!</div>
-    
-    <!-- Option Toggles -->
+        <!-- Option Toggles -->
     <div class="options-container">
         <div class="toggle-option">
             <label for="allowEnglishToggle">Allow English Keys</label>
@@ -489,6 +479,16 @@
             </label>
         </div>
     </div>
+
+    <div id="container">
+        <textarea id="textInput" rows="4" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="Type here using the Unicode keyboard..."></textarea>
+    </div>
+    <div id="container">
+        <button id="copyButton">Copy Text</button>
+        <button id="clearTextBtn">Clear Text</button>
+    </div>
+    <div id="copyMessage">Text copied!</div>
+    <div id="clearMessage">Text cleared!</div>
 
     <div class="table-container">
         <table id="keyMappings">
@@ -608,7 +608,7 @@
     // Display mappings for the table (alternate dialect)
     const typeModeDisplayAlternate = [
         ['A', 'á'], ['E', 'é'], ['I', 'í'], ['O', 'ó'], ['U', 'ú'],
-        ['>', 'ʌ́'], ['<', 'ʌ'], ['?', "'"], ['-', ':'], ['_', ':̲:̲:̲']
+        ['>', 'ʌ́'], ['<', 'ʌ'], ['?', "'"], ['-', ':'], ['_', '⋅̲⋅̲⋅̲']
     ];
 
     const convertModeDisplayAlternate = [
