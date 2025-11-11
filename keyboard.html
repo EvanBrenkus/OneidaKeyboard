@@ -17,6 +17,8 @@
             font-family: "Roboto", sans-serif;
             font-weight: 400;
             font-style: normal;
+            background: linear-gradient(135deg, #f5f3f7 0%, #e8e4eb 100%);
+            min-height: 100vh;
         }
 
         #container {
@@ -30,37 +32,54 @@
         #textInput {
             width: 90%;
             max-width: 500px;
-            padding: 10px;
+            padding: 15px 20px;
             margin-top: 10px;
             margin-left: 10px;
             margin-right: 10px;
-            font-size: 1em;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            font-size: 1.1em;
+            border: 2px solid #d0c5d8;
+            border-radius: 12px;
             text-align: center;
             word-wrap: break-word;
             resize: vertical;
-            height: 20px;
-            min-height: 20px;
-            max-height: 60px;
+            height: 40px;
+            min-height: 40px;
+            max-height: 100px;
             font-family: "Roboto", sans-serif;
+            background: white;
+            box-shadow: 0 2px 8px rgba(93, 63, 106, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        #textInput:focus {
+            outline: none;
+            border-color: #5D3F6A;
+            box-shadow: 0 4px 12px rgba(93, 63, 106, 0.2);
         }
 
         #copyButton, #clearTextBtn {
-            padding: 12px 20px;
+            padding: 14px 28px;
             font-size: 1em;
-            background-color: #5D3F6A;
+            background: linear-gradient(135deg, #5D3F6A 0%, #7d5a8a 100%);
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 25px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
             margin: 5px;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(93, 63, 106, 0.3);
         }
 
         #copyButton:hover, #clearTextBtn:hover {
-            background-color: #ddd;
-            color: black;
+            background: linear-gradient(135deg, #7d5a8a 0%, #5D3F6A 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(93, 63, 106, 0.4);
+        }
+
+        #copyButton:active, #clearTextBtn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(93, 63, 106, 0.3);
         }
 
         /* Mode Toggle Styles */
@@ -72,70 +91,76 @@
 
         .mode-toggle {
             display: inline-flex;
-            background-color: #f2f2f2;
-            border-radius: 25px;
-            padding: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background: white;
+            border-radius: 30px;
+            padding: 6px;
+            box-shadow: 0 4px 15px rgba(93, 63, 106, 0.15);
+            border: 2px solid #e8e4eb;
         }
 
         .mode-btn {
-            padding: 12px 30px;
+            padding: 14px 35px;
             font-size: 1em;
             border: none;
-            border-radius: 20px;
+            border-radius: 25px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             background-color: transparent;
-            color: #333;
+            color: #666;
             font-weight: 500;
         }
 
         .mode-btn.active {
-            background-color: #5D3F6A;
+            background: linear-gradient(135deg, #5D3F6A 0%, #7d5a8a 100%);
             color: white;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 12px rgba(93, 63, 106, 0.3);
         }
 
         .mode-btn:hover:not(.active) {
-            background-color: #e0e0e0;
+            background-color: #f5f3f7;
+            color: #5D3F6A;
         }
 
         /* Option Toggles Styles */
         .options-container {
             text-align: center;
-            margin: 20px auto;
+            margin: 25px auto;
             max-width: 600px;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
         }
 
         .toggle-option {
             display: flex;
             align-items: center;
-            background-color: #f9f9f9;
-            padding: 10px 20px;
-            border-radius: 25px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
+            background: white;
+            padding: 14px 24px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(93, 63, 106, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
         }
 
         .toggle-option:hover {
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 6px 20px rgba(93, 63, 106, 0.2);
+            border-color: #e8e4eb;
+            transform: translateY(-2px);
         }
 
         .toggle-option label {
-            margin-right: 10px;
+            margin-right: 12px;
             font-weight: 500;
-            color: #333;
+            color: #5D3F6A;
             cursor: pointer;
+            user-select: none;
         }
 
         .toggle-switch {
             position: relative;
-            width: 50px;
-            height: 26px;
+            width: 54px;
+            height: 28px;
             cursor: pointer;
         }
 
@@ -151,84 +176,97 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: #ccc;
+            background: linear-gradient(135deg, #d0c5d8 0%, #c5b8d0 100%);
             transition: 0.3s;
-            border-radius: 26px;
+            border-radius: 28px;
         }
 
         .toggle-slider:before {
             position: absolute;
             content: "";
-            height: 20px;
-            width: 20px;
+            height: 22px;
+            width: 22px;
             left: 3px;
             bottom: 3px;
-            background-color: white;
+            background: white;
             transition: 0.3s;
             border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .toggle-switch input:checked + .toggle-slider {
-            background-color: #5D3F6A;
+            background: linear-gradient(135deg, #5D3F6A 0%, #7d5a8a 100%);
         }
 
         .toggle-switch input:checked + .toggle-slider:before {
-            transform: translateX(24px);
+            transform: translateX(26px);
         }
 
         .table-container {
             overflow-x: auto;
-            margin: 20px auto;
-            max-width: 350px;
+            margin: 30px auto;
+            max-width: 400px;
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(93, 63, 106, 0.12);
         }
 
         table {
             border-collapse: collapse;
-            width: auto;
-            max-width: 300px;
+            width: 100%;
+            max-width: 350px;
             margin: auto;
             font-size: 1em;
         }
 
         th, td {
-            border: 1px solid #ccc;
-            padding: 7px;
+            border: 1px solid #e8e4eb;
+            padding: 12px;
             text-align: center;
             overflow: hidden;
             white-space: nowrap;
-            width: 150px;
-            max-width: 300px;
         }
 
         th {
-            background-color: #f2f2f2;
+            background: linear-gradient(135deg, #f5f3f7 0%, #e8e4eb 100%);
+            color: #5D3F6A;
+            font-weight: 600;
+        }
+
+        td {
+            background: white;
         }
 
         caption {
-            font-weight: bold;
-            font-size: 1.2em;
-            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            color: #5D3F6A;
         }
 
         .navbar {
-            background-color: #5D3F6A;
+            background: linear-gradient(135deg, #5D3F6A 0%, #7d5a8a 100%);
             display: flex;
             flex-wrap: wrap;
             justify-content: left;
             text-align: center;
+            box-shadow: 0 4px 12px rgba(93, 63, 106, 0.3);
         }
 
         .navbar a {
             font-size: 1.3em;
             color: white;
             text-decoration: none;
-            padding: 15px 25px;
+            padding: 18px 28px;
             text-align: left;
+            transition: all 0.3s ease;
+            font-weight: 500;
         }
 
         .navbar a:hover {
-            background-color: #ddd;
-            color: black;
+            background-color: rgba(255, 255, 255, 0.15);
+            color: white;
         }
 
         .dropdown {
@@ -258,15 +296,23 @@
         }
         
         .dropdown:hover > a {
-            background-color: #ddd;
-            color: black;
+            background-color: rgba(255, 255, 255, 0.15);
+            color: white;
         }
 
         .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
+            color: #5D3F6A;
+            padding: 14px 18px;
             text-decoration: none;
             display: block;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f5f3f7;
+            color: #5D3F6A;
+            padding-left: 22px;
         }
 
         #copyMessage, #clearMessage {
@@ -274,15 +320,17 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: rgba(0, 0, 0, 0.8);
+            background: linear-gradient(135deg, #5D3F6A 0%, #7d5a8a 100%);
             color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: bold;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-weight: 600;
             text-align: center;
             opacity: 0;
-            transition: opacity 1s ease-in-out;
+            transition: opacity 0.3s ease-in-out;
             z-index: 1000;
+            box-shadow: 0 8px 24px rgba(93, 63, 106, 0.4);
+            font-size: 1.1em;
         }
 
         @media (max-width: 768px) {
@@ -560,7 +608,7 @@
     // Display mappings for the table (alternate dialect)
     const typeModeDisplayAlternate = [
         ['A', 'á'], ['E', 'é'], ['I', 'í'], ['O', 'ó'], ['U', 'ú'],
-        ['>', 'ʌ́'], ['<', 'ʌ'], ['?', "'"], ['-', ':'], ['_', '⋅̲⋅̲⋅̲']
+        ['>', 'ʌ́'], ['<', 'ʌ'], ['?', "'"], ['-', ':'], ['_', ':̲:̲:̲']
     ];
 
     const convertModeDisplayAlternate = [
