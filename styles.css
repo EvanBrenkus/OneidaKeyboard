@@ -1,0 +1,907 @@
+/* ===== BASE RESET ===== */
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    background: linear-gradient(135deg, #f5f3f7 0%, #e8e4eb 100%);
+    min-height: 100vh;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+    background: linear-gradient(135deg, #5D3F6A 0%, #7d5a8a 100%);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(93, 63, 106, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar a {
+    font-size: 1.3em;
+    color: white;
+    text-decoration: none;
+    padding: 18px 28px;
+    text-align: left;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.navbar a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+}
+
+/* ===== DROPDOWN ===== */
+.dropdown {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 100px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    top: 100%;
+    left: 0;
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover > a {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+}
+
+.dropdown-content a {
+    color: #5D3F6A;
+    padding: 14px 18px;
+    text-decoration: none;
+    display: block;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.dropdown-content a:hover {
+    background-color: #f5f3f7;
+    color: #5D3F6A;
+    padding-left: 22px;
+}
+
+/* ===== TABLES (SHARED) ===== */
+.table-container, .tables-container {
+    overflow-x: auto;
+    max-width: 600px;
+    margin: 30px auto;
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(93, 63, 106, 0.12);
+}
+
+.interactive-table-container {
+    overflow-x: auto;
+    max-width: 1400px;
+    margin: 30px auto;
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(93, 63, 106, 0.12);
+}
+
+
+table {
+    border-collapse: collapse;
+    margin: auto;
+}
+
+th, td {
+    border: 1px solid #e8e4eb;
+    padding: 10px;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+th {
+    background: linear-gradient(135deg, #f5f3f7 0%, #e8e4eb 100%);
+    color: #5D3F6A;
+    font-weight: 600;
+}
+
+td {
+    background: white;
+}
+
+caption {
+    font-weight: 600;
+    font-size: 1.3em;
+    margin-bottom: 15px;
+    margin-top: 10px;
+    color: #5D3F6A;
+}
+
+/* ===== INDEX PAGE ===== */
+.welcome {
+    text-align: center;
+    margin: 40px auto;
+    padding: 30px;
+    max-width: 800px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(93, 63, 106, 0.12);
+    color: #333;
+    font-size: 1.2em;
+}
+
+.welcome h1 {
+    margin-top: 10px;
+    font-size: 2em;
+    color: #5D3F6A;
+    font-weight: 600;
+}
+
+.welcome p {
+    margin: 15px 0;
+    line-height: 1.6;
+}
+
+.sources {
+    margin-top: 30px;
+    font-size: 1em;
+    margin-bottom: 10px;
+    padding: 20px;
+    background: #f5f3f7;
+    border-radius: 12px;
+}
+
+.sources p {
+    margin: 10px 0;
+}
+
+.sources a {
+    color: #5D3F6A;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.sources a:hover {
+    color: #7d5a8a;
+    text-decoration: underline;
+}
+
+/* ===== KEYBOARD PAGE ===== */
+#container {
+    text-align: center;
+    margin: 20px auto;
+    padding: 10px;
+    max-width: 90%;
+    justify-content: center;
+}
+
+#textInput {
+    width: 90%;
+    max-width: 500px;
+    padding: 15px 20px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 1.1em;
+    border: 2px solid #d0c5d8;
+    border-radius: 12px;
+    text-align: center;
+    word-wrap: break-word;
+    resize: vertical;
+    height: 40px;
+    min-height: 40px;
+    max-height: 100px;
+    font-family: "Roboto", sans-serif;
+    background: white;
+    box-shadow: 0 2px 8px rgba(93, 63, 106, 0.1);
+}
+
+#textInput:focus {
+    outline: none;
+    border-color: #5D3F6A;
+    box-shadow: 0 4px 12px rgba(93, 63, 106, 0.2);
+}
+
+#copyButton, #clearTextBtn {
+    padding: 14px 28px;
+    font-size: 1em;
+    background: linear-gradient(135deg, #5D3F6A 0%, #7d5a8a 100%);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 5px;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(93, 63, 106, 0.3);
+}
+
+#copyButton:hover, #clearTextBtn:hover {
+    background: linear-gradient(135deg, #7d5a8a 0%, #5D3F6A 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(93, 63, 106, 0.4);
+}
+
+#copyButton:active, #clearTextBtn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(93, 63, 106, 0.3);
+}
+
+.mode-toggle-container {
+    text-align: center;
+    margin: 30px auto 20px;
+    max-width: 400px;
+}
+
+.mode-toggle {
+    display: inline-flex;
+    background: white;
+    border-radius: 30px;
+    padding: 6px;
+    box-shadow: 0 4px 15px rgba(93, 63, 106, 0.15);
+    border: 2px solid #e8e4eb;
+}
+
+.mode-btn {
+    padding: 14px 35px;
+    font-size: 1em;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: transparent;
+    color: #666;
+    font-weight: 500;
+}
+
+.mode-btn.active {
+    background: linear-gradient(135deg, #5D3F6A 0%, #7d5a8a 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(93, 63, 106, 0.3);
+}
+
+.mode-btn:hover:not(.active) {
+    background-color: #f5f3f7;
+    color: #5D3F6A;
+}
+
+.options-container {
+    text-align: center;
+    margin: 25px auto;
+    max-width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.toggle-option {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 14px 24px;
+    border-radius: 30px;
+    box-shadow: 0 4px 15px rgba(93, 63, 106, 0.1);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.toggle-option:hover {
+    box-shadow: 0 6px 20px rgba(93, 63, 106, 0.2);
+    border-color: #e8e4eb;
+    transform: translateY(-2px);
+}
+
+.toggle-option label {
+    margin-right: 12px;
+    font-weight: 500;
+    color: #5D3F6A;
+    cursor: pointer;
+}
+
+.toggle-switch {
+    position: relative;
+    width: 54px;
+    height: 28px;
+    cursor: pointer;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #d0c5d8 0%, #c5b8d0 100%);
+    transition: 0.3s;
+    border-radius: 28px;
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 3px;
+    background: white;
+    transition: 0.3s;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-switch input:checked + .toggle-slider {
+    background: linear-gradient(135deg, #5D3F6A 0%, #7d5a8a 100%);
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+    transform: translateX(26px);
+}
+
+#copyMessage, #clearMessage {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #5D3F6A 0%, #7d5a8a 100%);
+    color: white;
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 1000;
+    box-shadow: 0 8px 24px rgba(93, 63, 106, 0.4);
+    font-size: 1.1em;
+}
+
+/* ===== CHART PAGES (possessives, pronouns, transitives) ===== */
+.left-column {
+    background: linear-gradient(135deg, #f5f3f7 0%, #e8e4eb 100%);
+    color: #333;
+}
+
+table.large-caption caption {
+    font-size: 1.8em;
+    margin-top: 20px;
+}
+
+.tables-container {
+    overflow-x: auto;
+    margin: 30px auto;
+    max-width: 600px;
+    text-align: center;
+}
+
+.table-row {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.navigation {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 20px 0;
+}
+
+.navigation button {
+    width: 235px;
+    padding: 14px 28px;
+    font-size: 1em;
+    cursor: pointer;
+    background: linear-gradient(135deg, #5D3F6A 0%, #7d5a8a 100%);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(93, 63, 106, 0.3);
+}
+
+.navigation button:disabled {
+    background: linear-gradient(135deg, #c5b8d0 0%, #d0c5d8 100%);
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.navigation button:hover:not(:disabled) {
+    background: linear-gradient(135deg, #7d5a8a 0%, #5D3F6A 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(93, 63, 106, 0.4);
+}
+
+.stem-tab {
+    display: none;
+}
+
+.stem-tab:first-child {
+    display: block;
+}
+
+/* Transitives highlight styles */
+.highlighted-header {
+    background: linear-gradient(135deg, #d0c5d8 0%, #c5b8d0 100%) !important;
+    color: #5D3F6A !important;
+}
+
+.highlighted-left-column {
+    background: linear-gradient(135deg, #d0c5d8 0%, #c5b8d0 100%) !important;
+}
+
+.highlighted-cell {
+    background-color: #c5b8d0 !important;
+}
+
+.highlighted-row {
+    background-color: #f5f3f7;
+}
+
+.highlighted-column {
+    background-color: #f5f3f7;
+}
+
+/* Transitives table sizing */
+.interactive-table {
+    width: 1200px;
+    font-size: 1.2em;
+}
+
+/* ===== DICTIONARY PAGES (nouns, particles) ===== */
+.dictionary-container {
+    width: 100%;
+    max-width: 1600px;
+    margin: 20px auto;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#searchInput {
+    width: 90%;
+    max-width: 500px;
+    padding: 15px 20px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 1.1em;
+    border: 2px solid #d0c5d8;
+    border-radius: 12px;
+    text-align: center;
+    word-wrap: break-word;
+    font-family: "Roboto", sans-serif;
+    background: white;
+    box-shadow: 0 2px 8px rgba(93, 63, 106, 0.1);
+    transition: all 0.3s ease;
+}
+
+#searchInput:focus {
+    outline: none;
+    border-color: #5D3F6A;
+    box-shadow: 0 4px 12px rgba(93, 63, 106, 0.2);
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    justify-content: center;
+    background: linear-gradient(135deg, #5D3F6A 0%, #7d5a8a 100%);
+    border-radius: 12px;
+    padding: 6px;
+    box-shadow: 0 4px 12px rgba(93, 63, 106, 0.3);
+    gap: 4px;
+}
+
+.filter-btn, .filter-dropbtn {
+    padding: 12px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: transparent;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.filter-btn.active {
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    color: #5D3F6A;
+}
+
+.filter-btn.active, .filter-dropbtn.active {
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    color: white;
+}
+
+.filter-dropbtn {
+    padding: 15px 20px;
+    font-size: 16px;
+    background-color: transparent;
+    color: white;
+    border: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.dropdown-table {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 100px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    top: 100%;
+    left: 0;
+}
+
+.dropdown-table button {
+    display: block;
+    width: 150px;
+    padding: 15px 20px;
+    border: none;
+    background: none;
+    color: #5D3F6A;
+    text-align: left;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.dropdown-table button:hover, .dropdown-table button.active {
+    background-color: #e5e1e9;
+    color: #5D3F6A;
+}
+
+.filters .dropdown:hover .dropdown-table {
+    display: block;
+}
+
+.filter-dropbtn:hover, .dropdown:hover .filter-dropbtn {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+/* Nouns table */
+.nouns-table {
+    width: auto;
+    border-collapse: collapse;
+}
+
+.nouns-table th, .nouns-table td {
+    padding: 10px;
+    border: 1px solid #e8e4eb;
+    width: 300px;
+}
+
+.nouns-table th {
+    background: linear-gradient(135deg, #f5f3f7 0%, #e8e4eb 100%);
+    color: #5D3F6A;
+}
+
+.nouns-table td {
+    text-align: left;
+    background: white;
+}
+
+/* Particles table */
+.particles-table {
+    width: auto;
+    border-collapse: collapse;
+}
+
+.particles-table th, .particles-table td {
+    padding: 10px;
+    border: 1px solid #e8e4eb;
+    width: 300px;
+}
+
+.particles-table th {
+    background: linear-gradient(135deg, #f5f3f7 0%, #e8e4eb 100%);
+    color: #5D3F6A;
+}
+
+.particles-table td {
+    text-align: left;
+    background: white;
+}
+
+/* Shared dictionary */
+.hidden-column {
+    display: none;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.no-results {
+    display: none;
+    color: #5D3F6A;
+    font-weight: bold;
+    font-size: 1.5em;
+    margin: 20px;
+    text-align: center;
+}
+
+.pagination {
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-btn {
+    padding: 12px 24px;
+    font-size: 1em;
+    cursor: pointer;
+    background: linear-gradient(135deg, #5D3F6A 0%, #7d5a8a 100%);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(93, 63, 106, 0.3);
+}
+
+.page-btn:hover {
+    background: linear-gradient(135deg, #7d5a8a 0%, #5D3F6A 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(93, 63, 106, 0.4);
+}
+
+.page-btn:disabled {
+    background: linear-gradient(135deg, #c5b8d0 0%, #d0c5d8 100%);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+#pageInfo {
+    font-size: 1em;
+    margin: 0 15px;
+    color: #5D3F6A;
+    font-weight: 500;
+}
+
+.table-caption {
+    font-size: 1.3em;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #5D3F6A;
+    font-weight: 600;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1300px) {
+    .interactive-table {
+        width: 900px;
+    }
+
+    .interactive-table th, .interactive-table td {
+        font-size: 0.8em;
+    }
+
+    .interactive-table.large-caption caption {
+        font-size: 1.4em;
+    }
+}
+
+@media (max-width: 950px) {
+    .interactive-table {
+        width: 750px;
+    }
+
+    .interactive-table th, .interactive-table td {
+        font-size: 0.7em;
+    }
+
+    .interactive-table.large-caption caption {
+        font-size: 1.3em;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        justify-content: center;
+    }
+
+    .navbar a {
+        font-size: 1.1em;
+        padding: 10px 20px;
+    }
+
+    #textInput {
+        font-size: 0.8em;
+        padding: 8px;
+    }
+
+    #copyButton, #clearTextBtn {
+        font-size: 0.8em;
+        padding: 10px 15px;
+    }
+
+    .mode-btn {
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
+
+    .toggle-option {
+        padding: 8px 15px;
+    }
+
+    .toggle-option label {
+        font-size: 0.9em;
+    }
+
+    table th, table td {
+        font-size: 0.8em;
+    }
+
+    caption {
+        font-size: 1em;
+    }
+
+    table.large-caption caption {
+        font-size: 1.4em;
+    }
+
+    .welcome {
+        font-size: 1em;
+        margin: 20px;
+        padding: 20px;
+    }
+
+    .welcome h1 {
+        font-size: 1.5em;
+    }
+
+    .interactive-table {
+        max-width: 450px;
+    }
+
+    .interactive-table th, .interactive-table td {
+        font-size: 0.6em;
+    }
+
+    .interactive-table.large-caption caption {
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        justify-content: center;
+    }
+
+    .navbar a {
+        font-size: 0.8em;
+        padding: 10px 20px;
+    }
+
+    #textInput {
+        font-size: 0.6em;
+        padding: 8px;
+    }
+
+    #copyButton, #clearTextBtn {
+        font-size: 0.6em;
+        padding: 8px 12px;
+    }
+
+    .mode-btn {
+        padding: 8px 15px;
+        font-size: 0.8em;
+    }
+
+    .toggle-option {
+        padding: 6px 12px;
+    }
+
+    .toggle-option label {
+        font-size: 0.8em;
+        margin-right: 8px;
+    }
+
+    .toggle-switch {
+        width: 40px;
+        height: 22px;
+    }
+
+    .toggle-slider:before {
+        height: 16px;
+        width: 16px;
+    }
+
+    .toggle-switch input:checked + .toggle-slider:before {
+        transform: translateX(18px);
+    }
+
+    table th, table td {
+        font-size: 0.6em;
+    }
+
+    caption {
+        font-size: 0.8em;
+    }
+
+    table.large-caption caption {
+        font-size: 1.2em;
+    }
+
+    .welcome {
+        font-size: 0.8em;
+        margin: 15px;
+        padding: 15px;
+    }
+
+    .welcome h1 {
+        font-size: 1.2em;
+    }
+
+    .navigation button {
+        max-width: 150px;
+        font-size: 0.6em;
+    }
+
+    .table-row, .navigation {
+        gap: 10px;
+    }
+
+    .interactive-table {
+        width: 350px;
+    }
+
+    .interactive-table.large-caption caption {
+        font-size: 0.9em;
+    }
+
+    .interactive-table th, .interactive-table td {
+        font-size: 0.4em;
+    }
+}
