@@ -91,7 +91,7 @@ body {
 /* ===== TABLES (SHARED) ===== */
 .table-container, .tables-container {
     overflow-x: auto;
-    max-width: 600px;
+    max-width: 500px;
     margin: 30px auto;
     background: white;
     border-radius: 16px;
@@ -123,14 +123,14 @@ th, td {
     white-space: nowrap;
 }
 
-th {
-    background: linear-gradient(135deg, #f5f3f7 0%, #e8e4eb 100%);
+thead {
+    background: linear-gradient(135deg, #f2eef6 0%, #ded8e2 100%);
     color: #5D3F6A;
     font-weight: 600;
 }
 
-td {
-    background: white;
+tr:nth-child(even) td {
+    background: #f5f3f740;
 }
 
 caption {
@@ -387,10 +387,26 @@ caption {
     font-size: 1.1em;
 }
 
+#keyMappings td:first-child, #keyMappings td:nth-child(2) {
+    border-right-color: white;
+}
+
+#keyMappings td:first-child, #keyMappings td:nth-child(3) {
+    width: 100px;
+}
+
+#keyMappings td:nth-child(2), #keyMappings th:nth-child(2) {
+    width: 0px;
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
+}
+
 /* ===== CHART PAGES (possessives, pronouns, transitives) ===== */
 .left-column {
-    background: linear-gradient(135deg, #f5f3f7 0%, #e8e4eb 100%);
-    color: #333;
+    background: linear-gradient(135deg, #f2eef6 0%, #ded8e2 100%) !important;
+    color: #5D3F6A !important;
+    font-weight: 600;
 }
 
 table.large-caption caption {
@@ -454,8 +470,8 @@ table.large-caption caption {
 
 /* Transitives highlight styles */
 .highlighted-header {
-    background: linear-gradient(135deg, #d0c5d8 0%, #c5b8d0 100%) !important;
-    color: #5D3F6A !important;
+    background: linear-gradient(135deg, #d0c5d8 0%, #c5b8d0 100%);
+    color: #5D3F6A;
 }
 
 .highlighted-left-column {
@@ -466,17 +482,9 @@ table.large-caption caption {
     background-color: #c5b8d0 !important;
 }
 
-.highlighted-row {
-    background-color: #f5f3f7;
-}
-
-.highlighted-column {
-    background-color: #f5f3f7;
-}
-
 /* Transitives table sizing */
 .interactive-table {
-    width: 1200px;
+    max-width: 1200px;
     font-size: 1.2em;
 }
 
@@ -484,6 +492,7 @@ table.large-caption caption {
 .dictionary-container {
     width: 100%;
     max-width: 1600px;
+    min-width: 500px;
     margin: 20px auto;
     padding: 10px;
     box-sizing: border-box;
@@ -612,15 +621,16 @@ table.large-caption caption {
     border-collapse: collapse;
 }
 
-.nouns-table th, .nouns-table td {
+.nouns-table th, .nouns-table td, .nouns-table tr {
     padding: 10px;
     border: 1px solid #e8e4eb;
     width: 300px;
 }
 
-.nouns-table th {
-    background: linear-gradient(135deg, #f5f3f7 0%, #e8e4eb 100%);
+.nouns-table thead {
+    background: linear-gradient(135deg, #f2eef6 0%, #ded8e2 100%);
     color: #5D3F6A;
+    font-weight: 600;
 }
 
 .nouns-table td {
@@ -640,9 +650,10 @@ table.large-caption caption {
     width: 300px;
 }
 
-.particles-table th {
-    background: linear-gradient(135deg, #f5f3f7 0%, #e8e4eb 100%);
+.particles-table thead {
+    background: linear-gradient(135deg, #f2eef6 0%, #ded8e2 100%);
     color: #5D3F6A;
+    font-weight: 600;
 }
 
 .particles-table td {
@@ -720,11 +731,12 @@ table.large-caption caption {
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1300px) {
     .interactive-table {
-        width: 900px;
+        max-width: 900px;
     }
 
     .interactive-table th, .interactive-table td {
         font-size: 0.8em;
+        padding: 6px;
     }
 
     .interactive-table.large-caption caption {
@@ -734,11 +746,12 @@ table.large-caption caption {
 
 @media (max-width: 950px) {
     .interactive-table {
-        width: 750px;
+        max-width: 750px;
     }
 
     .interactive-table th, .interactive-table td {
         font-size: 0.7em;
+        padding: 3px;
     }
 
     .interactive-table.large-caption caption {
@@ -747,10 +760,6 @@ table.large-caption caption {
 }
 
 @media (max-width: 768px) {
-    .navbar {
-        justify-content: center;
-    }
-
     .navbar a {
         font-size: 1.1em;
         padding: 10px 20px;
@@ -811,6 +820,10 @@ table.large-caption caption {
 
     .interactive-table.large-caption caption {
         font-size: 1.1em;
+    }
+
+    .interactive-table td, .interactive-table th {
+        padding: 1px;
     }
 }
 
@@ -894,7 +907,7 @@ table.large-caption caption {
     }
 
     .interactive-table {
-        width: 350px;
+        max-width: 350px;
     }
 
     .interactive-table.large-caption caption {
@@ -903,5 +916,9 @@ table.large-caption caption {
 
     .interactive-table th, .interactive-table td {
         font-size: 0.4em;
+    }
+
+    .interactive-table td, .interactive-table th {
+        padding: 0px;
     }
 }

@@ -37,7 +37,7 @@
         </div>
     </div>
 
-        <!-- Option Toggles -->
+    <!-- Option Toggles -->
     <div class="options-container">
         <div class="toggle-option">
             <label for="allowEnglishToggle">Allow English Keys</label>
@@ -71,6 +71,7 @@
             <thead>
                 <tr>
                     <th>English Key</th>
+                    <th>&#10142;</th>
                     <th>Oneida Symbol</th>
                 </tr>
             </thead>
@@ -204,7 +205,7 @@
         
         mappings.forEach(([key, symbol]) => {
             const row = document.createElement('tr');
-            row.innerHTML = `<td>${key}</td><td>${symbol}</td>`;
+            row.innerHTML = `<td>${key}</td><td>&#10142</td><td>${symbol}</td>`;
             tbody.appendChild(row);
         });
     }
